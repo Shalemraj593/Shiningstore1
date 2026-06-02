@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product | Shining Store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=1780385356122">
+    <style>
+        /* ========== Product Detail Page Styles ========== */
+        .pdp-wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb a {
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent);
+        }
+
+        .breadcrumb .sep {
+            color: var(--border);
+        }
+
+        .breadcrumb .current {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* Product Grid */
+        .pdp-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Image Gallery */
+        .pdp-gallery {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+        }
+
+        .pdp-main-image {
+            width: 100%;
+            aspect-ratio: 3/4;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: var(--bg-cream);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .pdp-main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .pdp-main-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .pdp-thumbnails {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .pdp-thumb {
+            width: 80px;
+            height: 100px;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .pdp-thumb.active {
+            border-color: var(--primary);
+        }
+
+        .pdp-thumb:hover {
+            border-color: var(--accent);
+        }
+
+        .pdp-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Product Info */
+        .pdp-info {
+            padding-top: 0.5rem;
+        }
+
+        .pdp-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .pdp-title {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .pdp-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pdp-stars {
+            color: #f5a623;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+        }
+
+        .pdp-rating-text {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
+
+        .pdp-rating-text span {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .pdp-price-block {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .pdp-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .pdp-price.sale {
+            color: var(--sale-red);
+        }
+
+        .pdp-compare-price {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .pdp-save-badge {
+            background: rgba(255, 42, 0, 0.1);
+            color: var(--sale-red);
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 0.3rem 0.8rem;
+            border-radius: var(--radius-pill);
+        }
+
+        .pdp-desc {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Size Selector */
+        .pdp-option-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.8rem;
+            color: var(--text-main);
+        }
+
+        .pdp-sizes {
+            display: flex;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .size-btn {
+            width: 48px;
+            height: 48px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: transparent;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .size-btn:hover {
+            border-color: var(--primary);
+        }
+
+        .size-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Quantity */
+        .pdp-qty-row {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .pdp-qty {
+            display: flex;
+            align-items: center;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+        }
+
+        .pdp-qty button {
+            width: 44px;
+            height: 44px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .pdp-qty button:hover {
+            background: var(--bg-cream);
+        }
+
+        .pdp-qty span {
+            width: 50px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1rem;
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            line-height: 44px;
+        }
+
+        /* Action Buttons */
+        .pdp-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .pdp-add-cart {
+            flex: 1;
+            height: 56px;
+            font-size: 0.9rem;
+        }
+
+        .pdp-wishlist-btn {
+            width: 56px;
+            height: 56px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: transparent;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .pdp-wishlist-btn:hover {
+            border-color: #d4736d;
+            color: #d4736d;
+        }
+
+        .pdp-wishlist-btn.active {
+            background: #fff0ef;
+            border-color: #d4736d;
+            color: #d4736d;
+        }
+
+        /* Trust Strip */
+        .pdp-trust {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: var(--bg-cream);
+            border-radius: var(--radius-md);
+            margin-bottom: 2rem;
+        }
+
+        .pdp-trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .pdp-trust-item i {
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        /* Checkout icons */
+        .pdp-checkout-icons {
+            border-top: 1px solid var(--border-light);
+            padding-top: 1.5rem;
+        }
+
+        .pdp-checkout-icons strong {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+        }
+
+        .pdp-checkout-icons .icons {
+            display: flex;
+            gap: 14px;
+            color: var(--text-muted);
+            font-size: 1.8rem;
+        }
+
+        /* Product Tabs */
+        .pdp-tabs-section {
+            max-width: 1300px;
+            margin: 0 auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .pdp-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border-light);
+            margin-bottom: 2rem;
+        }
+
+        .pdp-tab {
+            padding: 1rem 2rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .pdp-tab:hover {
+            color: var(--text-main);
+        }
+
+        .pdp-tab.active {
+            color: var(--text-main);
+        }
+
+        .pdp-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .pdp-tab-content {
+            display: none;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            font-size: 0.95rem;
+        }
+
+        .pdp-tab-content.active {
+            display: block;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        .pdp-tab-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-main);
+        }
+
+        .pdp-tab-content ul {
+            list-style: disc;
+            padding-left: 1.5rem;
+        }
+
+        .pdp-tab-content ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .pdp-tab-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .pdp-tab-content table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 0.9rem;
+        }
+
+        .pdp-tab-content table td:first-child {
+            font-weight: 600;
+            color: var(--text-main);
+            width: 35%;
+        }
+
+        /* Related Products */
+        .related-section {
+            max-width: 1300px;
+            margin: 0 auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .related-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        /* Notification Toast */
+        .pdp-toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-pill);
+            font-size: 0.88rem;
+            font-weight: 600;
+            z-index: 9999;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pdp-toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .pdp-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .pdp-gallery {
+                position: static;
+            }
+
+            .pdp-title {
+                font-size: 1.4rem;
+            }
+
+            .pdp-price {
+                font-size: 1.5rem;
+            }
+
+            .pdp-trust {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .related-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .pdp-wrapper {
+                padding: 1rem;
+            }
+
+            .pdp-tabs-section,
+            .related-section {
+                padding: 0 1rem;
+            }
+
+            .pdp-tab {
+                padding: 0.8rem 1rem;
+                font-size: 0.78rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html"><span>Shining</span>Store</a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html#new-arrivals">New Arrivals</a>
+                <a href="index.html#shop-desktop" data-category="dresses">Dresses</a>
+                <a href="index.html#shop-desktop" data-category="outerwear">Outerwear</a>
+                <a href="index.html#shop-desktop" data-category="tops">Tops</a>
+                <a href="index.html#shop-desktop" data-category="activewear">Activewear</a>
+                <a href="index.html#shop-desktop" data-category="jeans">Jeans</a>
+            </div>
+            <div class="nav-actions">
+                <div class="currency-selector tooltip" data-tooltip="Currency">
+                    <button class="icon-btn currency-btn" id="currencyToggleBtn">
+                        <span class="current-currency-display">$ USD</span> <i class="fa-solid fa-chevron-down" style="font-size:0.6rem; margin-left:3px;"></i>
+                    </button>
+                    <div class="currency-dropdown hidden" id="currencyDropdown">
+                        <button class="currency-option" data-currency="USD">$ USD</button>
+                        <button class="currency-option" data-currency="INR">₹ INR</button>
+                    </div>
+                </div>
+                <div class="search-bar">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <button class="icon-btn tooltip" data-tooltip="Account" id="accountBtn">
+                    <i class="fa-regular fa-user" id="accountIcon"></i>
+                </button>
+                <button class="icon-btn tooltip" data-tooltip="Wishlist" onclick="toggleWishlistDrawer()">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="badge hidden" id="wishlistBadge">0</span>
+                </button>
+                <button class="icon-btn tooltip cart-btn" data-tooltip="Cart" onclick="toggleCartDrawer()">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="badge" id="cartBadge">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb + Product Content -->
+    <div class="pdp-wrapper">
+        <div class="breadcrumb" id="breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="sep">/</span>
+            <a href="index.html#shop-desktop">Shop</a>
+            <span class="sep">/</span>
+            <span class="current" id="breadcrumbCategory">Category</span>
+            <span class="sep">/</span>
+            <span class="current" id="breadcrumbProduct">Product</span>
+        </div>
+
+        <div class="pdp-grid" id="pdpGrid">
+            <!-- Filled by JS -->
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="auth-overlay" id="authOverlay"></div>
+    <div class="auth-modal" id="authModal">
+        <button class="auth-close" id="authCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+        <div class="auth-header">
+            <h3 id="authTitle">Welcome Back</h3>
+            <p id="authSubtitle">Sign in to access your account</p>
+        </div>
+        
+        <div class="auth-tabs">
+            <button class="auth-tab active" data-tab="login">Login</button>
+            <button class="auth-tab" data-tab="signup">Sign Up</button>
+        </div>
+
+        <form id="authForm" class="auth-form">
+            <div class="input-group" id="nameGroup" style="display:none;">
+                <i class="fa-regular fa-user"></i>
+                <input type="text" id="authName" placeholder="Full Name">
+            </div>
+            <div class="input-group">
+                <i class="fa-regular fa-envelope"></i>
+                <input type="email" id="authEmail" placeholder="Email Address" required>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="authPassword" placeholder="Password" required>
+            </div>
+            <div class="auth-options" id="authOptions">
+                <label><input type="checkbox"> Remember me</label>
+                <a href="#" class="forgot-pwd">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%; border-radius:var(--radius-pill); font-size:0.9rem;" id="authSubmitBtn">SIGN IN</button>
+        </form>
+
+        <div class="auth-divider"><span>OR</span></div>
+        <div class="auth-socials">
+            <button class="social-btn"><i class="fa-brands fa-google"></i> Google</button>
+            <button class="social-btn"><i class="fa-brands fa-apple"></i> Apple</button>
+        </div>
+    </div>
+
+    <!-- Product Detail Section -->
+    <section class="pdp-tabs-section">
+        <div class="pdp-tabs">
+            <button class="pdp-tab active" data-tab="description">Description</button>
+            <button class="pdp-tab" data-tab="details">Details & Care</button>
+            <button class="pdp-tab" data-tab="shipping">Shipping & Returns</button>
+            <button class="pdp-tab" data-tab="reviews">Reviews</button>
+        </div>
+        <div class="pdp-tab-content active" id="tab-description"></div>
+        <div class="pdp-tab-content" id="tab-details">
+            <h4>Product Details</h4>
+            <table>
+                <tr><td>Material</td><td>Premium blend fabric</td></tr>
+                <tr><td>Fit</td><td>Regular fit — true to size</td></tr>
+                <tr><td>Care</td><td>Machine wash cold, hang dry</td></tr>
+                <tr><td>Origin</td><td>Designed in-house, ethically manufactured</td></tr>
+            </table>
+        </div>
+        <div class="pdp-tab-content" id="tab-shipping">
+            <h4>Shipping Information</h4>
+            <ul>
+                <li><strong>Free Standard Shipping</strong> on orders over $50 (5–8 business days)</li>
+                <li><strong>Express Shipping</strong> — $9.99 (2–3 business days)</li>
+                <li><strong>International Shipping</strong> — rates calculated at checkout</li>
+            </ul>
+            <h4 style="margin-top:1.5rem;">Returns & Exchanges</h4>
+            <ul>
+                <li>Easy 30-day returns on all unworn items with original tags</li>
+                <li>Free return shipping on all domestic orders</li>
+                <li>Exchanges processed within 3–5 business days</li>
+            </ul>
+        </div>
+        <div class="pdp-tab-content" id="tab-reviews">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; border-bottom:1px solid var(--border-light); padding-bottom:1rem;">
+                <div>
+                    <h4 style="margin:0; font-size:1.2rem;">Customer Reviews</h4>
+                    <div style="color:var(--text-muted); font-size:0.9rem; margin-top:0.3rem;"><span id="reviewStars"></span> Based on reviews</div>
+                </div>
+                <button class="btn btn-outline" onclick="alert('Write a review feature coming soon!')">Write a Review</button>
+            </div>
+            
+            <div style="display:flex; flex-direction:column; gap:1.5rem;">
+                <div style="border-bottom:1px solid #eee; padding-bottom:1rem;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                        <div style="font-weight:600;">Sarah M. <i class="fa-solid fa-circle-check" style="color:var(--success); font-size:0.8rem; margin-left:4px;"></i></div>
+                        <div style="color:#f5a623; font-size:0.8rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    </div>
+                    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.5;">Absolutely love this piece! The quality is amazing and it fits perfectly. I wore it to an event and got so many compliments.</p>
+                </div>
+                <div style="border-bottom:1px solid #eee; padding-bottom:1rem;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                        <div style="font-weight:600;">Jessica T. <i class="fa-solid fa-circle-check" style="color:var(--success); font-size:0.8rem; margin-left:4px;"></i></div>
+                        <div style="color:#f5a623; font-size:0.8rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
+                    </div>
+                    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.5;">Great product. The material feels very premium. Taking one star off because shipping was slightly delayed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="related-section">
+        <h2>You May Also Like</h2>
+        <div class="related-grid" id="relatedGrid"></div>
+    </section>
+
+    <!-- Recently Viewed Products -->
+    <section class="related-section" id="recentlyViewedSection" style="display:none; margin-top:2rem; border-top:1px solid var(--border-light); padding-top:4rem;">
+        <h2>Recently Viewed</h2>
+        <div class="related-grid" id="recentGrid"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3 class="footer-logo">SHINING<span>STORE.</span></h3>
+                    <p>Redefining premium fashion with elegant, timeless, and sustainable pieces.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="index.html#shop-desktop">New Arrivals</a></li>
+                        <li><a href="index.html#shop-desktop">Dresses</a></li>
+                        <li><a href="index.html#shop-desktop">Outerwear</a></li>
+                        <li><a href="index.html#shop-desktop">Activewear</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Help</h4>
+                    <ul>
+                        <li><a href="#">Customer Service</a></li>
+                        <li><a href="#">Track Order</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Sustainability</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Shining Store. All Rights Reserved.</p>
+            <div class="footer-payment">
+                <i class="fa-brands fa-cc-visa"></i>
+                <i class="fa-brands fa-cc-mastercard"></i>
+                <i class="fa-brands fa-cc-amex"></i>
+                <i class="fa-brands fa-cc-paypal"></i>
+                <i class="fa-brands fa-cc-apple-pay"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Wishlist Drawer -->
+    <div class="cart-overlay" id="wishlistOverlay"></div>
+    <div class="cart-drawer" id="wishlistDrawer">
+        <div class="cart-header">
+            <h3>My Wishlist (<span id="wishlistCount">0</span>)</h3>
+            <button class="close-btn" id="wishlistCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="wishlistItems"></div>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>Shopping Bag</h3>
+            <button class="close-btn" id="cartCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div style="text-align:center; padding: 2rem; color: #767676;">Your bag is empty.</div>
+        </div>
+        <div class="cart-footer">
+            <div class="totals" style="margin-bottom: 1rem;">
+                <div style="display:flex; justify-content:space-between; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); font-weight: bold; font-size: 1.1rem;">
+                    <span>Total</span>
+                    <span id="totalAmount">$0.00</span>
+                </div>
+            </div>
+            <button class="btn btn-primary w-100" id="checkoutBtn" disabled>Checkout</button>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="pdp-toast" id="pdpToast"></div>
+
+    <!-- Load core JS first to provide products, cart, wishlist globally -->
+    <script src="app.js"></script>
+    <script>
+    // ============================================
+    // State
+    // ============================================
+    let pdpQty = 1;
+
+    // ============================================
+    // Init
+    // ============================================
+    function initPDP() {
+        const params = new URLSearchParams(window.location.search);
+        const productId = parseInt(params.get('id'));
+        const product = products.find(p => p.id === productId);
+
+        if (!product) {
+            document.getElementById('pdpGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:4rem;"><h2>Product not found</h2><p style="margin:1rem 0;color:var(--text-muted);">The product you\'re looking for doesn\'t exist.</p><a href="index.html" class="btn btn-primary">Back to Shop</a></div>';
+            return;
+        }
+
+        document.title = `${product.name} | Shining Store`;
+        renderProduct(product);
+        renderRelatedProducts(product);
+        setupTabs();
+        updateCartBadge();
+        updateWishlistBadge();
+        trackRecentlyViewed(product.id);
+        renderRecentProducts();
+
+        // Scroll effects
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            window.scrollY > 50 ? navbar?.classList.add('scrolled') : navbar?.classList.remove('scrolled');
+        }, { passive: true });
+    }
+
+    // ============================================
+    // Render Product Detail
+    // ============================================
+    async function loadHDImages(productId) {
+        try {
+            const res = await fetch('shining-store-data/products-full.json');
+            const data = await res.json();
+            for (const cat of Object.values(data.categories)) {
+                const fullProd = cat.products.find(p => p.id == productId);
+                if (fullProd && fullProd.images && fullProd.images.length > 0) {
+                    const gallery = document.querySelector('.pdp-gallery');
+                    if (gallery) {
+                        const mainImg = fullProd.images[0].src;
+                        // Use up to 4 images for thumbnails
+                        const thumbs = fullProd.images.slice(0, 4).map((img, idx) => 
+                            `<div class="pdp-thumb ${idx === 0 ? 'active' : ''}" onclick="changeImage(this, '${img.src}')">
+                                <img src="${img.src}" alt="View ${idx+1}">
+                            </div>`
+                        ).join('');
+                        
+                        gallery.innerHTML = `
+                            <div class="pdp-main-image">
+                                <img src="${mainImg}" id="mainImage" alt="Product">
+                            </div>
+                            <div class="pdp-thumbnails">
+                                ${thumbs}
+                            </div>
+                        `;
+                    }
+                    return;
+                }
+            }
+        } catch(e) {
+            console.error('Error loading HD images', e);
+        }
+    }
+
+    function renderProduct(product) {
+        // Breadcrumb
+        document.getElementById('breadcrumbCategory').textContent = product.category.charAt(0).toUpperCase() + product.category.slice(1);
+        document.getElementById('breadcrumbProduct').textContent = product.name;
+
+        // Stars
+        const fullStars = Math.floor(product.rating);
+        const hasHalf = product.rating % 1 >= 0.5;
+        let starsHTML = '';
+        for (let i = 0; i < fullStars; i++) starsHTML += '<i class="fa-solid fa-star"></i>';
+        if (hasHalf) starsHTML += '<i class="fa-solid fa-star-half-stroke"></i>';
+        for (let i = fullStars + (hasHalf ? 1 : 0); i < 5; i++) starsHTML += '<i class="fa-regular fa-star"></i>';
+        for (let i = fullStars + (hasHalf ? 1 : 0); i < 5; i++) starsHTML += '<i class="fa-regular fa-star"></i>';
+        
+        // Reviews Tab Stars
+        const reviewStars = document.getElementById('reviewStars');
+        if (reviewStars) reviewStars.innerHTML = starsHTML;
+
+        // Price
+        let priceHTML = `<span class="pdp-price">${formatPrice(product.price)}</span>`;
+        if (product.comparePrice) {
+            const savePercent = Math.round((1 - product.price / product.comparePrice) * 100);
+            priceHTML = `
+                <span class="pdp-compare-price">${formatPrice(product.comparePrice)}</span>
+                <span class="pdp-price sale">${formatPrice(product.price)}</span>
+                <span class="pdp-save-badge">Save ${savePercent}%</span>
+            `;
+        }
+
+        // Wishlist state
+        const isWished = wishlist.includes(product.id);
+
+        // Description tab
+        document.getElementById('tab-description').innerHTML = `
+            <h4>About This Product</h4>
+            <p>${product.desc}</p>
+            <ul style="margin-top:1rem;">
+                <li>Premium quality materials sourced responsibly</li>
+                <li>Designed for comfort and versatility</li>
+                <li>Available in multiple sizes</li>
+                <li>Perfect for both casual and formal occasions</li>
+            </ul>
+        `;
+
+        document.getElementById('pdpGrid').innerHTML = `
+            <!-- Image Gallery -->
+            <div class="pdp-gallery">
+                <div class="pdp-main-image">
+                    <img src="${product.image}" alt="${product.name}" id="mainImage">
+                </div>
+                <div class="pdp-thumbnails">
+                    <div class="pdp-thumb active" onclick="changeImage(this, '${product.image}')">
+                        <img src="${product.image}" alt="View 1">
+                    </div>
+                    <div class="pdp-thumb" onclick="changeImage(this, '${product.image.replace('w=600', 'w=601')}')">
+                        <img src="${product.image}" alt="View 2">
+                    </div>
+                    <div class="pdp-thumb" onclick="changeImage(this, '${product.image.replace('w=600', 'w=602')}')">
+                        <img src="${product.image}" alt="View 3">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="pdp-info">
+                <div class="pdp-category">${product.category}</div>
+                <h1 class="pdp-title">${product.name}</h1>
+
+                <div class="pdp-rating">
+                    <div class="pdp-stars">${starsHTML}</div>
+                    <div class="pdp-rating-text"><span>${product.rating}</span> — ${product.reviews} reviews</div>
+                </div>
+
+                <div class="pdp-price-block">
+                    ${priceHTML}
+                </div>
+
+                <p class="pdp-desc">${product.desc}</p>
+
+                <div class="pdp-option-label">Size</div>
+                <div class="pdp-sizes">
+                    <button class="size-btn" onclick="selectSize(this)">XS</button>
+                    <button class="size-btn active" onclick="selectSize(this)">S</button>
+                    <button class="size-btn" onclick="selectSize(this)">M</button>
+                    <button class="size-btn" onclick="selectSize(this)">L</button>
+                    <button class="size-btn" onclick="selectSize(this)">XL</button>
+                </div>
+
+                <div class="pdp-option-label">Quantity</div>
+                <div class="pdp-qty-row">
+                    <div class="pdp-qty">
+                        <button onclick="changeQty(-1)"><i class="fa-solid fa-minus"></i></button>
+                        <span id="qtyDisplay">1</span>
+                        <button onclick="changeQty(1)"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+
+                <div class="pdp-actions" style="display:flex; gap:10px;">
+                    <button class="btn btn-primary pdp-add-cart" style="flex:1;" onclick="addToCartPDP(${product.id})">
+                        <i class="fa-solid fa-bag-shopping"></i> Add to Cart
+                    </button>
+                    <button class="btn pdp-buy-now" style="flex:1; background:var(--primary); color:white; border:none; border-radius:var(--radius-sm); font-weight:700;" onclick="buyNowPDP(${product.id})">
+                        Buy Now
+                    </button>
+                    <button class="pdp-wishlist-btn ${isWished ? 'active' : ''}" id="pdpWishBtn" onclick="toggleWishlistPDP(${product.id})">
+                        <i class="${isWished ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+                    </button>
+                </div>
+
+                <div class="pdp-trust">
+                    <div class="pdp-trust-item"><i class="fa-solid fa-truck-fast"></i> Free Shipping over $50</div>
+                    <div class="pdp-trust-item"><i class="fa-solid fa-arrow-rotate-left"></i> 30-Day Returns</div>
+                    <div class="pdp-trust-item"><i class="fa-solid fa-shield-halved"></i> Secure Payment</div>
+                </div>
+
+                <div class="pdp-checkout-icons">
+                    <strong>Guaranteed Safe Checkout</strong>
+                    <div class="icons">
+                        <i class="fa-brands fa-cc-visa"></i>
+                        <i class="fa-brands fa-cc-mastercard"></i>
+                        <i class="fa-brands fa-cc-amex"></i>
+                        <i class="fa-brands fa-cc-paypal"></i>
+                        <i class="fa-brands fa-cc-apple-pay"></i>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Attempt to load HD images asynchronously
+        loadHDImages(product.id);
+    }
+
+    // ============================================
+    // Helpers
+    // ============================================
+    function changeImage(thumb, src) {
+        document.getElementById('mainImage').src = src;
+        document.querySelectorAll('.pdp-thumb').forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+    }
+
+    function selectSize(btn) {
+        document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+
+    function changeQty(delta) {
+        pdpQty = Math.max(1, pdpQty + delta);
+        document.getElementById('qtyDisplay').textContent = pdpQty;
+    }
+
+    function showToast(msg) {
+        const toast = document.getElementById('pdpToast');
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    // ============================================
+    // Cart
+    // ============================================
+    function buyNowPDP(id) {
+        addToCartPDP(id);
+        window.location.href = 'checkout.html';
+    }
+
+    function addToCartPDP(id) {
+        const product = products.find(p => p.id === id);
+        const existing = cart.find(item => item.id === id);
+        if (existing) {
+            existing.quantity += pdpQty;
+        } else {
+            cart.push({ ...product, quantity: pdpQty });
+        }
+        localStorage.setItem('shiningstore_cart', JSON.stringify(cart));
+        updateCartBadge();
+        updateCartDrawer();
+        showToast(`✓ Added ${pdpQty}x ${product.name} to cart`);
+    }
+
+    function updateCartBadge() {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const badge = document.getElementById('cartBadge');
+        if (badge) {
+            badge.innerText = totalItems;
+            totalItems > 0 ? badge.classList.remove('hidden') : badge.classList.add('hidden');
+        }
+    }
+
+    function updateCartDrawer() {
+        const container = document.getElementById('cartItems');
+        const totalEl = document.getElementById('totalAmount');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        if (!container) return;
+
+        if (cart.length === 0) {
+            container.innerHTML = '<div style="text-align:center; padding:2rem; color:#767676;">Your bag is empty.</div>';
+            checkoutBtn.disabled = true;
+        } else {
+            checkoutBtn.disabled = false;
+            container.innerHTML = cart.map(item => `
+                <div style="display:flex; gap:1rem; padding:1rem 0; border-bottom:1px solid var(--border-light);">
+                    <img src="${item.image}" alt="${item.name}" style="width:70px; height:90px; object-fit:cover; border-radius:6px;">
+                    <div style="flex:1;">
+                        <div style="font-weight:600; font-size:0.88rem; margin-bottom:0.3rem;">${item.name}</div>
+                        <div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;">Qty: ${item.quantity}</div>
+                        <div style="font-weight:700;">$${(item.price * item.quantity).toFixed(2)}</div>
+                    </div>
+                    <button onclick="removeFromCartPDP(${item.id})" style="background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:1rem;"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            `).join('');
+        }
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        if (totalEl) totalEl.innerText = `$${total.toFixed(2)}`;
+    }
+
+    function removeFromCartPDP(id) {
+        cart = cart.filter(i => i.id !== id);
+        localStorage.setItem('shiningstore_cart', JSON.stringify(cart));
+        updateCartBadge();
+        updateCartDrawer();
+    }
+
+    function toggleCartDrawer() {
+        const drawer = document.getElementById('cartDrawer');
+        const overlay = document.getElementById('cartOverlay');
+        updateCartDrawer();
+        drawer.classList.toggle('active');
+        overlay.classList.toggle('active');
+        document.body.style.overflow = drawer.classList.contains('active') ? 'hidden' : '';
+    }
+
+    // ============================================
+    // Wishlist
+    // ============================================
+    function toggleWishlistPDP(id) {
+        const idx = wishlist.indexOf(id);
+        if (idx > -1) {
+            wishlist.splice(idx, 1);
+        } else {
+            wishlist.push(id);
+        }
+        localStorage.setItem('shiningstore_wishlist', JSON.stringify(wishlist));
+        updateWishlistBadge();
+        updateWishlistDrawer();
+
+        // Update button
+        const btn = document.getElementById('pdpWishBtn');
+        const icon = btn.querySelector('i');
+        if (wishlist.includes(id)) {
+            btn.classList.add('active');
+            icon.classList.remove('fa-regular');
+            icon.classList.add('fa-solid');
+            showToast('♥ Added to Wishlist');
+        } else {
+            btn.classList.remove('active');
+            icon.classList.remove('fa-solid');
+            icon.classList.add('fa-regular');
+            showToast('Removed from Wishlist');
+        }
+    }
+
+    function updateWishlistBadge() {
+        const badge = document.getElementById('wishlistBadge');
+        if (badge) {
+            badge.innerText = wishlist.length;
+            wishlist.length > 0 ? badge.classList.remove('hidden') : badge.classList.add('hidden');
+        }
+    }
+
+    function updateWishlistDrawer() {
+        const container = document.getElementById('wishlistItems');
+        const count = document.getElementById('wishlistCount');
+        if (!container) return;
+        if (count) count.textContent = wishlist.length;
+
+        if (wishlist.length === 0) {
+            container.innerHTML = '<div style="text-align:center; padding:2rem; color:#767676;"><i class="fa-regular fa-heart" style="font-size:3rem; margin-bottom:1rem; display:block; color:#ddd;"></i><p>Your wishlist is empty.</p></div>';
+            return;
+        }
+
+        container.innerHTML = wishlist.map(id => {
+            const p = products.find(pr => pr.id === id);
+            if (!p) return '';
+            return `
+                <div style="display:flex; gap:1rem; padding:1rem 0; border-bottom:1px solid var(--border-light);">
+                    <a href="product.html?id=${p.id}"><img src="${p.image}" alt="${p.name}" style="width:70px; height:90px; object-fit:cover; border-radius:6px; cursor:pointer;"></a>
+                    <div style="flex:1;">
+                        <a href="product.html?id=${p.id}" style="font-weight:600; font-size:0.88rem; margin-bottom:0.3rem; display:block; color:var(--text-main);">${p.name}</a>
+                        <div style="font-weight:700; margin-top:0.3rem;">${formatPrice(p.price)}</div>
+                        <button onclick="addToCartPDP(${p.id})" style="margin-top:0.5rem; background:var(--primary); color:white; border:none; padding:0.4rem 1rem; border-radius:4px; font-size:0.75rem; cursor:pointer; font-weight:600;">ADD TO CART</button>
+                    </div>
+                    <button onclick="removeFromWishlistDrawer(${p.id})" style="background:none;border:none;cursor:pointer;color:#d4736d;font-size:1.1rem;"><i class="fa-solid fa-heart"></i></button>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function removeFromWishlistDrawer(id) {
+        wishlist = wishlist.filter(w => w !== id);
+        localStorage.setItem('shiningstore_wishlist', JSON.stringify(wishlist));
+        updateWishlistBadge();
+        updateWishlistDrawer();
+        // Update PDP button if on same product
+        const btn = document.getElementById('pdpWishBtn');
+        if (btn) {
+            const icon = btn.querySelector('i');
+            btn.classList.remove('active');
+            icon.classList.remove('fa-solid');
+            icon.classList.add('fa-regular');
+        }
+    }
+
+    function toggleWishlistDrawer() {
+        const drawer = document.getElementById('wishlistDrawer');
+        const overlay = document.getElementById('wishlistOverlay');
+        updateWishlistDrawer();
+        drawer.classList.toggle('active');
+        overlay.classList.toggle('active');
+        document.body.style.overflow = drawer.classList.contains('active') ? 'hidden' : '';
+    }
+
+    // ============================================
+    // Drawers Setup
+    // ============================================
+    function setupDrawers() {
+        document.getElementById('cartCloseBtn')?.addEventListener('click', toggleCartDrawer);
+        document.getElementById('cartOverlay')?.addEventListener('click', toggleCartDrawer);
+        document.getElementById('wishlistCloseBtn')?.addEventListener('click', toggleWishlistDrawer);
+        document.getElementById('wishlistOverlay')?.addEventListener('click', toggleWishlistDrawer);
+    }
+
+    // ============================================
+    // Tabs
+    // ============================================
+    function setupTabs() {
+        document.querySelectorAll('.pdp-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.pdp-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.pdp-tab-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('tab-' + tab.dataset.tab)?.classList.add('active');
+            });
+        });
+    }
+
+    // ============================================
+    // Related Products
+    // ============================================
+    function renderRelatedProducts(currentProduct) {
+        let related = products
+            .filter(p => p.category === currentProduct.category && p.id !== currentProduct.id)
+            .slice(0, 4);
+
+        // If not enough from same category, fill from others
+        if (related.length < 4) {
+            const more = products.filter(p => p.id !== currentProduct.id && !related.find(r => r.id === p.id)).slice(0, 4 - related.length);
+            related.push(...more);
+        }
+        const grid = document.getElementById('relatedGrid');
+        if (!grid) return;
+        
+        if (related.length === 0) {
+            grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text-muted);">No related products found.</p>';
+            return;
+        }
+
+        grid.innerHTML = related.map(p => `
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    <a href="product.html?id=${p.id}"><img src="${p.image}" alt="${p.name}" loading="lazy"></a>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">${p.category}</div>
+                    <a href="product.html?id=${p.id}" class="product-title">${p.name}</a>
+                    <div class="product-price costdiscount">
+                        ${p.comparePrice ? `<span class="compare-price costdiscount">${formatPrice(p.comparePrice)}</span> <span class="sale-price costdiscount">${formatPrice(p.price)}</span>` : formatPrice(p.price)}
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // ============================================
+    // Recently Viewed Products
+    // ============================================
+    function trackRecentlyViewed(id) {
+        let recent = JSON.parse(localStorage.getItem('shiningstore_recent') || '[]');
+        recent = recent.filter(pId => pId !== id); // Remove if exists
+        recent.unshift(id); // Add to beginning
+        if (recent.length > 4) recent.pop(); // Keep max 4
+        localStorage.setItem('shiningstore_recent', JSON.stringify(recent));
+    }
+
+    function renderRecentProducts() {
+        const section = document.getElementById('recentlyViewedSection');
+        const grid = document.getElementById('recentGrid');
+        if (!section || !grid) return;
+
+        const recentIds = JSON.parse(localStorage.getItem('shiningstore_recent') || '[]');
+        // Don't show the current product in recent list
+        const filteredIds = recentIds.filter(id => id !== productId);
+
+        if (filteredIds.length === 0) {
+            section.style.display = 'none';
+            return;
+        }
+
+        section.style.display = 'block';
+        
+        grid.innerHTML = filteredIds.map(id => {
+            const p = products.find(prod => prod.id === id);
+            if(!p) return '';
+            return `
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <a href="product.html?id=${p.id}"><img src="${p.image}" alt="${p.name}" loading="lazy"></a>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">${p.category}</div>
+                        <a href="product.html?id=${p.id}" class="product-title">${p.name}</a>
+                        <div class="product-price costdiscount">
+                            ${p.comparePrice ? `<span class="compare-price costdiscount">${formatPrice(p.comparePrice)}</span> <span class="sale-price costdiscount">${formatPrice(p.price)}</span>` : formatPrice(p.price)}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    // Currency event listener
+    window.addEventListener('currencyChanged', () => {
+        const params = new URLSearchParams(window.location.search);
+        const productId = parseInt(params.get('id'));
+        const product = products.find(p => p.id === productId);
+        if (product) {
+            renderProduct(product);
+            renderRelatedProducts(product);
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentCurrencyStr = localStorage.getItem('shiningstore_currency') || 'USD';
+        const displays = document.querySelectorAll('.current-currency-display');
+        displays.forEach(el => el.textContent = currentCurrencyStr === 'USD' ? '$ USD' : '₹ INR');
+
+        const currencyToggleBtn = document.getElementById('currencyToggleBtn');
+        const currencyDropdown = document.getElementById('currencyDropdown');
+        if(currencyToggleBtn && currencyDropdown) {
+            currencyToggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currencyDropdown.classList.toggle('hidden');
+            });
+            document.addEventListener('click', () => {
+                currencyDropdown.classList.add('hidden');
+            });
+        }
+    });
+
+    document.addEventListener('productsLoaded', initPDP);
+
+    </script>
+    
+    <!-- Chatbot is injected dynamically via app.js -->
+</body>
+
+</html>

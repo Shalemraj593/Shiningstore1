@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shining Store | Premium Fashion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=1780385356120">
+</head>
+
+<body>
+
+    <!-- ==========================================
+         DESKTOP LAYOUT 
+         ========================================== -->
+    <div class="desktop-layout">
+        <!-- Announcement Bar -->
+        <div class="announcement-bar" id="announcementBar">
+            <p>✨ Free Global Shipping on all orders over $50 &nbsp;|&nbsp; Use Code <strong>WELCOME10</strong> for 10%
+                Off</p>
+            <button id="closeAnnouncement"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <!-- Header -->
+        <header class="navbar" id="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="index.html"><span>Shining</span>Store</a>
+                </div>
+
+                <div class="nav-links">
+                    <a href="#new-arrivals">New Arrivals</a>
+                    <a href="#shop-desktop" data-category="dresses">Dresses</a>
+                    <a href="#shop-desktop" data-category="outerwear">Outerwear</a>
+                    <a href="#shop-desktop" data-category="tops">Tops</a>
+                    <a href="#shop-desktop" data-category="activewear">Activewear</a>
+                    <a href="#shop-desktop" data-category="jeans">Jeans</a>
+                    <a href="#shop-desktop" data-category="trousers">Trousers</a>
+                    <a href="#shop-desktop" data-category="accessories">Accessories</a>
+                    <a href="#shop-desktop" data-category="shoes">Shoes</a>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="currency-selector tooltip" data-tooltip="Currency">
+                        <button class="icon-btn currency-btn" id="currencyToggleBtn">
+                            <span class="current-currency-display">$ USD</span> <i class="fa-solid fa-chevron-down" style="font-size:0.6rem; margin-left:3px;"></i>
+                        </button>
+                        <div class="currency-dropdown hidden" id="currencyDropdown">
+                            <button class="currency-option" data-currency="USD">$ USD</button>
+                            <button class="currency-option" data-currency="INR">₹ INR</button>
+                        </div>
+                    </div>
+                    <button class="icon-btn tooltip" data-tooltip="Search" id="searchToggleBtn">
+                        <i class="fa-solid fa-search"></i>
+                    </button>
+                    <button class="icon-btn tooltip" data-tooltip="Wishlist" id="wishlistBtn">
+                        <i class="fa-regular fa-heart"></i>
+                        <span class="badge hidden" id="wishlistBadge">0</span>
+                    </button>
+                    <button class="icon-btn tooltip cart-btn" id="cartOpenBtn" data-tooltip="Cart">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span class="badge" id="cartBadge">0</span>
+                    </button>
+                    <button class="icon-btn tooltip" data-tooltip="Account" id="accountBtn">
+                        <i class="fa-regular fa-user" id="accountIcon"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Search Dropdown -->
+            <div class="search-dropdown hidden" id="searchDropdown">
+                <div class="search-dropdown-inner">
+                    <div class="search-input-wrap">
+                        <i class="fa-solid fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search for dresses, tops, outerwear..." autocomplete="off">
+                        <button class="search-close-btn" id="searchCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div class="search-results" id="searchResults">
+                        <div class="search-trending">
+                            <h4>Trending Searches</h4>
+                            <div class="search-tags">
+                                <a href="#" class="search-tag" data-query="dresses">Dresses</a>
+                                <a href="#" class="search-tag" data-query="tops">Tops</a>
+                                <a href="#" class="search-tag" data-query="outerwear">Outerwear</a>
+                                <a href="#" class="search-tag" data-query="activewear">Activewear</a>
+                                <a href="#" class="search-tag" data-query="jeans">Jeans</a>
+                                <a href="#" class="search-tag" data-query="shoes">Shoes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Search Overlay -->
+        <div class="search-overlay" id="searchOverlay"></div>
+
+        <!-- Auth Modal -->
+        <div class="auth-overlay" id="authOverlay"></div>
+        <div class="auth-modal" id="authModal">
+            <button class="auth-close" id="authCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+            <div class="auth-header">
+                <h3 id="authTitle">Welcome Back</h3>
+                <p id="authSubtitle">Sign in to access your account</p>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Login</button>
+                <button class="auth-tab" data-tab="signup">Sign Up</button>
+            </div>
+
+            <form id="authForm" class="auth-form">
+                <div class="input-group" id="nameGroup" style="display:none;">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" id="authName" placeholder="Full Name">
+                </div>
+                <div class="input-group">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input type="email" id="authEmail" placeholder="Email Address" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="authPassword" placeholder="Password" required>
+                </div>
+                <div class="auth-options" id="authOptions">
+                    <label><input type="checkbox"> Remember me</label>
+                    <a href="#" class="forgot-pwd">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%; border-radius:var(--radius-pill); font-size:0.9rem;" id="authSubmitBtn">SIGN IN</button>
+            </form>
+
+            <div class="auth-divider"><span>OR</span></div>
+            <div class="auth-socials">
+                <button class="social-btn"><i class="fa-brands fa-google"></i> Google</button>
+                <button class="social-btn"><i class="fa-brands fa-apple"></i> Apple</button>
+            </div>
+        </div>
+
+        <!-- End Header area -->
+
+        <!-- Trending Products & Advanced Filters -->
+        <section id="shop-desktop" class="shop-section">
+            <div class="section-title">
+                <h2>Shop Collections</h2>
+            </div>
+            
+            <div class="shop-layout">
+                <!-- Advanced Filtering Sidebar -->
+                <aside class="shop-sidebar">
+                    <div class="filter-header">
+                        <h3>Filters</h3>
+                        <button id="clearFiltersBtn" class="clear-filters">Clear All</button>
+                    </div>
+
+                    <!-- Price Filter -->
+                    <div class="filter-group-adv">
+                        <h4>Price Range</h4>
+                        <div class="price-slider-wrap">
+                            <input type="range" id="priceRange" min="0" max="100" value="100" class="range-slider">
+                            <div class="price-labels">
+                                <span id="priceMinDisplay">$0</span>
+                                <span id="priceMaxDisplay">$100</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category Filter -->
+                    <div class="filter-group-adv">
+                        <h4>Categories</h4>
+                        <div class="checkbox-list">
+                            <label class="custom-checkbox">
+                                <input type="checkbox" value="fashion" class="cat-filter">
+                                <span class="checkmark"></span> Fashion
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" value="shoes" class="cat-filter">
+                                <span class="checkmark"></span> Shoes
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" value="electronics" class="cat-filter">
+                                <span class="checkmark"></span> Tech & Gadgets
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" value="pets" class="cat-filter">
+                                <span class="checkmark"></span> Pet Essentials
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" value="accessories" class="cat-filter">
+                                <span class="checkmark"></span> Accessories
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Size Filter -->
+                    <div class="filter-group-adv">
+                        <h4>Size</h4>
+                        <div class="size-filter-grid">
+                            <button class="size-filter-btn" data-size="XS">XS</button>
+                            <button class="size-filter-btn" data-size="S">S</button>
+                            <button class="size-filter-btn" data-size="M">M</button>
+                            <button class="size-filter-btn" data-size="L">L</button>
+                            <button class="size-filter-btn" data-size="XL">XL</button>
+                        </div>
+                    </div>
+
+                    <!-- Color Filter -->
+                    <div class="filter-group-adv">
+                        <h4>Color</h4>
+                        <div class="color-filter-grid">
+                            <button class="color-swatch tooltip" data-tooltip="Black" data-color="black" style="background:#000;"></button>
+                            <button class="color-swatch tooltip" data-tooltip="White" data-color="white" style="background:#fff; border:1px solid #ddd;"></button>
+                            <button class="color-swatch tooltip" data-tooltip="Red" data-color="red" style="background:#d4736d;"></button>
+                            <button class="color-swatch tooltip" data-tooltip="Blue" data-color="blue" style="background:#4A90E2;"></button>
+                            <button class="color-swatch tooltip" data-tooltip="Beige" data-color="beige" style="background:#F5F5DC;"></button>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Product Grid Area -->
+                <div class="shop-content">
+                    <div class="shop-active-filters" id="activeFiltersContainer">
+                        <!-- Active filter tags injected here -->
+                    </div>
+                    <div class="product-grid" id="mainProductGrid">
+                        <!-- Products injected via JS -->
+                    </div>
+                    <div id="noProductsMsg" class="hidden" style="text-align:center; padding:4rem; color:var(--text-muted);">
+                        <i class="fa-solid fa-box-open" style="font-size:3rem; margin-bottom:1rem; opacity:0.3;"></i>
+                        <h3>No products found</h3>
+                        <p>Try adjusting your filters to find what you're looking for.</p>
+                        <button class="btn btn-outline" onclick="document.getElementById('clearFiltersBtn').click()" style="margin-top:1rem;">Clear Filters</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Proof / Testimonials -->
+        <section class="social-proof">
+            <div class="section-title" style="justify-content: center; text-align: center;">
+                <h2>What Our Customers Say</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Absolutely love the quality! The dresses fit perfectly and the fabric
+                        is premium. My go-to store for every occasion."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">S</div>
+                        <div>
+                            <div class="testimonial-name">Sarah M.</div>
+                            <div class="testimonial-verified"><i class="fa-solid fa-circle-check"></i> Verified Buyer
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Fast shipping and incredible customer service. The knitted coat is even
+                        better in person. Will definitely order again!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">E</div>
+                        <div>
+                            <div class="testimonial-name">Emily R.</div>
+                            <div class="testimonial-verified"><i class="fa-solid fa-circle-check"></i> Verified Buyer
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <p class="testimonial-text">"The activewear collection is amazing — so comfortable and stylish. I
+                        get compliments every time I wear them to the gym."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">J</div>
+                        <div>
+                            <div class="testimonial-name">Jessica K.</div>
+                            <div class="testimonial-verified"><i class="fa-solid fa-circle-check"></i> Verified Buyer
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Instagram / Community Section -->
+        <section class="instagram-section">
+            <div class="section-title" style="justify-content: center; text-align: center;">
+                <h2>@ShiningStore on Instagram</h2>
+            </div>
+            <p class="instagram-subtitle">Follow us for daily style inspiration and behind-the-scenes content</p>
+            <div class="instagram-grid">
+                <a href="#" class="insta-item">
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80"
+                        alt="Instagram 1">
+                    <div class="insta-hover"><i class="fa-brands fa-instagram"></i></div>
+                </a>
+                <a href="#" class="insta-item">
+                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=400&q=80"
+                        alt="Instagram 2">
+                    <div class="insta-hover"><i class="fa-brands fa-instagram"></i></div>
+                </a>
+                <a href="#" class="insta-item">
+                    <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=400&q=80"
+                        alt="Instagram 3">
+                    <div class="insta-hover"><i class="fa-brands fa-instagram"></i></div>
+                </a>
+                <a href="#" class="insta-item">
+                    <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=400&q=80"
+                        alt="Instagram 4">
+                    <div class="insta-hover"><i class="fa-brands fa-instagram"></i></div>
+                </a>
+                <a href="#" class="insta-item">
+                    <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=400&q=80"
+                        alt="Instagram 5">
+                    <div class="insta-hover"><i class="fa-brands fa-instagram"></i></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter-section">
+            <div class="newsletter-inner">
+                <div class="newsletter-icon"><i class="fa-regular fa-envelope"></i></div>
+                <h2>Join the Shining Club</h2>
+                <p>Subscribe for exclusive deals, early access to new collections, and 10% off your first order.</p>
+                <form class="newsletter-form"
+                    onsubmit="event.preventDefault(); this.querySelector('button').textContent='Subscribed ✓'; this.querySelector('button').style.background='var(--success)';">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit" class="btn btn-accent">Subscribe</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Premium Footer -->
+        <footer class="site-footer">
+            <div class="footer-top">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <h3 class="footer-logo">SHINING<span>STORE.</span></h3>
+                        <p>Redefining premium women's fashion with elegant, timeless, and sustainable pieces designed
+                            for the modern lifestyle.</p>
+                        <div class="footer-social">
+                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+                            <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Shop</h4>
+                        <ul>
+                            <li><a href="#">New Arrivals</a></li>
+                            <li><a href="#">Dresses</a></li>
+                            <li><a href="#">Outerwear</a></li>
+                            <li><a href="#">Activewear</a></li>
+                            <li><a href="#">Sale</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Help</h4>
+                        <ul>
+                            <li><a href="#">Customer Service</a></li>
+                            <li><a href="#">Track Order</a></li>
+                            <li><a href="#">Returns & Exchanges</a></li>
+                            <li><a href="#">Shipping Info</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>About</h4>
+                        <ul>
+                            <li><a href="#">Our Story</a></li>
+                            <li><a href="#">Sustainability</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Press</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Shining Store. All Rights Reserved.</p>
+                <div class="footer-payment">
+                    <i class="fa-brands fa-cc-visa"></i>
+                    <i class="fa-brands fa-cc-mastercard"></i>
+                    <i class="fa-brands fa-cc-amex"></i>
+                    <i class="fa-brands fa-cc-paypal"></i>
+                    <i class="fa-brands fa-cc-apple-pay"></i>
+                    <i class="fa-brands fa-google-pay"></i>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- ==========================================
+         MOBILE LAYOUT (SHEIN STYLE)
+         ========================================== -->
+    <div class="mobile-layout">
+        <!-- Mobile Header -->
+        <header class="mobile-header">
+            <div class="mobile-header-left">
+                <i class="fa-regular fa-envelope"></i>
+                <div class="logo"><span>Shining</span>Store.</div>
+            </div>
+            <div class="mobile-header-actions">
+                <i class="fa-solid fa-search"></i>
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-solid fa-bag-shopping" onclick="toggleCart(true)"></i>
+            </div>
+        </header>
+
+        <!-- Top Circle Categories -->
+        <div class="mobile-top-categories">
+            <div class="top-cat-item">
+                <div class="top-cat-icon"><i class="fa-solid fa-house"
+                        style="font-size:1.2rem;color:var(--text-main)"></i></div>
+            </div>
+            <div class="top-cat-item">
+                <div class="top-cat-icon"><img
+                        src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=100&q=80"
+                        alt="Offers"></div>
+                <span class="top-cat-name">Offers</span>
+            </div>
+            <div class="top-cat-item">
+                <div class="top-cat-icon"><img
+                        src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=100&q=80"
+                        alt="Fresh Fits"></div>
+                <span class="top-cat-name">Fresh Fits</span>
+            </div>
+            <div class="top-cat-item">
+                <div class="top-cat-icon"><img
+                        src="https://images.unsplash.com/photo-1434389677669-e08b4cda3a7a?auto=format&fit=crop&w=100&q=80"
+                        alt="Women"></div>
+                <span class="top-cat-name">Women</span>
+            </div>
+            <div class="top-cat-item">
+                <div class="top-cat-icon"><img
+                        src="https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=100&q=80"
+                        alt="Men"></div>
+                <span class="top-cat-name">Men</span>
+            </div>
+            <div class="top-cat-item">
+                <div class="top-cat-icon"><img
+                        src="https://images.unsplash.com/photo-1596755094514-f87e32f85e23?auto=format&fit=crop&w=100&q=80"
+                        alt="Kids"></div>
+                <span class="top-cat-name">Kids</span>
+            </div>
+        </div>
+
+        <!-- Mobile Shop Section -->
+        <section id="shop" class="shop-section">
+            <div class="section-title">
+                <h2>Shop Collections</h2>
+            </div>
+            <div class="product-grid">
+                <!-- Products injected via JS -->
+            </div>
+        </section>
+
+        <!-- Mobile Bottom Nav -->
+        <nav class="mobile-bottom-nav">
+            <a href="index.html" class="bottom-nav-item active">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+            <a href="categories.html" class="bottom-nav-item">
+                <i class="fa-solid fa-list"></i>
+                <span>Category</span>
+            </a>
+            <a href="index.html#shop" class="bottom-nav-item">
+                <i class="fa-solid fa-shirt"></i>
+                <span>New</span>
+            </a>
+            <a href="#" class="bottom-nav-item" onclick="toggleCart(true); return false;">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span>Bag</span>
+                <span class="bottom-nav-badge hidden" id="mobileCartBadge">0</span>
+            </a>
+            <a href="account.html" class="bottom-nav-item">
+                <i class="fa-regular fa-user"></i>
+                <span>Me</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Wishlist Drawer -->
+    <div class="cart-overlay" id="wishlistOverlay"></div>
+    <div class="cart-drawer" id="wishlistDrawer">
+        <div class="cart-header">
+            <h3>My Wishlist (<span id="wishlistCount">0</span>)</h3>
+            <button class="close-btn" id="wishlistCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="wishlistItems">
+            <div style="text-align:center; padding: 2rem; color: #767676;">
+                <i class="fa-regular fa-heart" style="font-size:3rem; margin-bottom:1rem; display:block; color:#ddd;"></i>
+                <p>Your wishlist is empty.</p>
+                <p style="font-size:0.85rem; margin-top:0.5rem;">Tap the heart icon on products you love.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Drawer (Shared) -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>Shopping Bag</h3>
+            <button class="close-btn" id="cartCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div style="text-align:center; padding: 2rem; color: #767676;">Your bag is empty.</div>
+        </div>
+        <div class="cart-footer">
+            <div class="totals" style="margin-bottom: 1rem;">
+                <div class="total-row"
+                    style="display:flex; justify-content:space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
+                    <span>Subtotal</span>
+                    <span id="subtotalAmount">$0.00</span>
+                </div>
+                <div class="total-row discount hidden" id="discountRow"
+                    style="display:flex; justify-content:space-between; margin-bottom: 0.5rem; font-size: 0.9rem; color: #ff0000;">
+                    <span>Discount</span>
+                    <span id="discountAmount">-$0.00</span>
+                </div>
+                <div class="total-row grand-total"
+                    style="display:flex; justify-content:space-between; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); font-weight: bold; font-size: 1.1rem;">
+                    <span>Total</span>
+                    <span id="totalAmount">$0.00</span>
+                </div>
+            </div>
+            <button class="btn btn-primary w-100" id="checkoutBtn" disabled>Checkout</button>
+        </div>
+    </div>
+
+    <!-- Currency Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentCurrencyStr = localStorage.getItem('shiningstore_currency') || 'USD';
+            const displays = document.querySelectorAll('.current-currency-display');
+            displays.forEach(el => el.textContent = currentCurrencyStr === 'USD' ? '$ USD' : '₹ INR');
+
+            const currencyToggleBtn = document.getElementById('currencyToggleBtn');
+            const currencyDropdown = document.getElementById('currencyDropdown');
+            currencyToggleBtn?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currencyDropdown.classList.toggle('hidden');
+            });
+            document.addEventListener('click', () => {
+                currencyDropdown?.classList.add('hidden');
+            });
+        });
+    </script>
+    <!-- Chatbot is injected dynamically via app.js -->
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+
+</html>
