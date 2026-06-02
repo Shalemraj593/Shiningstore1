@@ -1173,3 +1173,26 @@ img { max-width: 100%; display: block; }
     .badge-new { background: #d32f2f; color: #fff; font-size: 0.6rem; padding: 2px 6px; border-radius: 2px; font-weight: 700; }
 }
 \n.buy-now { background: var(--primary); color: white; border: none; }\n.buy-now:hover { background: #111; }\n
+/* About Page Styles */
+.about-page { padding-bottom: 4rem; }
+.about-hero { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1920&q=80') center/cover; padding: 6rem 2rem; text-align: center; color: white; }
+.about-hero h1 { font-size: 3rem; margin-bottom: 1rem; font-family: 'Playfair Display', serif; }
+.about-hero p { font-size: 1.2rem; max-width: 600px; margin: 0 auto; opacity: 0.9; }
+.about-section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+.about-container { display: flex; gap: 4rem; align-items: center; }
+.about-text-content { flex: 1; }
+.about-text-content h2 { font-size: 2.5rem; margin-bottom: 1.5rem; font-family: 'Playfair Display', serif; }
+.about-text-content p { color: #555; line-height: 1.8; margin-bottom: 1rem; font-size: 1.1rem; }
+.about-image-content { flex: 1; }
+.about-image-content img { width: 100%; border-radius: var(--radius-md); box-shadow: var(--shadow-lg); }
+.about-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; padding: 2rem; }
+.feature-box { text-align: center; padding: 2rem; background: var(--bg-cream); border-radius: var(--radius-md); transition: var(--transition); }
+.feature-box:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+.feature-box i { font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; }
+.feature-box h3 { font-size: 1.2rem; margin-bottom: 1rem; }
+.feature-box p { color: #666; line-height: 1.6; }
+@media (max-width: 768px) {
+    .about-container { flex-direction: column; gap: 2rem; }
+    .about-hero h1 { font-size: 2.2rem; }
+    .about-text-content h2 { font-size: 2rem; }
+}
