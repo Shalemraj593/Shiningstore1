@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Account | Shining Store</title>
+    <link rel="icon" type="image/jpeg" href="assets/Tabpic.jpeg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css?v=1780385356117">
@@ -203,37 +204,41 @@
             <div class="mobile-avatar">
                 <i class="fa-regular fa-user"></i>
             </div>
-            <button class="mobile-signin-btn">Sign in / Join</button>
+            <button class="mobile-signin-btn" onclick="toggleAuthModal(true)">Sign in / Join</button>
         </div>
         <div class="mobile-account-links">
-            <a href="#" class="mobile-account-link">
+            <a href="#" class="mobile-account-link" onclick="toggleChat(); return false;">
                 <span>Customer Care</span>
                 <i class="fa-solid fa-chevron-right"></i>
             </a>
-            <a href="#" class="mobile-account-link">
+            <a href="#" class="mobile-account-link" onclick="toggleAuthModal(true); return false;">
                 <div class="link-content">
                     <span style="display:flex;align-items:center;gap:8px;">Shiningstore <span class="badge-new">NEW</span></span>
                     <span class="link-subtext">Connect, create acc with us</span>
                 </div>
                 <i class="fa-solid fa-chevron-right"></i>
             </a>
-            <a href="#" class="mobile-account-link">
+            <a href="#" class="mobile-account-link" onclick="alert('You have 0 new notifications.'); return false;">
                 <span>Notifications</span>
                 <i class="fa-solid fa-chevron-right"></i>
             </a>
-            <a href="#" class="mobile-account-link">
+            <a href="about.html#returns" class="mobile-account-link">
                 <span>How To Return</span>
                 <i class="fa-solid fa-chevron-right"></i>
             </a>
-            <a href="#" class="mobile-account-link">
+            <a href="about.html#terms" class="mobile-account-link">
                 <span>Terms & Conditions</span>
                 <i class="fa-solid fa-chevron-right"></i>
             </a>
-            <a href="#" class="mobile-account-link">
+            <a href="about.html" class="mobile-account-link">
+                <span>Our Story</span>
+                <i class="fa-solid fa-chevron-right"></i>
+            </a>
+            <a href="about.html#promotions" class="mobile-account-link">
                 <span>Promotions Terms & Conditions</span>
                 <i class="fa-solid fa-chevron-right"></i>
             </a>
-            <a href="#" class="mobile-account-link">
+            <a href="about.html#returns" class="mobile-account-link">
                 <span>Returns & Refunds Policy</span>
                 <i class="fa-solid fa-chevron-right"></i>
             </a>
@@ -246,7 +251,7 @@
             <i class="fa-solid fa-house"></i>
             <span>Home</span>
         </a>
-        <a href="category.html" class="bottom-nav-item">
+        <a href="categories.html" class="bottom-nav-item">
             <i class="fa-solid fa-list"></i>
             <span>Category</span>
         </a>
@@ -305,5 +310,113 @@
             }
         });
     </script>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay"></div>
+
+    <!-- Auth Modal -->
+    <div class="auth-overlay" id="authOverlay"></div>
+    <div class="auth-modal" id="authModal">
+        <button class="auth-close" id="authCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+        <div class="auth-header">
+            <h3 id="authTitle">Welcome Back</h3>
+            <p id="authSubtitle">Sign in to access your account</p>
+        </div>
+        
+        <div class="auth-tabs">
+            <button class="auth-tab active" data-tab="login">Login</button>
+            <button class="auth-tab" data-tab="signup">Sign Up</button>
+        </div>
+
+        <form id="authForm" class="auth-form">
+            <div class="input-group" id="nameGroup" style="display:none;">
+                <i class="fa-regular fa-user"></i>
+                <input type="text" id="authName" placeholder="Full Name">
+            </div>
+            <div class="input-group">
+                <i class="fa-regular fa-envelope"></i>
+                <input type="email" id="authEmail" placeholder="Email Address" required>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="authPassword" placeholder="Password" required>
+            </div>
+            <div class="auth-options" id="authOptions">
+                <label><input type="checkbox"> Remember me</label>
+                <a href="#" class="forgot-pwd">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%; border-radius:var(--radius-pill); font-size:0.9rem;" id="authSubmitBtn">SIGN IN</button>
+        </form>
+
+        <div class="auth-divider"><span>OR</span></div>
+        <div class="auth-socials">
+            <button class="social-btn"><i class="fa-brands fa-google"></i> Google</button>
+            <button class="social-btn"><i class="fa-brands fa-apple"></i> Apple</button>
+        </div>
+    </div>
+
+    <!-- Wishlist Drawer -->
+    <div class="cart-overlay" id="wishlistOverlay"></div>
+    <div class="cart-drawer" id="wishlistDrawer">
+        <div class="cart-header">
+            <h3>My Wishlist (<span id="wishlistCount">0</span>)</h3>
+            <button class="close-btn" id="wishlistCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="wishlistItems">
+            <div style="text-align:center; padding: 2rem; color: #767676;">
+                <i class="fa-regular fa-heart" style="font-size:3rem; margin-bottom:1rem; display:block; color:#ddd;"></i>
+                <p>Your wishlist is empty.</p>
+                <p style="font-size:0.85rem; margin-top:0.5rem;">Tap the heart icon on products you love.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Drawer (Shared) -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>Shopping Bag</h3>
+            <button class="close-btn" id="cartCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div style="text-align:center; padding: 2rem; color: #767676;">Your bag is empty.</div>
+        </div>
+        <div class="cart-footer">
+            <div class="totals" style="margin-bottom: 1rem;">
+                <div class="total-row"
+                    style="display:flex; justify-content:space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
+                    <span>Subtotal</span>
+                    <span id="subtotalAmount">$0.00</span>
+                </div>
+                <div class="total-row discount hidden" id="discountRow"
+                    style="display:flex; justify-content:space-between; margin-bottom: 0.5rem; font-size: 0.9rem; color: #ff0000;">
+                    <span>Discount</span>
+                    <span id="discountAmount">-$0.00</span>
+                </div>
+                <div class="total-row grand-total"
+                    style="display:flex; justify-content:space-between; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); font-weight: bold; font-size: 1.1rem;">
+                    <span>Total</span>
+                    <span id="totalAmount">$0.00</span>
+                </div>
+            </div>
+            <button class="btn btn-primary w-100" id="checkoutBtn" disabled>Checkout</button>
+        </div>
+    </div>
+
+    <!-- Mobile Search Overlay -->
+    <div class="mobile-search-overlay hidden" id="mobileSearchOverlay">
+        <div class="mobile-search-header">
+            <button class="mobile-search-close" id="mobileSearchClose"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="mobile-search-input-box">
+                <input type="text" id="mobileSearchField" placeholder="Search by Product" autocomplete="off">
+            </div>
+        </div>
+        <div class="mobile-search-content" id="mobileSearchResults">
+            <!-- Search results injected here -->
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
 </body>
 </html>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secure Checkout | Shining Store</title>
+    <link rel="icon" type="image/jpeg" href="assets/Tabpic.jpeg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css?v=1780385356121">
@@ -229,6 +230,31 @@
             <a href="index.html" class="btn btn-primary" style="width: 100%; border-radius: var(--radius-pill);">Continue Shopping</a>
         </div>
     </div>
+
+    <!-- Mobile Bottom Nav -->
+    <nav class="mobile-bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="categories.html" class="bottom-nav-item">
+            <i class="fa-solid fa-list"></i>
+            <span>Category</span>
+        </a>
+        <a href="index.html#shop" class="bottom-nav-item">
+            <i class="fa-solid fa-shirt"></i>
+            <span>New</span>
+        </a>
+        <a href="#" class="bottom-nav-item" onclick="toggleCart(true); return false;">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span>Bag</span>
+            <span class="bottom-nav-badge hidden" id="mobileCartBadge">0</span>
+        </a>
+        <a href="account.html" class="bottom-nav-item">
+            <i class="fa-regular fa-user"></i>
+            <span>Me</span>
+        </a>
+    </nav>
 
     <script src="app.js"></script>
     <script>
