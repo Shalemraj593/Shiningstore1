@@ -4,23 +4,34 @@
    ============================================ */
 
 :root {
-    --bg-main: #fafafa;
-    --bg-white: #ffffff;
-    --bg-cream: #f5f0eb;
-    --bg-dark: #1a1a2e;
-    --bg-darker: #0f0f1a;
-    --text-main: #111111;
-    --text-secondary: #4a4a68;
-    --text-muted: #767676;
-    --text-light: #ffffff;
-    --primary: #111111;
+    /* Main Design System Colors */
+    --color-cream: #F5F3EE;
+    --color-charcoal: #1A1A1A;
+    --color-accent: #D4A853;
+    --color-surface: #FFFFFF;
+    --color-surface-warm: #EDEAE3;
+    --color-muted: #8A8680;
+    --color-border: #D9D5CE;
+    --color-overlay: rgba(26, 26, 26, 0.4);
+
+    /* Theme Mapping to Existing Variables for Seamless Integration */
+    --bg-main: var(--color-cream);
+    --bg-white: var(--color-surface);
+    --bg-cream: var(--color-surface-warm);
+    --bg-dark: var(--color-charcoal);
+    --bg-darker: #0D0D0D;
+    --text-main: var(--color-charcoal);
+    --text-secondary: var(--color-muted);
+    --text-muted: var(--color-muted);
+    --text-light: var(--color-surface);
+    --primary: var(--color-charcoal);
     --primary-hover: #333333;
-    --accent: #c9a96e;
-    --accent-light: #dfc9a0;
+    --accent: var(--color-accent);
+    --accent-light: #E4C381;
     --sale-red: #ff2a00;
     --success: #5cb885;
-    --border: #e8e4e0;
-    --border-light: #f0ece8;
+    --border: var(--color-border);
+    --border-light: var(--color-surface-warm);
     --font-heading: 'Inter', sans-serif;
     --font-body: 'Inter', sans-serif;
     --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -989,7 +1000,7 @@ img { max-width: 100%; display: block; }
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    background: #fafafa;
+    background: var(--bg-main);
 }
 .chat-msg {
     max-width: 80%;
@@ -1196,7 +1207,7 @@ img { max-width: 100%; display: block; }
     .square-cat span { font-size: 0.7rem; color: var(--text-main); font-weight: 600; text-align: center; }
     
     /* Sale Banner 2 */
-    .mobile-sale-banner { display: flex; margin: 1rem; border-radius: var(--radius-sm); overflow: hidden; background: #fafafa; border: 1px solid var(--border-light); }
+    .mobile-sale-banner { display: flex; margin: 1rem; border-radius: var(--radius-sm); overflow: hidden; background: var(--bg-white); border: 1px solid var(--border-light); }
     .sale-banner-red { background: #e53935; color: white; padding: 1.5rem 1rem; display: flex; flex-direction: column; justify-content: center; align-items: center; min-width: 100px; }
     .sale-banner-red h3 { font-size: 1.5rem; font-weight: 800; line-height: 1; margin: 0; text-align: center; }
     .sale-banner-red span { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; margin-top: 5px; }
@@ -1206,7 +1217,7 @@ img { max-width: 100%; display: block; }
     /* Bottom Navigation Bar */
     .mobile-bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: var(--bottom-nav-height); background: var(--bg-white); border-top: 1px solid var(--border-light); z-index: 999; display: flex; padding-bottom: env(safe-area-inset-bottom); }
     .bottom-nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: var(--text-main); font-size: 0.65rem; font-weight: 500; -webkit-tap-highlight-color: transparent; }
-    .bottom-nav-item i { font-size: 1.2rem; color: #555; }
+    .bottom-nav-item i { font-size: 1.2rem; color: var(--text-secondary); }
     .bottom-nav-item.active i { color: var(--text-main); }
     .bottom-nav-item.active { font-weight: 700; }
     .bottom-nav-badge { position: absolute; top: 5px; right: 50%; transform: translateX(12px); background: var(--sale-red); color: white; font-size: 0.55rem; font-weight: 700; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid white; }
