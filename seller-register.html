@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Become a Seller | Shining Store</title>
+    <link rel="icon" type="image/jpeg" href="assets/Tabpic.jpeg">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=1780385356117">
+    <style>
+        /* Hide announcement bar on this specific page */
+        #announcementBar {
+            display: none !important;
+        }
+
+        /* Seller Page Specific Styles */
+        .seller-hero {
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1600&q=80') center/cover;
+            padding: calc(var(--header-desktop-height) + 4rem) 2rem 6rem 2rem;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .seller-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 100%);
+            z-index: 0;
+        }
+
+        .seller-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            width: 100%;
+        }
+
+        .seller-hero-text {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .seller-hero-text h1 {
+            font-family: var(--font-secondary);
+            font-size: 3.8rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: #ffffff !important;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .seller-hero-text p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: #e0e0e0 !important;
+        }
+
+        .seller-benefits-inline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .seller-benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #ffffff !important;
+        }
+
+        .seller-benefit-item i {
+            color: var(--color-accent);
+            font-size: 1.2rem;
+            background: rgba(212, 115, 109, 0.2);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .seller-form-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 450px;
+            color: var(--text-main);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+            animation: slideUp 0.6s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .seller-form-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-secondary);
+        }
+
+        .seller-form-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .seller-input-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .seller-input-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            color: var(--text-secondary);
+        }
+
+        .seller-input-group input,
+        .seller-input-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            font-family: var(--font-primary);
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .seller-input-group input:focus,
+        .seller-input-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(17, 17, 17, 0.1);
+        }
+
+        .seller-form-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 0.5rem;
+        }
+
+        .seller-form-btn:hover {
+            background: #333;
+            transform: translateY(-2px);
+        }
+
+        .seller-stats {
+            background: var(--bg-cream);
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .stats-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item h2 {
+            font-size: 3rem;
+            font-family: var(--font-secondary);
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+
+        /* ============ MOBILE STYLES FOR SELLER PAGE ============ */
+        @media (max-width: 768px) {
+            /* Show mobile header, hide desktop navbar */
+            .seller-mobile-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.8rem 1rem;
+                border-bottom: 1px solid var(--border-light);
+                background: var(--bg-white);
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+
+            .seller-mobile-header .logo a {
+                font-size: 1.25rem;
+                letter-spacing: 3px;
+                color: var(--primary);
+                font-weight: 300;
+                text-transform: uppercase;
+                display: inline-flex;
+                align-items: center;
+                text-decoration: none;
+            }
+
+            .seller-mobile-header .logo a span {
+                font-weight: 800;
+                letter-spacing: 3px;
+                color: var(--primary);
+                margin-right: 2px;
+            }
+
+            .seller-mobile-header .logo a::after {
+                content: '.';
+                color: var(--accent);
+                font-size: 1.8rem;
+                line-height: 0;
+                margin-left: 2px;
+                margin-top: -4px;
+            }
+
+            .seller-mobile-header-actions {
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+                font-size: 1.2rem;
+            }
+
+            .seller-mobile-header-actions a {
+                color: var(--text-main);
+                text-decoration: none;
+            }
+
+            /* Hero mobile */
+            .seller-hero {
+                padding: 2rem 1rem 2rem 1rem;
+                min-height: auto;
+                background-position: center;
+            }
+
+            .seller-hero::before {
+                background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.5) 100%);
+            }
+
+            .seller-hero-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+
+            .seller-hero-text {
+                max-width: 100%;
+            }
+
+            .seller-hero-text h1 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .seller-hero-text p {
+                font-size: 0.9rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .seller-benefits-inline {
+                align-items: flex-start;
+                gap: 0.8rem;
+                margin-bottom: 1.5rem;
+                text-align: left;
+            }
+
+            .seller-benefit-item {
+                font-size: 0.85rem;
+                gap: 10px;
+            }
+
+            .seller-benefit-item i {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+                flex-shrink: 0;
+            }
+
+            .seller-form-card {
+                padding: 1.5rem;
+                max-width: 100%;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            }
+
+            .seller-form-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .seller-form-card p {
+                font-size: 0.82rem;
+                margin-bottom: 1rem;
+            }
+
+            .seller-input-group {
+                margin-bottom: 1rem;
+            }
+
+            .seller-input-group input,
+            .seller-input-group select {
+                padding: 0.7rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .seller-form-btn {
+                padding: 0.85rem;
+                font-size: 0.9rem;
+            }
+
+            /* Stats mobile */
+            .seller-stats {
+                padding: 3rem 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stat-item h2 {
+                font-size: 2.2rem;
+            }
+
+            .stat-item p {
+                font-size: 0.75rem;
+            }
+
+            /* Mobile Bottom Nav for seller page */
+            .seller-bottom-nav {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: var(--bottom-nav-height);
+                background: var(--bg-white);
+                border-top: 1px solid var(--border-light);
+                z-index: 999;
+                display: flex;
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+
+            .seller-bottom-nav .bottom-nav-item {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 4px;
+                color: var(--text-main);
+                font-size: 0.65rem;
+                font-weight: 500;
+                text-decoration: none;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .seller-bottom-nav .bottom-nav-item i {
+                font-size: 1.2rem;
+                color: var(--text-secondary);
+            }
+
+            .seller-bottom-nav .bottom-nav-item.active i {
+                color: var(--text-main);
+            }
+
+            .seller-bottom-nav .bottom-nav-item.active {
+                font-weight: 700;
+            }
+
+            /* Add padding at bottom for bottom nav */
+            main {
+                padding-bottom: calc(var(--bottom-nav-height) + 20px);
+            }
+        }
+
+        /* Desktop: hide mobile elements */
+        @media (min-width: 769px) {
+            .seller-mobile-header {
+                display: none;
+            }
+
+            .seller-bottom-nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Dynamic Header (Desktop only) -->
+    <header class="navbar" id="navbar"></header>
+
+    <!-- Mobile Header -->
+    <div class="seller-mobile-header">
+        <div class="logo">
+            <a href="index.html"><span>SHINING</span> STORE</a>
+        </div>
+        <div class="seller-mobile-header-actions">
+            <a href="index.html"><i class="fa-solid fa-house"></i></a>
+            <a href="account.html"><i class="fa-regular fa-user"></i></a>
+        </div>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="seller-hero">
+            <div class="seller-hero-content">
+                <div class="seller-hero-text">
+                    <h1>Grow Your Business with Shining Store</h1>
+                    <p>Reach thousands of shoppers worldwide. Join the premium destination for fashion, electronics, and
+                        lifestyle products. Set up your store in minutes and start selling globally.</p>
+
+                    <div class="seller-benefits-inline">
+                        <div class="seller-benefit-item">
+                            <i class="fa-solid fa-percent"></i>
+                            <span>Industry-lowest 5% commission rate</span>
+                        </div>
+                        <div class="seller-benefit-item">
+                            <i class="fa-solid fa-globe"></i>
+                            <span>Access to over 15K active users globally</span>
+                        </div>
+                        <div class="seller-benefit-item">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span>Powerful analytics and marketing tools</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="seller-form-card">
+                    <h3>Register as a Seller</h3>
+                    <p>Start your journey with us today. No hidden fees.</p>
+                    <form id="sellerRegistrationForm">
+                        <div class="seller-input-group">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="John Doe" required>
+                        </div>
+                        <div class="seller-input-group">
+                            <label>Business / Store Name</label>
+                            <input type="text" placeholder="e.g. Elegant Apparel" required>
+                        </div>
+                        <div class="seller-input-group">
+                            <label>Email Address</label>
+                            <input type="email" placeholder="contact@yourstore.com" required>
+                        </div>
+                        <div class="seller-input-group">
+                            <label>Phone Number</label>
+                            <div style="display:flex; gap:10px;">
+                                <select required style="width:90px; padding:0.8rem 0.5rem; text-align:center;">
+                                    <option value="+91">+91</option>
+                                    <option value="+1">+1</option>
+                                    <option value="+44">+44</option>
+                                    <option value="+61">+61</option>
+                                    <option value="+81">+81</option>
+                                </select>
+                                <input type="tel" placeholder="000-0000" required style="flex:1;">
+                            </div>
+                        </div>
+                        <div class="seller-input-group">
+                            <label>Primary Product Category</label>
+                            <select required>
+                                <option value="" disabled selected>Select a category</option>
+                                <option value="fashion">Fashion & Apparel</option>
+                                <option value="shoes">Shoes & Footwear</option>
+                                <option value="electronics">Electronics & Tech</option>
+                                <option value="pets">Pet Supplies</option>
+                                <option value="accessories">Jewelry & Accessories</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="seller-form-btn">Create Seller Account</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="seller-stats">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h2>15K+</h2>
+                    <p>Active Global Shoppers</p>
+                </div>
+                <div class="stat-item">
+                    <h2>Yet No</h2>
+                    <p>Successful Sellers</p>
+                </div>
+                <div class="stat-item">
+                    <h2>Will get</h2>
+                    <p>Annual Seller Sales</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="seller-bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="categories.html" class="bottom-nav-item">
+            <i class="fa-solid fa-grid-2"></i>
+            <span>Categories</span>
+        </a>
+        <a href="seller-register.html" class="bottom-nav-item active">
+            <i class="fa-solid fa-store"></i>
+            <span>Sell</span>
+        </a>
+        <a href="account.html" class="bottom-nav-item">
+            <i class="fa-regular fa-user"></i>
+            <span>Me</span>
+        </a>
+    </nav>
+
+    <!-- Shared Modals/Overlays will be injected by app.js -->
+
+    <script src="app.js"></script>
+    <script>
+        document.getElementById('sellerRegistrationForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Application submitted successfully! Our team will review your details and contact you shortly.');
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>

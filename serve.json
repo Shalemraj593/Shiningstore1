@@ -1,3 +1,33 @@
 {
-  "cleanUrls": false
+  "cleanUrls": false,
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/shining-store-data/**",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=3600" }
+      ]
+    },
+    {
+      "source": "**/*.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    },
+    {
+      "source": "**/*.css",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    },
+    {
+      "source": "**/*.{jpg,jpeg,png,gif,svg,webp}",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=604800" }
+      ]
+    }
+  ]
 }
+

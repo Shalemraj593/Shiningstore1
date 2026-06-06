@@ -6,57 +6,193 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Track Your Order | Shining Store</title>
     <link rel="icon" type="image/jpeg" href="assets/Tabpic.jpeg">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css?v=1780385356123">
     <style>
-        .tracking-page { padding: 4rem 1rem; max-width: 600px; margin: 0 auto; margin-top: var(--header-desktop-height); min-height: 70vh; }
-        .tracking-box { background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid var(--border-light); }
-        .tracking-box h1 { font-family: var(--font-secondary); font-size: 2.2rem; text-align: center; margin-bottom: 0.5rem; color: var(--text-main); }
-        .tracking-box p.subtitle { text-align: center; color: var(--text-secondary); margin-bottom: 2rem; }
+        .tracking-page {
+            padding: 4rem 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            margin-top: var(--header-desktop-height);
+            min-height: 70vh;
+        }
 
-        .tracking-form { display: flex; flex-direction: column; gap: 1rem; }
-        .tracking-form input { padding: 1rem 1.2rem; border: 1px solid var(--border-light); border-radius: var(--radius-sm); font-family: var(--font-primary); font-size: 1rem; outline: none; transition: border-color 0.2s; }
-        .tracking-form input:focus { border-color: var(--primary); }
-        
-        .tracking-results { display: none; margin-top: 2.5rem; animation: fadeIn 0.4s ease; border-top: 1px solid var(--border-light); padding-top: 2rem; }
-        .tracking-results.active { display: block; }
+        .tracking-box {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-light);
+        }
 
-        .order-info { margin-bottom: 2rem; background: #f9f9f9; padding: 1.5rem; border-radius: 8px; }
-        .order-info h3 { margin: 0 0 0.5rem 0; font-size: 1.2rem; }
-        .order-info p { margin: 0; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; }
+        .tracking-box h1 {
+            font-family: var(--font-secondary);
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .tracking-box p.subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .tracking-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .tracking-form input {
+            padding: 1rem 1.2rem;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .tracking-form input:focus {
+            border-color: var(--primary);
+        }
+
+        .tracking-results {
+            display: none;
+            margin-top: 2.5rem;
+            animation: fadeIn 0.4s ease;
+            border-top: 1px solid var(--border-light);
+            padding-top: 2rem;
+        }
+
+        .tracking-results.active {
+            display: block;
+        }
+
+        .order-info {
+            margin-bottom: 2rem;
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .order-info h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.2rem;
+        }
+
+        .order-info p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
 
         /* Timeline Styles */
-        .timeline { display: flex; flex-direction: column; gap: 1.5rem; position: relative; padding-left: 20px; }
-        .timeline::before { content: ''; position: absolute; left: 6px; top: 10px; bottom: 10px; width: 2px; background: var(--border-light); z-index: 0; }
-        
-        .timeline-step { position: relative; z-index: 1; display: flex; gap: 1.5rem; opacity: 0.5; transition: opacity 0.3s; }
-        .timeline-step.completed { opacity: 1; }
-        .timeline-step.active { opacity: 1; }
-        
-        .timeline-icon { width: 14px; height: 14px; background: white; border: 2px solid var(--border-light); border-radius: 50%; margin-top: 4px; flex-shrink: 0; position: relative; right: 6px; transition: all 0.3s; }
-        .timeline-step.completed .timeline-icon { background: var(--primary); border-color: var(--primary); }
-        .timeline-step.active .timeline-icon { background: white; border-color: var(--primary); border-width: 4px; box-shadow: 0 0 0 4px rgba(0,0,0,0.1); width: 16px; height: 16px; right: 7px; margin-top: 3px; }
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+            padding-left: 20px;
+        }
 
-        .timeline-content h4 { margin: 0 0 0.2rem 0; font-size: 1rem; color: var(--text-main); }
-        .timeline-content p { margin: 0; font-size: 0.85rem; color: var(--text-secondary); }
-        .timeline-date { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: var(--border-light);
+            z-index: 0;
+        }
+
+        .timeline-step {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            gap: 1.5rem;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .timeline-step.completed {
+            opacity: 1;
+        }
+
+        .timeline-step.active {
+            opacity: 1;
+        }
+
+        .timeline-icon {
+            width: 14px;
+            height: 14px;
+            background: white;
+            border: 2px solid var(--border-light);
+            border-radius: 50%;
+            margin-top: 4px;
+            flex-shrink: 0;
+            position: relative;
+            right: 6px;
+            transition: all 0.3s;
+        }
+
+        .timeline-step.completed .timeline-icon {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .timeline-step.active .timeline-icon {
+            background: white;
+            border-color: var(--primary);
+            border-width: 4px;
+            box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
+            width: 16px;
+            height: 16px;
+            right: 7px;
+            margin-top: 3px;
+        }
+
+        .timeline-content h4 {
+            margin: 0 0 0.2rem 0;
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+
+        .timeline-content p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .timeline-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+        }
 
         @media (max-width: 768px) {
-            .tracking-page { margin-top: var(--header-mobile-height); padding: 2rem 1rem; }
-            .tracking-box { padding: 1.5rem; }
+            .tracking-page {
+                margin-top: var(--header-mobile-height);
+                padding: 2rem 1rem;
+            }
+
+            .tracking-box {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
 
 <body>
-    <!-- Simple Header -->
-    <header class="header" style="position: fixed; top: 0; width: 100%; background: white; z-index: 1000; border-bottom: 1px solid var(--border-light);">
-        <div style="display:flex; justify-content:center; align-items:center; height:60px; position:relative;">
-            <a href="index.html" style="position:absolute; left:20px; font-weight:600; text-decoration:none; color:inherit;"><i class="fa-solid fa-arrow-left"></i> Back</a>
-            <a href="index.html" class="logo" style="font-size:1.4rem;">SHINING STORE</a>
-        </div>
-    </header>
+    <!-- Dynamic Header -->
+    <header class="navbar" id="navbar"></header>
 
     <main class="tracking-page">
         <div class="tracking-box">
@@ -85,7 +221,7 @@
                             <div class="timeline-date">May 28, 2026 - 10:45 AM</div>
                         </div>
                     </div>
-                    
+
                     <div class="timeline-step completed">
                         <div class="timeline-icon"></div>
                         <div class="timeline-content">
@@ -94,7 +230,7 @@
                             <div class="timeline-date">May 29, 2026 - 02:15 PM</div>
                         </div>
                     </div>
-                    
+
                     <div class="timeline-step active">
                         <div class="timeline-icon"></div>
                         <div class="timeline-content">
@@ -103,7 +239,7 @@
                             <div class="timeline-date">May 30, 2026 - 08:30 AM</div>
                         </div>
                     </div>
-                    
+
                     <div class="timeline-step">
                         <div class="timeline-icon"></div>
                         <div class="timeline-content">
@@ -111,7 +247,7 @@
                             <p>Package is with the local courier.</p>
                         </div>
                     </div>
-                    
+
                     <div class="timeline-step">
                         <div class="timeline-icon"></div>
                         <div class="timeline-content">
@@ -124,12 +260,13 @@
         </div>
     </main>
 
+    <script src="app.js"></script>
     <script>
         document.getElementById('trackingForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const orderId = document.getElementById('orderId').value;
             const btn = e.target.querySelector('button');
-            
+
             // Simulate loading
             const originalText = btn.innerText;
             btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Locating...';
@@ -138,11 +275,12 @@
             setTimeout(() => {
                 btn.innerHTML = originalText;
                 btn.disabled = false;
-                
+
                 document.getElementById('displayOrderId').innerText = orderId.toUpperCase().startsWith('#') ? orderId.toUpperCase() : '#' + orderId.toUpperCase();
                 document.getElementById('trackingResults').classList.add('active');
             }, 1000);
         });
     </script>
 </body>
+
 </html>

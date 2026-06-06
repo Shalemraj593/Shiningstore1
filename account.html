@@ -6,102 +6,397 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Account | Shining Store</title>
     <link rel="icon" type="image/jpeg" href="assets/Tabpic.jpeg">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css?v=1780385356117">
     <style>
-        .account-page { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; display: flex; gap: 3rem; margin-top: var(--header-desktop-height); }
-        .account-sidebar { width: 250px; flex-shrink: 0; display: flex; flex-direction: column; gap: 0.5rem; }
-        .account-tab-btn { padding: 1rem 1.2rem; background: transparent; border: none; text-align: left; font-size: 1rem; font-weight: 500; color: var(--text-secondary); cursor: pointer; border-radius: 8px; transition: var(--transition); display: flex; align-items: center; gap: 10px; }
-        .account-tab-btn i { width: 20px; text-align: center; }
-        .account-tab-btn:hover { background: #f5f5f5; color: var(--text-main); }
-        .account-tab-btn.active { background: #fce8f4; color: var(--primary); font-weight: 700; }
-        .account-content { flex: 1; background: white; padding: 2rem; border-radius: 12px; border: 1px solid var(--border-light); min-height: 500px; }
-        .account-section { display: none; animation: fadeIn 0.3s ease; }
-        .account-section.active { display: block; }
-        .account-section h2 { font-family: var(--font-secondary); font-size: 2rem; margin-bottom: 1.5rem; color: var(--text-main); }
+        .account-page {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 3rem;
+            margin-top: var(--header-desktop-height);
+        }
+
+        .account-sidebar {
+            width: 250px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .account-tab-btn {
+            padding: 1rem 1.2rem;
+            background: transparent;
+            border: none;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .account-tab-btn i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .account-tab-btn:hover {
+            background: #f5f5f5;
+            color: var(--text-main);
+        }
+
+        .account-tab-btn.active {
+            background: #fce8f4;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .account-content {
+            flex: 1;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+            min-height: 500px;
+        }
+
+        .account-section {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .account-section.active {
+            display: block;
+        }
+
+        .account-section h2 {
+            font-family: var(--font-secondary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
 
         /* Profile Forms */
-        .profile-form { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
-        .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
-        .form-group input { padding: 0.8rem 1rem; border: 1px solid var(--border-light); border-radius: var(--radius-sm); font-family: var(--font-primary); }
-        .form-group.full-width { grid-column: 1 / -1; }
+        .profile-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .form-group input {
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-primary);
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
 
         /* Order History */
-        .order-card { border: 1px solid var(--border-light); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; display: flex; flex-direction: column; gap: 1rem; }
-        .order-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed var(--border-light); padding-bottom: 1rem; }
-        .order-id { font-weight: 700; font-size: 1.1rem; }
-        .order-status { padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
-        .status-delivered { background: #e8f5e9; color: #2e7d32; }
-        .status-transit { background: #fff3e0; color: #ef6c00; }
-        .order-items { display: flex; gap: 1rem; flex-wrap: wrap; }
-        .order-item-img { width: 60px; height: 60px; border-radius: 4px; object-fit: cover; }
+        .order-card {
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed var(--border-light);
+            padding-bottom: 1rem;
+        }
+
+        .order-id {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .order-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .status-delivered {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-transit {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .order-items {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .order-item-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            object-fit: cover;
+        }
 
         /* Saved Addresses */
-        .address-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
-        .address-card { border: 1px solid var(--border-light); padding: 1.5rem; border-radius: 8px; position: relative; }
-        .address-card h4 { margin: 0 0 0.5rem 0; font-size: 1rem; }
-        .address-card p { font-size: 0.85rem; color: var(--text-secondary); margin: 0; line-height: 1.5; }
-        .address-badge { position: absolute; top: 1rem; right: 1rem; background: #f0f0f0; font-size: 0.65rem; padding: 0.2rem 0.6rem; border-radius: 10px; font-weight: 600; }
-        .address-actions { margin-top: 1rem; display: flex; gap: 1rem; font-size: 0.8rem; font-weight: 600; color: var(--primary); }
-        .address-actions span { cursor: pointer; }
+        .address-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .address-card {
+            border: 1px solid var(--border-light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .address-card h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        .address-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .address-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #f0f0f0;
+            font-size: 0.65rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .address-actions {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .address-actions span {
+            cursor: pointer;
+        }
 
         @media (max-width: 768px) {
-            .account-page { flex-direction: column; padding: 1rem; gap: 1rem; margin-top: var(--header-mobile-height); padding-bottom: calc(var(--bottom-nav-height) + 20px); }
-            .account-sidebar { width: 100%; flex-direction: row; overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid var(--border-light); padding-bottom: 0.5rem; }
-            .account-sidebar::-webkit-scrollbar { display: none; }
-            .account-tab-btn { flex-shrink: 0; white-space: nowrap; padding: 0.8rem 1rem; border-radius: 30px; }
-            .account-content { padding: 1.5rem 1rem; min-height: auto; border: none; }
-            .profile-form { grid-template-columns: 1fr; }
-            .order-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+            .account-page {
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+                margin-top: var(--header-mobile-height);
+                padding-bottom: calc(var(--bottom-nav-height) + 20px);
+            }
+
+            .account-sidebar {
+                width: 100%;
+                flex-direction: row;
+                overflow-x: auto;
+                scrollbar-width: none;
+                border-bottom: 1px solid var(--border-light);
+                padding-bottom: 0.5rem;
+            }
+
+            .account-sidebar::-webkit-scrollbar {
+                display: none;
+            }
+
+            .account-tab-btn {
+                flex-shrink: 0;
+                white-space: nowrap;
+                padding: 0.8rem 1rem;
+                border-radius: 30px;
+            }
+
+            .account-content {
+                padding: 1.5rem 1rem;
+                min-height: auto;
+                border: none;
+            }
+
+            .profile-form {
+                grid-template-columns: 1fr;
+            }
+
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
         }
-    
-        .mobile-account { display: none; }
+
+        .mobile-account {
+            display: none;
+        }
+
         @media (max-width: 768px) {
-            .desktop-only { display: none !important; }
-            .mobile-account { display: block; padding-top: var(--header-mobile-height); padding-bottom: calc(var(--bottom-nav-height) + 20px); background: #f5f6f8; min-height: 100vh; }
-            .mobile-account-title { padding: 16px; font-size: 1.2rem; font-family: 'Inter', sans-serif; background: #fff; margin: 0; font-weight: 600; }
-            .mobile-account-header { background: #f0f4f8; padding: 24px 16px; display: flex; align-items: center; gap: 16px; }
-            .mobile-account-avatar { width: 80px; height: 80px; background: #111; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff; }
-            .mobile-account-btn { background: #222; color: #fff; border: none; padding: 12px 24px; border-radius: 4px; font-weight: 600; font-size: 0.95rem; font-family: 'Inter', sans-serif; }
-            .mobile-account-links { background: #fff; margin-top: 8px; }
-            .mobile-account-links a { display: flex; justify-content: space-between; align-items: center; padding: 16px; border-bottom: 1px solid #eee; text-decoration: none; color: #333; font-size: 0.95rem; font-family: 'Inter', sans-serif; }
-            .mobile-account-links a:last-child { border-bottom: none; }
-            .mobile-account-links a i { color: #999; font-size: 0.8rem; }
-            .link-content { display: flex; flex-direction: column; gap: 4px; }
-            .link-sub { font-size: 0.75rem; color: #777; }
-            .badge-new { background: #d32f2f; color: #fff; font-size: 0.6rem; padding: 2px 6px; border-radius: 2px; font-weight: 700; }
+            .navbar {
+                display: none !important;
+            }
+
+            .desktop-only {
+                display: none !important;
+            }
+
+            .mobile-account {
+                display: block;
+                padding-top: var(--header-mobile-height);
+                padding-bottom: calc(var(--bottom-nav-height) + 20px);
+                background: #f5f6f8;
+                min-height: 100vh;
+            }
+
+            .mobile-account-title {
+                padding: 16px;
+                font-size: 1.2rem;
+                font-family: 'Inter', sans-serif;
+                background: #fff;
+                margin: 0;
+                font-weight: 600;
+            }
+
+            .mobile-account-header {
+                background: #f0f4f8;
+                padding: 24px 16px;
+                display: flex;
+                align-items: center;
+                gap: 16px;
+            }
+
+            .mobile-account-avatar {
+                width: 80px;
+                height: 80px;
+                background: #111;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 2rem;
+                color: #fff;
+            }
+
+            .mobile-account-btn {
+                background: #222;
+                color: #fff;
+                border: none;
+                padding: 12px 24px;
+                border-radius: 4px;
+                font-weight: 600;
+                font-size: 0.95rem;
+                font-family: 'Inter', sans-serif;
+            }
+
+            .mobile-account-links {
+                background: #fff;
+                margin-top: 8px;
+            }
+
+            .mobile-account-links a {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 16px;
+                border-bottom: 1px solid #eee;
+                text-decoration: none;
+                color: #333;
+                font-size: 0.95rem;
+                font-family: 'Inter', sans-serif;
+            }
+
+            .mobile-account-links a:last-child {
+                border-bottom: none;
+            }
+
+            .mobile-account-links a i {
+                color: #999;
+                font-size: 0.8rem;
+            }
+
+            .link-content {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .link-sub {
+                font-size: 0.75rem;
+                color: #777;
+            }
+
+            .badge-new {
+                background: #d32f2f;
+                color: #fff;
+                font-size: 0.6rem;
+                padding: 2px 6px;
+                border-radius: 2px;
+                font-weight: 700;
+            }
         }
     </style>
 </head>
 
 <body>
-    <!-- Top Header Placeholder (Will be loaded via app.js or can just use a simple nav) -->
-    <header class="header desktop-only">
-        <div class="header-desktop" style="display:flex; justify-content:space-between; align-items:center; width:100%; padding:0 2rem;">
-            <a href="index.html" class="logo">SHINING STORE</a>
-            <a href="index.html" style="font-weight:600; text-decoration:none; color:inherit;"><i class="fa-solid fa-arrow-left"></i> Back to Shop</a>
-        </div>
-        <div class="header-mobile" style="display:flex; justify-content:space-between; align-items:center; width:100%; padding:0 1rem; height:var(--header-mobile-height);">
-            <a href="index.html" style="font-weight:600; text-decoration:none; color:inherit;"><i class="fa-solid fa-arrow-left"></i></a>
-            <a href="index.html" class="logo" style="font-size:1.2rem;">SHINING STORE</a>
-            <div style="width:20px;"></div>
-        </div>
-    </header>
+    <!-- Dynamic Header -->
+    <header class="navbar" id="navbar"></header>
 
     <main class="account-page desktop-only">
         <!-- Sidebar Navigation -->
         <aside class="account-sidebar">
-            <button class="account-tab-btn active" data-target="profile"><i class="fa-regular fa-user"></i> My Profile</button>
-            <button class="account-tab-btn" data-target="orders"><i class="fa-solid fa-box-open"></i> Order History</button>
-            <button class="account-tab-btn" data-target="addresses"><i class="fa-regular fa-map"></i> Saved Addresses</button>
-            <button class="account-tab-btn" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
+            <button class="account-tab-btn active" data-target="profile"><i class="fa-regular fa-user"></i> My
+                Profile</button>
+            <button class="account-tab-btn" data-target="orders"><i class="fa-solid fa-box-open"></i> Order
+                History</button>
+            <button class="account-tab-btn" data-target="addresses"><i class="fa-regular fa-map"></i> Saved
+                Addresses</button>
+            <button class="account-tab-btn" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                Logout</button>
         </aside>
 
         <!-- Main Content Area -->
         <section class="account-content">
-            
+
             <!-- Profile Section -->
             <div class="account-section active" id="profile">
                 <h2>My Profile</h2>
@@ -131,21 +426,25 @@
             <!-- Orders Section -->
             <div class="account-section" id="orders">
                 <h2>Order History</h2>
-                
+
                 <div class="order-card">
                     <div class="order-header">
                         <div>
                             <div class="order-id">Order #SHN-98234</div>
-                            <div style="font-size:0.8rem; color:var(--text-secondary); margin-top:4px;">Placed on May 28, 2026 • $245.00</div>
+                            <div style="font-size:0.8rem; color:var(--text-secondary); margin-top:4px;">Placed on May
+                                28, 2026 • $245.00</div>
                         </div>
                         <div class="order-status status-transit">In Transit</div>
                     </div>
                     <div class="order-items">
-                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=100&q=80" class="order-item-img" alt="Item">
-                        <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=100&q=80" class="order-item-img" alt="Item">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=100&q=80"
+                            class="order-item-img" alt="Premium Headphones" title="Sony WH-1000XM4">
+                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=100&q=80"
+                            class="order-item-img" alt="Laptop" title="MacBook Pro">
                     </div>
                     <div style="display:flex; justify-content:flex-end;">
-                        <a href="tracking.html" class="btn btn-outline" style="padding:0.4rem 1rem; font-size:0.8rem;">Track Package</a>
+                        <a href="tracking.html" class="btn btn-outline"
+                            style="padding:0.4rem 1rem; font-size:0.8rem;">Track Package</a>
                     </div>
                 </div>
 
@@ -153,12 +452,14 @@
                     <div class="order-header">
                         <div>
                             <div class="order-id">Order #SHN-87421</div>
-                            <div style="font-size:0.8rem; color:var(--text-secondary); margin-top:4px;">Placed on April 12, 2026 • $89.50</div>
+                            <div style="font-size:0.8rem; color:var(--text-secondary); margin-top:4px;">Placed on April
+                                12, 2026 • $89.50</div>
                         </div>
                         <div class="order-status status-delivered">Delivered</div>
                     </div>
                     <div class="order-items">
-                        <img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=100&q=80" class="order-item-img" alt="Item">
+                        <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=100&q=80"
+                            class="order-item-img" alt="Premium Sunglasses" title="Ray-Ban Aviator">
                     </div>
                 </div>
             </div>
@@ -169,7 +470,7 @@
                     <h2 style="margin:0;">Saved Addresses</h2>
                     <button class="btn btn-outline" style="padding:0.4rem 1rem; font-size:0.8rem;">+ Add New</button>
                 </div>
-                
+
                 <div class="address-grid">
                     <div class="address-card">
                         <div class="address-badge">Default</div>
@@ -181,7 +482,7 @@
                             <span style="color:var(--sale-red);">Delete</span>
                         </div>
                     </div>
-                    
+
                     <div class="address-card">
                         <h4>Jane Doe (Work)</h4>
                         <p>99 Tech Boulevard, Floor 12<br>San Francisco, CA 94105<br>United States</p>
@@ -207,13 +508,14 @@
             <button class="mobile-signin-btn" onclick="toggleAuthModal(true)">Sign in / Join</button>
         </div>
         <div class="mobile-account-links">
-            <a href="#" class="mobile-account-link" onclick="toggleChat(); return false;">
+            <a href="customer-care.html" class="mobile-account-link">
                 <span>Customer Care</span>
                 <i class="fa-solid fa-chevron-right"></i>
             </a>
             <a href="#" class="mobile-account-link" onclick="toggleAuthModal(true); return false;">
                 <div class="link-content">
-                    <span style="display:flex;align-items:center;gap:8px;">Shiningstore <span class="badge-new">NEW</span></span>
+                    <span style="display:flex;align-items:center;gap:8px;">Shiningstore <span
+                            class="badge-new">NEW</span></span>
                     <span class="link-subtext">Connect, create acc with us</span>
                 </div>
                 <i class="fa-solid fa-chevron-right"></i>
@@ -297,7 +599,7 @@
         // Auth Guard
         document.addEventListener('DOMContentLoaded', () => {
             const userStr = localStorage.getItem('shiningstore_user');
-            if(!userStr) {
+            if (!userStr) {
                 // For demo purposes, we can just pre-fill a fake user or redirect
                 // alert('Please login first.');
                 // window.location.href = 'index.html';
@@ -305,8 +607,8 @@
                 const user = JSON.parse(userStr);
                 const nameInput = document.querySelector('input[value="Jane"]');
                 const emailInput = document.querySelector('input[type="email"]');
-                if(nameInput) nameInput.value = user.name || 'User';
-                if(emailInput) emailInput.value = user.email || 'user@example.com';
+                if (nameInput) nameInput.value = user.name || 'User';
+                if (emailInput) emailInput.value = user.email || 'user@example.com';
             }
         });
     </script>
@@ -322,7 +624,7 @@
             <h3 id="authTitle">Welcome Back</h3>
             <p id="authSubtitle">Sign in to access your account</p>
         </div>
-        
+
         <div class="auth-tabs">
             <button class="auth-tab active" data-tab="login">Login</button>
             <button class="auth-tab" data-tab="signup">Sign Up</button>
@@ -345,7 +647,9 @@
                 <label><input type="checkbox"> Remember me</label>
                 <a href="#" class="forgot-pwd">Forgot Password?</a>
             </div>
-            <button type="submit" class="btn btn-primary" style="width:100%; border-radius:var(--radius-pill); font-size:0.9rem;" id="authSubmitBtn">SIGN IN</button>
+            <button type="submit" class="btn btn-primary"
+                style="width:100%; border-radius:var(--radius-pill); font-size:0.9rem;" id="authSubmitBtn">SIGN
+                IN</button>
         </form>
 
         <div class="auth-divider"><span>OR</span></div>
@@ -364,7 +668,8 @@
         </div>
         <div class="cart-items" id="wishlistItems">
             <div style="text-align:center; padding: 2rem; color: #767676;">
-                <i class="fa-regular fa-heart" style="font-size:3rem; margin-bottom:1rem; display:block; color:#ddd;"></i>
+                <i class="fa-regular fa-heart"
+                    style="font-size:3rem; margin-bottom:1rem; display:block; color:#ddd;"></i>
                 <p>Your wishlist is empty.</p>
                 <p style="font-size:0.85rem; margin-top:0.5rem;">Tap the heart icon on products you love.</p>
             </div>
@@ -419,4 +724,5 @@
     <!-- Scripts -->
     <script src="app.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Care | Shining Store</title>
+    <link rel="icon" type="image/jpeg" href="assets/Tabpic.jpeg">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=1780385356117">
+    <style>
+        .care-page {
+            padding: 4rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            margin-top: var(--header-desktop-height);
+            min-height: 70vh;
+        }
+
+        .care-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .care-header h1 {
+            font-family: var(--font-secondary);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .care-header p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .signin-card {
+            background: #fdfdfd;
+            border: 1px solid var(--border-light);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+        }
+
+        .signin-card p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .signin-card .btn {
+            padding: 0.8rem 3rem;
+            font-weight: 600;
+            border-radius: 6px;
+        }
+
+        .faq-section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .faq-category {
+            margin-bottom: 1.5rem;
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-category-header {
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            background: #fff;
+            transition: background 0.3s;
+        }
+
+        .faq-category-header:hover {
+            background: #fcfcfc;
+        }
+
+        .faq-category-header i {
+            transition: transform 0.3s;
+            color: var(--text-muted);
+        }
+
+        .faq-category.active .faq-category-header i {
+            transform: rotate(90deg);
+        }
+
+        .faq-list {
+            display: none;
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .faq-category.active .faq-list {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .faq-item {
+            margin-top: 1.5rem;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .faq-question::before {
+            content: 'Q:';
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .faq-answer {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            padding-left: 28px;
+        }
+
+        @media (max-width: 768px) {
+            .care-page {
+                padding: 1rem;
+                margin-top: var(--header-mobile-height);
+                padding-bottom: calc(var(--bottom-nav-height) + 20px);
+            }
+
+            .care-header h1 {
+                font-size: 2rem;
+            }
+
+            .signin-card {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .faq-category-header {
+                padding: 1rem;
+                font-size: 1rem;
+            }
+
+            .faq-list {
+                padding: 0 1rem 1rem 1rem;
+            }
+        }
+
+        .mobile-account {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Dynamic Header -->
+    <header class="navbar" id="navbar"></header>
+
+    <!-- Mobile Header -->
+    <header class="mobile-header" style="display:none;" id="mobileHeader">
+        <div class="mobile-header-left">
+            <a href="account.html" style="color:var(--text-main);"><i class="fa-solid fa-chevron-left"></i></a>
+            <div class="logo" style="margin-left: 15px;"><span
+                    style="font-size:1.1rem; font-weight:600; font-family:'Inter',sans-serif;">Customer Care</span>
+            </div>
+        </div>
+    </header>
+    <script>
+        if (window.innerWidth <= 768) {
+            document.getElementById('mobileHeader').style.display = 'flex';
+        }
+    </script>
+
+    <main class="care-page">
+        <div class="care-header desktop-only">
+            <h1>Customer Care</h1>
+            <p>How can we help you today? Browse our frequently asked questions below or sign in to view specific order
+                details.</p>
+        </div>
+
+        <div class="signin-card" id="careSigninCard">
+            <p>To access order related help and track your packages</p>
+            <button class="btn btn-primary" onclick="toggleAuthModal(true)">Sign in</button>
+        </div>
+
+        <h2 class="faq-section-title">FAQ</h2>
+
+        <!-- Shipping FAQs -->
+        <div class="faq-category">
+            <div class="faq-category-header" onclick="toggleCategory(this)">
+                <span>Shipping FAQs</span>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">How much does shipping cost?</div>
+                    <div class="faq-answer">We offer Free Standard Shipping on all orders over $50. For orders under
+                        $50, standard shipping is $4.99. Express Shipping is available for a flat rate of $9.99.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How long will it take to receive my order?</div>
+                    <div class="faq-answer">Standard shipping typically takes 5–8 business days depending on your
+                        location. Express shipping takes 2–3 business days. Please allow 1-2 business days for order
+                        processing before shipment.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How do I track my order?</div>
+                    <div class="faq-answer">Once your order ships, you will receive a confirmation email with a tracking
+                        link. You can also track your package directly from your Account Dashboard under "Order History"
+                        or by visiting our <a href="tracking.html"
+                            style="color:var(--primary); text-decoration:underline;">Tracking Page</a>.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do you ship internationally?</div>
+                    <div class="faq-answer">Yes, we ship globally! International shipping rates and delivery times are
+                        calculated at checkout based on your destination country.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cancellation FAQs -->
+        <div class="faq-category">
+            <div class="faq-category-header" onclick="toggleCategory(this)">
+                <span>Cancellation FAQs</span>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">Can I cancel my order?</div>
+                    <div class="faq-answer">Orders can be cancelled within 24 hours of placement, provided they have not
+                        yet been processed or shipped. You can cancel directly from your Account -> Order History.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What if my order has already shipped?</div>
+                    <div class="faq-answer">If your order has already shipped, it cannot be cancelled. However, you can
+                        initiate a return within 30 days of receiving the item using our free returns portal.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Will I get a full refund if I cancel?</div>
+                    <div class="faq-answer">Yes, if an order is successfully cancelled before shipment, you will receive
+                        a full refund to your original payment method within 3-5 business days.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment FAQs -->
+        <div class="faq-category">
+            <div class="faq-category-header" onclick="toggleCategory(this)">
+                <span>Payment FAQs</span>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">What payment methods do you accept?</div>
+                    <div class="faq-answer">We accept all major credit cards (Visa, Mastercard, American Express),
+                        PayPal, and Apple Pay. All transactions are securely encrypted.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Can I pay in my local currency?</div>
+                    <div class="faq-answer">Yes, our website supports currency switching. You can select your preferred
+                        currency (USD or INR) from the top right corner of the website or the menu on mobile.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">When will I be charged for my order?</div>
+                    <div class="faq-answer">Your payment method will be authorized and charged immediately upon placing
+                        the order to secure your items.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Returns FAQs -->
+        <div class="faq-category">
+            <div class="faq-category-header" onclick="toggleCategory(this)">
+                <span>Returns FAQs</span>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">What is your return policy?</div>
+                    <div class="faq-answer">We offer easy 30-day returns on all items. To be eligible for a return, your
+                        item must be unworn, unwashed, and in the exact condition you received it, with all original
+                        tags attached.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How do I start a return?</div>
+                    <div class="faq-answer">Log into your account, go to "Order History," select the order containing
+                        the item you wish to return, and click "Start Return." You will be provided with a prepaid
+                        shipping label.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Is return shipping free?</div>
+                    <div class="faq-answer">Yes! We provide free return shipping on all domestic orders. For
+                        international returns, shipping costs are the responsibility of the customer.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How long does a refund take?</div>
+                    <div class="faq-answer">Once we receive and inspect your return, refunds are processed within 3-5
+                        business days to your original payment method.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Account & Shopping -->
+        <div class="faq-category">
+            <div class="faq-category-header" onclick="toggleCategory(this)">
+                <span>Account & Shopping</span>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">Do I need an account to place an order?</div>
+                    <div class="faq-answer">No, you can check out as a guest. However, creating an account allows you to
+                        save addresses, track orders easily, and build a Wishlist.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How do I use the Wishlist?</div>
+                    <div class="faq-answer">Simply click the heart icon (♥) on any product to save it to your Wishlist.
+                        You can access your saved items at any time by clicking the heart icon in the navigation bar.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How do I reset my password?</div>
+                    <div class="faq-answer">On the Sign In modal, click "Forgot Password?". Enter your email address,
+                        and we will send you a link to reset your password securely.</div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Mobile Bottom Nav -->
+    <nav class="mobile-bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="categories.html" class="bottom-nav-item">
+            <i class="fa-solid fa-list"></i>
+            <span>Category</span>
+        </a>
+        <a href="index.html#shop" class="bottom-nav-item">
+            <i class="fa-solid fa-shirt"></i>
+            <span>New</span>
+        </a>
+        <a href="#" class="bottom-nav-item" onclick="toggleCart(true); return false;">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span>Bag</span>
+            <span class="bottom-nav-badge hidden" id="mobileCartBadge">0</span>
+        </a>
+        <a href="account.html" class="bottom-nav-item active">
+            <i class="fa-regular fa-user"></i>
+            <span>Me</span>
+        </a>
+    </nav>
+
+    <!-- Shared Modals/Overlays will be injected by app.js -->
+
+    <script src="app.js"></script>
+    <script>
+        function toggleCategory(element) {
+            const parent = element.parentElement;
+            // Optional: Close other open categories
+            // document.querySelectorAll('.faq-category').forEach(cat => {
+            //     if (cat !== parent) cat.classList.remove('active');
+            // });
+            parent.classList.toggle('active');
+        }
+
+        // Hide sign-in card if user is already logged in
+        document.addEventListener('DOMContentLoaded', () => {
+            const userStr = localStorage.getItem('shiningstore_user');
+            if (userStr) {
+                const signinCard = document.getElementById('careSigninCard');
+                if (signinCard) signinCard.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

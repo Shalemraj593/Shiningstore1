@@ -19,26 +19,6 @@ function saveUsers(users) {
     localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(users));
 }
 
-function getSession() {
-    try {
-        return JSON.parse(localStorage.getItem(SESSION_KEY));
-    } catch { return null; }
-}
-
-function saveSession(user) {
-    localStorage.setItem(SESSION_KEY, JSON.stringify({
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        joinDate: user.joinDate,
-        loggedInAt: new Date().toISOString()
-    }));
-}
-
-function clearSession() {
-    localStorage.removeItem(SESSION_KEY);
-}
-
 // Simple hash function for password (not cryptographically secure, but works for demo)
 function hashPassword(password) {
     let hash = 0;
@@ -55,7 +35,14 @@ function hashPassword(password) {
 // ============================================
 function registerUser(name, email, password) {
     const users = getUsers();
-    
+
+    // Validate trusted domain
+    const allowedDomains = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'icloud.com', 'aol.com', 'proton.me', 'protonmail.com', 'zoho.com', 'live.com', 'msn.com', 'yandex.com', 'gmx.com'];
+    const domain = email.split('@')[1]?.toLowerCase().trim();
+    if (!allowedDomains.includes(domain)) {
+        return { success: false, error: 'Please use a trusted email service (e.g., Gmail, Yahoo, Outlook, iCloud).' };
+    }
+
     // Check if email already exists
     const existing = users.find(u => u.email.toLowerCase() === email.toLowerCase());
     if (existing) {
@@ -80,10 +67,30 @@ function registerUser(name, email, password) {
     return { success: true, user: newUser };
 }
 
+function getSession() {
+    try {
+        return JSON.parse(localStorage.getItem(SESSION_KEY));
+    } catch { return null; }
+}
+
+function saveSession(user) {
+    localStorage.setItem(SESSION_KEY, JSON.stringify({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        joinDate: user.joinDate,
+        loggedInAt: new Date().toISOString()
+    }));
+}
+
+function clearSession() {
+    localStorage.removeItem(SESSION_KEY);
+}
+
 function loginUser(email, password) {
     const users = getUsers();
     const user = users.find(u => u.email.toLowerCase() === email.toLowerCase().trim());
-    
+
     if (!user) {
         return { success: false, error: 'No account found with this email.' };
     }
@@ -115,7 +122,7 @@ function showToast(message) {
     const toast = document.getElementById('authToast');
     const toastMsg = document.getElementById('toastMsg');
     if (!toast || !toastMsg) return;
-    
+
     toastMsg.textContent = message;
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 3000);
@@ -174,7 +181,7 @@ function showDashboard(user) {
     const avatar = document.getElementById('dashAvatar');
     const name = document.getElementById('dashName');
     const email = document.getElementById('dashEmail');
-    
+
     if (avatar) avatar.textContent = user.name.charAt(0).toUpperCase();
     if (name) name.textContent = user.name;
     if (email) email.textContent = user.email;
@@ -204,7 +211,7 @@ function initAccountPage() {
 
     function switchTab(tab) {
         clearAllErrors();
-        
+
         if (tab === 'login') {
             loginTab?.classList.add('active');
             registerTab?.classList.remove('active');
@@ -322,6 +329,21 @@ function initAccountPage() {
 
         // Simulate network delay
         await new Promise(r => setTimeout(r, 1000));
+
+        // Generate OTP
+        const code = Math.floor(1000 + Math.random() * 9000).toString();
+        alert('🔑 shiningstore.com: Your registration verification code is ' + code);
+
+        // Wait for next tick so alert can clear before prompt
+        await new Promise(r => setTimeout(r, 50));
+        const entered = prompt('Please enter the 4-digit verification code sent to your email:');
+
+        if (entered !== code) {
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
+            showToast('Invalid verification code. Please try again.');
+            return;
+        }
 
         const result = registerUser(name, email, password);
         submitBtn.classList.remove('loading');

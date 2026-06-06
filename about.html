@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="styles.css?v=1780385356122">
     <style>
         @media (max-width: 768px) {
-            .site-footer, .chatbot-container {
+
+            .site-footer,
+            .chatbot-container {
                 display: none !important;
             }
         }
@@ -28,139 +30,36 @@
          DESKTOP LAYOUT 
          ========================================== -->
     <div class="desktop-layout">
-        <!-- Announcement Bar -->
-        <div class="announcement-bar" id="announcementBar">
-            <p>✨ Free Global Shipping on all orders over $50 &nbsp;|&nbsp; Use Code <strong>WELCOME10</strong> for 10% Off</p>
-            <button id="closeAnnouncement"><i class="fa-solid fa-xmark"></i></button>
-        </div>
 
-        <!-- Header -->
-        <header class="navbar" id="navbar">
-            <div class="nav-container">
-                <div class="logo">
-                    <a href="index.html"><span>Shining</span>Store</a>
-                </div>
 
-                <div class="nav-links">
-                    <a href="index.html#new-arrivals">New Arrivals</a>
-                    <a href="index.html#shop-desktop" data-category="fashion">Fashion</a>
-                    <a href="index.html#shop-desktop" data-category="shoes">Shoes</a>
-                    <a href="index.html#shop-desktop" data-category="electronics">Electronics</a>
-                    <a href="index.html#shop-desktop" data-category="pets">Pets</a>
-                    <a href="index.html#shop-desktop" data-category="accessories">Accessories</a>
-                </div>
+        <!-- Dynamic Header (injected by app.js) -->
+        <header class="navbar" id="navbar"></header>
 
-                <div class="nav-actions">
-                    <div class="currency-selector tooltip" data-tooltip="Currency">
-                        <button class="icon-btn currency-btn" id="currencyToggleBtn">
-                            <span class="current-currency-display">$ USD</span> <i class="fa-solid fa-chevron-down" style="font-size:0.6rem; margin-left:3px;"></i>
-                        </button>
-                        <div class="currency-dropdown hidden" id="currencyDropdown">
-                            <button class="currency-option" data-currency="USD">$ USD</button>
-                            <button class="currency-option" data-currency="INR">₹ INR</button>
-                        </div>
-                    </div>
-                    <button class="icon-btn tooltip" data-tooltip="Search" id="searchToggleBtn">
-                        <i class="fa-solid fa-search"></i>
-                    </button>
-                    <button class="icon-btn tooltip" data-tooltip="Wishlist" id="wishlistBtn">
-                        <i class="fa-regular fa-heart"></i>
-                        <span class="badge hidden" id="wishlistBadge">0</span>
-                    </button>
-                    <button class="icon-btn tooltip cart-btn" id="cartOpenBtn" data-tooltip="Cart">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                        <span class="badge" id="cartBadge">0</span>
-                    </button>
-                    <button class="icon-btn tooltip" data-tooltip="Account" id="accountBtn">
-                        <i class="fa-regular fa-user" id="accountIcon"></i>
-                    </button>
-                </div>
-            </div>
-            <!-- Search Dropdown -->
-            <div class="search-dropdown hidden" id="searchDropdown">
-                <div class="search-dropdown-inner">
-                    <div class="search-input-wrap">
-                        <i class="fa-solid fa-search"></i>
-                        <input type="text" id="searchInput" placeholder="Search for dresses, tops, outerwear..." autocomplete="off">
-                        <button class="search-close-btn" id="searchCloseBtn"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
-                    <div class="search-results" id="searchResults">
-                        <div class="search-trending">
-                            <h4>Trending Searches</h4>
-                            <div class="search-tags">
-                                <a href="#" class="search-tag" data-query="dresses">Dresses</a>
-                                <a href="#" class="search-tag" data-query="tops">Tops</a>
-                                <a href="#" class="search-tag" data-query="outerwear">Outerwear</a>
-                                <a href="#" class="search-tag" data-query="activewear">Activewear</a>
-                                <a href="#" class="search-tag" data-query="jeans">Jeans</a>
-                                <a href="#" class="search-tag" data-query="shoes">Shoes</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <!-- Search Overlay -->
-        <div class="search-overlay" id="searchOverlay"></div>
-
-        <!-- Auth Modal -->
-        <div class="auth-overlay" id="authOverlay"></div>
-        <div class="auth-modal" id="authModal">
-            <button class="auth-close" id="authCloseBtn"><i class="fa-solid fa-xmark"></i></button>
-            <div class="auth-header">
-                <h3 id="authTitle">Welcome Back</h3>
-                <p id="authSubtitle">Sign in to access your account</p>
-            </div>
-            
-            <div class="auth-tabs">
-                <button class="auth-tab active" data-tab="login">Login</button>
-                <button class="auth-tab" data-tab="signup">Sign Up</button>
-            </div>
-
-            <form id="authForm" class="auth-form">
-                <div class="input-group" id="nameGroup" style="display:none;">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" id="authName" placeholder="Full Name">
-                </div>
-                <div class="input-group">
-                    <i class="fa-regular fa-envelope"></i>
-                    <input type="email" id="authEmail" placeholder="Email Address" required>
-                </div>
-                <div class="input-group">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" id="authPassword" placeholder="Password" required>
-                </div>
-                <div class="auth-options" id="authOptions">
-                    <label><input type="checkbox"> Remember me</label>
-                    <a href="#" class="forgot-pwd">Forgot Password?</a>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width:100%; border-radius:var(--radius-pill); font-size:0.9rem;" id="authSubmitBtn">SIGN IN</button>
-            </form>
-
-            <div class="auth-divider"><span>OR</span></div>
-            <div class="auth-socials">
-                <button class="social-btn"><i class="fa-brands fa-google"></i> Google</button>
-                <button class="social-btn"><i class="fa-brands fa-apple"></i> Apple</button>
-            </div>
-        </div>
 
         <!-- Main About Content -->
         <main class="about-page" style="margin-top: var(--header-desktop-height);">
             <section class="about-hero">
                 <h1>Our Story</h1>
-                <p>Redefining premium fashion with elegant, timeless, and sustainable pieces designed for the modern lifestyle.</p>
+                <p>Redefining premium fashion with elegant, timeless, and sustainable pieces designed for the modern
+                    lifestyle.</p>
             </section>
 
             <section class="about-section">
                 <div class="about-container">
                     <div class="about-text-content">
                         <h2>Shining Store</h2>
-                        <p>Founded in 2026, Shining Store is a premium destination for curated fashion. We believe that clothing is more than just what you wear—it is an expression of identity, confidence, and values.</p>
-                        <p>Our collections are carefully selected to provide high-quality, sustainable, and timeless pieces that elevate your daily wardrobe. From everyday essentials to statement outerwear, every item is crafted with attention to detail and standard craftsmanship.</p>
-                        <p>We are dedicated to ethical sourcing, ensuring that our partners respect their workers and the environment, allowing you to dress elegantly without compromising your values.</p>
+                        <p>Founded in 2026, Shining Store is a premium destination for curated fashion. We believe that
+                            clothing is more than just what you wear—it is an expression of identity, confidence, and
+                            values.</p>
+                        <p>Our collections are carefully selected to provide high-quality, sustainable, and timeless
+                            pieces that elevate your daily wardrobe. From everyday essentials to statement outerwear,
+                            every item is crafted with attention to detail and standard craftsmanship.</p>
+                        <p>We are dedicated to ethical sourcing, ensuring that our partners respect their workers and
+                            the environment, allowing you to dress elegantly without compromising your values.</p>
                     </div>
                     <div class="about-image-content">
-                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80" alt="About Our Store">
+                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80"
+                            alt="About Our Store">
                     </div>
                 </div>
             </section>
@@ -170,17 +69,20 @@
                     <div class="feature-box">
                         <i class="fa-solid fa-gem"></i>
                         <h3>Premium Quality</h3>
-                        <p>We source only the finest fabrics and materials, ensuring comfort, durability, and a luxurious feel.</p>
+                        <p>We source only the finest fabrics and materials, ensuring comfort, durability, and a
+                            luxurious feel.</p>
                     </div>
                     <div class="feature-box">
                         <i class="fa-solid fa-leaf"></i>
                         <h3>Sustainability First</h3>
-                        <p>We are committed to reducing our carbon footprint by using eco-friendly packaging and ethical production.</p>
+                        <p>We are committed to reducing our carbon footprint by using eco-friendly packaging and ethical
+                            production.</p>
                     </div>
                     <div class="feature-box">
                         <i class="fa-solid fa-truck-fast"></i>
                         <h3>Fast Shipping</h3>
-                        <p>Enjoy reliable global delivery with free shipping on all orders over $50, tracked right to your door.</p>
+                        <p>Enjoy reliable global delivery with free shipping on all orders over $50, tracked right to
+                            your door.</p>
                     </div>
                 </div>
             </section>
@@ -188,21 +90,47 @@
             <!-- POLICIES AND SUPPORT SECTION -->
             <section class="about-section" style="background:#f9f9f9; padding: 4rem 2rem; margin-top:0;">
                 <div class="about-container" style="display:block; max-width:800px; margin:0 auto;">
-                    <h2 style="text-align:center; font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:3rem;">Policies & Support</h2>
-                    
-                    <div id="returns" style="margin-bottom:2.5rem; background:#fff; padding:2rem; border-radius:8px; box-shadow:0 4px 15px rgba(0,0,0,0.05);">
-                        <h3 style="font-size:1.2rem; margin-bottom:1rem; border-bottom:1px solid #eee; padding-bottom:0.5rem;"><i class="fa-solid fa-arrow-rotate-left" style="color:var(--accent); margin-right:8px;"></i> Returns & Refunds Policy</h3>
-                        <p style="font-size:0.95rem; color:#555; line-height:1.6;">We offer a 30-day hassle-free return policy. If you are not 100% satisfied with your purchase, you may return unworn, unwashed, and undamaged items with all original tags attached within 30 days of delivery. Refunds will be processed to the original payment method within 5-7 business days of receiving the returned item. Final sale items are not eligible for return or exchange.</p>
+                    <h2
+                        style="text-align:center; font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:3rem;">
+                        Policies & Support</h2>
+
+                    <div id="returns"
+                        style="margin-bottom:2.5rem; background:#fff; padding:2rem; border-radius:8px; box-shadow:0 4px 15px rgba(0,0,0,0.05);">
+                        <h3
+                            style="font-size:1.2rem; margin-bottom:1rem; border-bottom:1px solid #eee; padding-bottom:0.5rem;">
+                            <i class="fa-solid fa-arrow-rotate-left" style="color:var(--accent); margin-right:8px;"></i>
+                            Returns & Refunds Policy</h3>
+                        <p style="font-size:0.95rem; color:#555; line-height:1.6;">We offer a 30-day hassle-free return
+                            policy. If you are not 100% satisfied with your purchase, you may return unworn, unwashed,
+                            and undamaged items with all original tags attached within 30 days of delivery. Refunds will
+                            be processed to the original payment method within 5-7 business days of receiving the
+                            returned item. Final sale items are not eligible for return or exchange.</p>
                     </div>
 
-                    <div id="terms" style="margin-bottom:2.5rem; background:#fff; padding:2rem; border-radius:8px; box-shadow:0 4px 15px rgba(0,0,0,0.05);">
-                        <h3 style="font-size:1.2rem; margin-bottom:1rem; border-bottom:1px solid #eee; padding-bottom:0.5rem;"><i class="fa-solid fa-file-contract" style="color:var(--accent); margin-right:8px;"></i> Terms & Conditions</h3>
-                        <p style="font-size:0.95rem; color:#555; line-height:1.6;">By using Shining Store, you agree to comply with and be bound by our terms and conditions. All content, trademarks, and data on this website are the property of Shining Store. We reserve the right to modify prices and product availability without notice. Please read our full terms carefully before making a purchase.</p>
+                    <div id="terms"
+                        style="margin-bottom:2.5rem; background:#fff; padding:2rem; border-radius:8px; box-shadow:0 4px 15px rgba(0,0,0,0.05);">
+                        <h3
+                            style="font-size:1.2rem; margin-bottom:1rem; border-bottom:1px solid #eee; padding-bottom:0.5rem;">
+                            <i class="fa-solid fa-file-contract" style="color:var(--accent); margin-right:8px;"></i>
+                            Terms & Conditions</h3>
+                        <p style="font-size:0.95rem; color:#555; line-height:1.6;">By using Shining Store, you agree to
+                            comply with and be bound by our terms and conditions. All content, trademarks, and data on
+                            this website are the property of Shining Store. We reserve the right to modify prices and
+                            product availability without notice. Please read our full terms carefully before making a
+                            purchase.</p>
                     </div>
 
-                    <div id="promotions" style="margin-bottom:2.5rem; background:#fff; padding:2rem; border-radius:8px; box-shadow:0 4px 15px rgba(0,0,0,0.05);">
-                        <h3 style="font-size:1.2rem; margin-bottom:1rem; border-bottom:1px solid #eee; padding-bottom:0.5rem;"><i class="fa-solid fa-tag" style="color:var(--accent); margin-right:8px;"></i> Promotions Terms & Conditions</h3>
-                        <p style="font-size:0.95rem; color:#555; line-height:1.6;">Promotional codes and discounts cannot be combined unless explicitly stated. Discounts apply to the subtotal before taxes and shipping. Offers are valid for a limited time and are subject to change. Shining Store reserves the right to cancel any order due to unauthorized, altered, or ineligible use of an offer.</p>
+                    <div id="promotions"
+                        style="margin-bottom:2.5rem; background:#fff; padding:2rem; border-radius:8px; box-shadow:0 4px 15px rgba(0,0,0,0.05);">
+                        <h3
+                            style="font-size:1.2rem; margin-bottom:1rem; border-bottom:1px solid #eee; padding-bottom:0.5rem;">
+                            <i class="fa-solid fa-tag" style="color:var(--accent); margin-right:8px;"></i> Promotions
+                            Terms & Conditions</h3>
+                        <p style="font-size:0.95rem; color:#555; line-height:1.6;">Promotional codes and discounts
+                            cannot be combined unless explicitly stated. Discounts apply to the subtotal before taxes
+                            and shipping. Offers are valid for a limited time and are subject to change. Shining Store
+                            reserves the right to cancel any order due to unauthorized, altered, or ineligible use of an
+                            offer.</p>
                     </div>
                 </div>
             </section>
@@ -214,7 +142,8 @@
                 <div class="footer-grid">
                     <div class="footer-brand">
                         <h3 class="footer-logo">SHINING<span>STORE.</span></h3>
-                        <p>Redefining premium women's fashion with elegant, timeless, and sustainable pieces designed for the modern lifestyle.</p>
+                        <p>Redefining premium women's fashion with elegant, timeless, and sustainable pieces designed
+                            for the modern lifestyle.</p>
                         <div class="footer-social">
                             <a href="#"><i class="fa-brands fa-instagram"></i></a>
                             <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
@@ -278,18 +207,22 @@
          ========================================== -->
     <div class="mobile-layout">
         <!-- Mobile Header -->
-        <header class="mobile-header" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: #fff; gap: 12px; position: sticky; top: 0; z-index: 100;">
+        <header class="mobile-header"
+            style="display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: #fff; gap: 12px; position: sticky; top: 0; z-index: 100;">
             <i class="fa-regular fa-envelope" style="font-size: 1.2rem; color: #333;"></i>
-            
-            <div id="mobileSearchBtn" style="flex: 1; background: #f0f2f5; border-radius: 4px; padding: 8px 12px; display: flex; align-items: center; gap: 8px; color: #888; font-size: 0.9rem; cursor: text;">
+
+            <div id="mobileSearchBtn"
+                style="flex: 1; background: #f0f2f5; border-radius: 4px; padding: 8px 12px; display: flex; align-items: center; gap: 8px; color: #888; font-size: 0.9rem; cursor: text;">
                 Search by product
             </div>
 
             <div class="mobile-header-actions" style="display: flex; gap: 16px; align-items: center;">
-                <i class="fa-regular fa-heart" style="font-size: 1.2rem; color: #333;" onclick="toggleCart(false); document.getElementById('wishlistDrawer').classList.add('active'); document.getElementById('wishlistOverlay').classList.add('active');"></i>
+                <i class="fa-regular fa-heart" style="font-size: 1.2rem; color: #333;"
+                    onclick="toggleCart(false); document.getElementById('wishlistDrawer').classList.add('active'); document.getElementById('wishlistOverlay').classList.add('active');"></i>
                 <div style="position: relative;" onclick="toggleCart(true)">
                     <i class="fa-solid fa-bag-shopping" style="font-size: 1.2rem; color: #333;"></i>
-                    <span class="badge" id="mobileHeaderCartBadge" style="position: absolute; top: -6px; right: -8px; background: #d4736d; color: white; border-radius: 50%; font-size: 0.6rem; padding: 2px 5px;">0</span>
+                    <span class="badge" id="mobileHeaderCartBadge"
+                        style="position: absolute; top: -6px; right: -8px; background: #d4736d; color: white; border-radius: 50%; font-size: 0.6rem; padding: 2px 5px;">0</span>
                 </div>
             </div>
         </header>
@@ -299,47 +232,63 @@
         <!-- Mobile About Us Content -->
         <main class="mobile-about-content" style="padding: 20px 16px; padding-bottom: 80px;">
             <div style="text-align: center; margin-bottom: 30px;">
-                <h1 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 10px;">Our Story</h1>
-                <p style="color: #666; font-size: 0.95rem; line-height: 1.6;">Redefining premium fashion with elegant, timeless, and sustainable pieces.</p>
+                <h1 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 10px;">Our Story
+                </h1>
+                <p style="color: #666; font-size: 0.95rem; line-height: 1.6;">Redefining premium fashion with elegant,
+                    timeless, and sustainable pieces.</p>
             </div>
-            
+
             <div style="margin-bottom: 30px;">
-                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80" alt="Our Store" style="width: 100%; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-                <h2 style="font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 12px;">Shining Store</h2>
-                <p style="color: #555; line-height: 1.7; font-size: 0.95rem; margin-bottom: 12px;">Founded in 2026, Shining Store is a premium destination for curated fashion. We believe that clothing is more than just what you wear—it is an expression of identity, confidence, and values.</p>
-                <p style="color: #555; line-height: 1.7; font-size: 0.95rem; margin-bottom: 12px;">Our collections are carefully selected to provide high-quality, sustainable, and timeless pieces that elevate your daily wardrobe. We are dedicated to ethical sourcing, ensuring that our partners respect their workers and the environment.</p>
+                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80"
+                    alt="Our Store"
+                    style="width: 100%; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 12px;">Shining
+                    Store</h2>
+                <p style="color: #555; line-height: 1.7; font-size: 0.95rem; margin-bottom: 12px;">Founded in 2026,
+                    Shining Store is a premium destination for curated fashion. We believe that clothing is more than
+                    just what you wear—it is an expression of identity, confidence, and values.</p>
+                <p style="color: #555; line-height: 1.7; font-size: 0.95rem; margin-bottom: 12px;">Our collections are
+                    carefully selected to provide high-quality, sustainable, and timeless pieces that elevate your daily
+                    wardrobe. We are dedicated to ethical sourcing, ensuring that our partners respect their workers and
+                    the environment.</p>
             </div>
 
             <div style="background: #fdfbf7; border-radius: 8px; padding: 20px 16px;">
                 <h3 style="font-size: 1.2rem; margin-bottom: 20px; text-align: center;">Why Choose Us</h3>
-                
+
                 <div style="display: flex; gap: 16px; margin-bottom: 20px; align-items: flex-start;">
-                    <div style="background: #fff; border-radius: 50%; padding: 10px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.05); flex-shrink: 0;">
+                    <div
+                        style="background: #fff; border-radius: 50%; padding: 10px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.05); flex-shrink: 0;">
                         <i class="fa-solid fa-gem" style="color: var(--primary); font-size: 1.2rem;"></i>
                     </div>
                     <div>
                         <h4 style="font-size: 1rem; margin-bottom: 4px;">Premium Quality</h4>
-                        <p style="color: #666; font-size: 0.85rem; line-height: 1.5;">Finest fabrics and materials, comfort, and durability.</p>
+                        <p style="color: #666; font-size: 0.85rem; line-height: 1.5;">Finest fabrics and materials,
+                            comfort, and durability.</p>
                     </div>
                 </div>
 
                 <div style="display: flex; gap: 16px; margin-bottom: 20px; align-items: flex-start;">
-                    <div style="background: #fff; border-radius: 50%; padding: 10px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.05); flex-shrink: 0;">
+                    <div
+                        style="background: #fff; border-radius: 50%; padding: 10px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.05); flex-shrink: 0;">
                         <i class="fa-solid fa-leaf" style="color: var(--primary); font-size: 1.2rem;"></i>
                     </div>
                     <div>
                         <h4 style="font-size: 1rem; margin-bottom: 4px;">Sustainability First</h4>
-                        <p style="color: #666; font-size: 0.85rem; line-height: 1.5;">Eco-friendly packaging and ethical production commitments.</p>
+                        <p style="color: #666; font-size: 0.85rem; line-height: 1.5;">Eco-friendly packaging and ethical
+                            production commitments.</p>
                     </div>
                 </div>
 
                 <div style="display: flex; gap: 16px; align-items: flex-start;">
-                    <div style="background: #fff; border-radius: 50%; padding: 10px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.05); flex-shrink: 0;">
+                    <div
+                        style="background: #fff; border-radius: 50%; padding: 10px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.05); flex-shrink: 0;">
                         <i class="fa-solid fa-truck-fast" style="color: var(--primary); font-size: 1.2rem;"></i>
                     </div>
                     <div>
                         <h4 style="font-size: 1rem; margin-bottom: 4px;">Fast Shipping</h4>
-                        <p style="color: #666; font-size: 0.85rem; line-height: 1.5;">Reliable global delivery, free on orders over $50.</p>
+                        <p style="color: #666; font-size: 0.85rem; line-height: 1.5;">Reliable global delivery, free on
+                            orders over $50.</p>
                     </div>
                 </div>
             </div>
@@ -380,7 +329,8 @@
         </div>
         <div class="cart-items" id="wishlistItems">
             <div style="text-align:center; padding: 2rem; color: #767676;">
-                <i class="fa-regular fa-heart" style="font-size:3rem; margin-bottom:1rem; display:block; color:#ddd;"></i>
+                <i class="fa-regular fa-heart"
+                    style="font-size:3rem; margin-bottom:1rem; display:block; color:#ddd;"></i>
                 <p>Your wishlist is empty.</p>
                 <p style="font-size:0.85rem; margin-top:0.5rem;">Tap the heart icon on products you love.</p>
             </div>

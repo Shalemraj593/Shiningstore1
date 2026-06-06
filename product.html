@@ -249,6 +249,425 @@
             border-color: var(--primary);
         }
 
+        /* Color Selector */
+        .pdp-colors {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .color-swatch-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--border-light);
+            cursor: pointer;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            display: block;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-swatch.active {
+            border: 2px solid var(--primary);
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .color-tooltip {
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text-main);
+            color: white;
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .color-swatch-wrapper:hover .color-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* PDP Floating Action Buttons */
+        .pdp-floating-actions {
+            position: absolute;
+            bottom: 20px;
+            right: 15px;
+            display: flex;
+            gap: 12px;
+            z-index: 5;
+        }
+
+        .pdp-float-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            color: #333;
+        }
+
+        .pdp-float-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .pdp-float-btn i {
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+
+        .pdp-float-btn span {
+            font-size: 0.55rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Color Title Row */
+        .pdp-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .pdp-title-col-left {
+            flex: 1;
+            padding-right: 1rem;
+        }
+
+        .pdp-title-col-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            min-width: 70px;
+        }
+
+        .pdp-color-text {
+            font-size: 0.85rem;
+            color: #0b678c;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        .pdp-colors-mini {
+            display: flex;
+            gap: 6px;
+        }
+
+        .color-swatch-mini {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+        }
+
+        /* Size Guide Modal Updates */
+        .size-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 9999;
+            /* Higher than everything else */
+            display: flex;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .size-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .size-modal {
+            background: #f4f6f8;
+            width: 100%;
+            max-width: 450px;
+            height: 100vh;
+            max-height: 100vh;
+            border-radius: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .size-modal-overlay.active .size-modal {
+            transform: translateX(0);
+        }
+
+        .size-modal-header {
+            display: flex;
+            align-items: center;
+            padding: 1.2rem 1rem;
+            background: white;
+        }
+
+        .size-modal-close {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #000;
+            margin-right: 1rem;
+            font-weight: bold;
+        }
+
+        .size-modal-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .size-modal-tabs {
+            display: flex;
+            background: white;
+            padding: 0 1rem;
+        }
+
+        .size-modal-tab {
+            padding: 0.8rem 1rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            margin-right: 1rem;
+        }
+
+        .size-modal-tab.active {
+            color: #000;
+            border-bottom-color: #ffc107;
+        }
+
+        .size-modal-body {
+            padding: 1rem;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .size-tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .size-tab-content.active {
+            display: block;
+        }
+
+        .size-box {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Toggle */
+        .size-toggle-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+        }
+
+        .size-toggle {
+            display: flex;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+        }
+
+        .size-toggle-btn {
+            padding: 4px 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: #555;
+            transition: 0.2s;
+        }
+
+        .size-toggle-btn.active {
+            background: #333;
+            color: white;
+            border-radius: 20px;
+        }
+
+        .size-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .size-table th {
+            background: #8b9ca6;
+            color: white;
+            font-weight: 500;
+            padding: 10px 5px;
+        }
+
+        .size-table th:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        .size-table th:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .size-table td {
+            padding: 12px 5px;
+            color: #444;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .size-table tr:nth-child(odd) td {
+            background: #fff;
+        }
+
+        .size-table tr:nth-child(even) td {
+            background: #fdfdfd;
+        }
+
+        .size-feedback {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .size-feedback-box {
+            background: white;
+            border-radius: 8px;
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            font-weight: 600;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        /* How to Measure Layout */
+        .htm-image-container {
+            position: relative;
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem 0;
+        }
+
+        .htm-image-container img {
+            height: 350px;
+            object-fit: contain;
+        }
+
+        .htm-pointer {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.65rem;
+            color: #666;
+            text-align: center;
+            max-width: 110px;
+            line-height: 1.3;
+        }
+
+        .htm-pointer-circle {
+            background: #2a3d4f;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.75rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            z-index: 2;
+        }
+
+        .htm-title-line {
+            text-align: center;
+            border-top: 2px solid #2a3d4f;
+            border-bottom: 2px solid #2a3d4f;
+            padding: 0.5rem 0;
+            margin-bottom: 1rem;
+            color: #bfa183;
+            font-weight: 600;
+            letter-spacing: 1px;
+            font-size: 0.95rem;
+            font-family: serif;
+        }
+
+        .htm-tip {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .htm-accurate-box {
+            background: #f0f0f0;
+            text-align: center;
+            padding: 0.6rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .htm-desc {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
         /* Quantity */
         .pdp-qty-row {
             display: flex;
@@ -532,18 +951,23 @@
                 border-radius: 0;
                 margin: -1rem -1rem 1rem -1rem;
                 width: calc(100% + 2rem);
-                aspect-ratio: 4/5; /* Slightly less tall on mobile */
+                aspect-ratio: 4/5;
+                /* Slightly less tall on mobile */
             }
-            
+
             .pdp-thumbnails {
                 overflow-x: auto;
                 padding-bottom: 5px;
                 scroll-snap-type: x mandatory;
-                scrollbar-width: none; /* Firefox */
+                scrollbar-width: none;
+                /* Firefox */
             }
+
             .pdp-thumbnails::-webkit-scrollbar {
-                display: none; /* Chrome/Safari */
+                display: none;
+                /* Chrome/Safari */
             }
+
             .pdp-thumb {
                 flex-shrink: 0;
                 scroll-snap-align: start;
@@ -568,7 +992,7 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
             }
-            
+
             /* User requested to remove the fixed bottom footer (Add to Cart bar) and use normal flow */
             .pdp-actions {
                 display: flex;
@@ -620,7 +1044,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
             z-index: 10;
             transition: var(--transition);
         }
@@ -645,8 +1069,15 @@
         }
 
         @keyframes fadeInShare {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .pdp-share-item {
@@ -670,7 +1101,7 @@
         .pdp-share-item a {
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: space-between;
             color: var(--text-main);
             font-size: 0.92rem;
             font-weight: 500;
@@ -731,53 +1162,14 @@
             <i class="fa-regular fa-heart" onclick="toggleWishlistDrawer()"></i>
             <div style="position: relative; cursor: pointer;" onclick="toggleCartDrawer()">
                 <i class="fa-solid fa-bag-shopping"></i>
-                <span class="badge" id="mobileHeaderCartBadge" style="position: absolute; top: -6px; right: -8px; background: #d4736d; color: white; border-radius: 50%; font-size: 0.6rem; padding: 2px 5px;">0</span>
+                <span class="badge" id="mobileHeaderCartBadge"
+                    style="position: absolute; top: -6px; right: -8px; background: #d4736d; color: white; border-radius: 50%; font-size: 0.6rem; padding: 2px 5px;">0</span>
             </div>
         </div>
     </header>
 
-    <!-- Navbar -->
-    <header class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <a href="index.html"><span>Shining</span>Store</a>
-            </div>
-            <div class="nav-links">
-                <a href="index.html#new-arrivals">New Arrivals</a>
-                <a href="index.html#shop-desktop" data-category="dresses">Dresses</a>
-                <a href="index.html#shop-desktop" data-category="outerwear">Outerwear</a>
-                <a href="index.html#shop-desktop" data-category="tops">Tops</a>
-                <a href="index.html#shop-desktop" data-category="activewear">Activewear</a>
-                <a href="index.html#shop-desktop" data-category="jeans">Jeans</a>
-            </div>
-            <div class="nav-actions">
-                <div class="currency-selector tooltip" data-tooltip="Currency">
-                    <button class="icon-btn currency-btn" id="currencyToggleBtn">
-                        <span class="current-currency-display">$ USD</span> <i class="fa-solid fa-chevron-down" style="font-size:0.6rem; margin-left:3px;"></i>
-                    </button>
-                    <div class="currency-dropdown hidden" id="currencyDropdown">
-                        <button class="currency-option" data-currency="USD">$ USD</button>
-                        <button class="currency-option" data-currency="INR">₹ INR</button>
-                    </div>
-                </div>
-                <div class="search-bar">
-                    <i class="fa-solid fa-search"></i>
-                    <input type="text" placeholder="Search...">
-                </div>
-                <button class="icon-btn tooltip" data-tooltip="Account" id="accountBtn">
-                    <i class="fa-regular fa-user" id="accountIcon"></i>
-                </button>
-                <button class="icon-btn tooltip" data-tooltip="Wishlist" onclick="toggleWishlistDrawer()">
-                    <i class="fa-regular fa-heart"></i>
-                    <span class="badge hidden" id="wishlistBadge">0</span>
-                </button>
-                <button class="icon-btn tooltip cart-btn" data-tooltip="Cart" onclick="toggleCartDrawer()">
-                    <i class="fa-solid fa-bag-shopping"></i>
-                    <span class="badge" id="cartBadge">0</span>
-                </button>
-            </div>
-        </div>
-    </header>
+    <!-- Dynamic Header (injected by app.js) -->
+    <header class="navbar" id="navbar"></header>
 
     <!-- Breadcrumb + Product Content -->
     <div class="pdp-wrapper">
@@ -804,7 +1196,7 @@
             <h3 id="authTitle">Welcome Back</h3>
             <p id="authSubtitle">Sign in to access your account</p>
         </div>
-        
+
         <div class="auth-tabs">
             <button class="auth-tab active" data-tab="login">Login</button>
             <button class="auth-tab" data-tab="signup">Sign Up</button>
@@ -827,7 +1219,9 @@
                 <label><input type="checkbox"> Remember me</label>
                 <a href="#" class="forgot-pwd">Forgot Password?</a>
             </div>
-            <button type="submit" class="btn btn-primary" style="width:100%; border-radius:var(--radius-pill); font-size:0.9rem;" id="authSubmitBtn">SIGN IN</button>
+            <button type="submit" class="btn btn-primary"
+                style="width:100%; border-radius:var(--radius-pill); font-size:0.9rem;" id="authSubmitBtn">SIGN
+                IN</button>
         </form>
 
         <div class="auth-divider"><span>OR</span></div>
@@ -849,10 +1243,22 @@
         <div class="pdp-tab-content" id="tab-details">
             <h4>Product Details</h4>
             <table>
-                <tr><td>Material</td><td>Premium blend fabric</td></tr>
-                <tr><td>Fit</td><td>Regular fit — true to size</td></tr>
-                <tr><td>Care</td><td>Machine wash cold, hang dry</td></tr>
-                <tr><td>Origin</td><td>Designed in-house, ethically manufactured</td></tr>
+                <tr>
+                    <td>Material</td>
+                    <td>Premium blend fabric</td>
+                </tr>
+                <tr>
+                    <td>Fit</td>
+                    <td>Regular fit — true to size</td>
+                </tr>
+                <tr>
+                    <td>Care</td>
+                    <td>Machine wash cold, hang dry</td>
+                </tr>
+                <tr>
+                    <td>Origin</td>
+                    <td>Designed in-house, ethically manufactured</td>
+                </tr>
             </table>
         </div>
         <div class="pdp-tab-content" id="tab-shipping">
@@ -870,28 +1276,40 @@
             </ul>
         </div>
         <div class="pdp-tab-content" id="tab-reviews">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; border-bottom:1px solid var(--border-light); padding-bottom:1rem;">
+            <div
+                style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; border-bottom:1px solid var(--border-light); padding-bottom:1rem;">
                 <div>
                     <h4 style="margin:0; font-size:1.2rem;">Customer Reviews</h4>
-                    <div style="color:var(--text-muted); font-size:0.9rem; margin-top:0.3rem;"><span id="reviewStars"></span> Based on reviews</div>
+                    <div style="color:var(--text-muted); font-size:0.9rem; margin-top:0.3rem;"><span
+                            id="reviewStars"></span> Based on reviews</div>
                 </div>
-                <button class="btn btn-outline" onclick="alert('Write a review feature coming soon!')">Write a Review</button>
+                <button class="btn btn-outline" onclick="alert('Write a review feature coming soon!')">Write a
+                    Review</button>
             </div>
-            
+
             <div style="display:flex; flex-direction:column; gap:1.5rem;">
                 <div style="border-bottom:1px solid #eee; padding-bottom:1rem;">
                     <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
-                        <div style="font-weight:600;">Sarah M. <i class="fa-solid fa-circle-check" style="color:var(--success); font-size:0.8rem; margin-left:4px;"></i></div>
-                        <div style="color:#f5a623; font-size:0.8rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <div style="font-weight:600;">Sarah M. <i class="fa-solid fa-circle-check"
+                                style="color:var(--success); font-size:0.8rem; margin-left:4px;"></i></div>
+                        <div style="color:#f5a623; font-size:0.8rem;"><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                     </div>
-                    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.5;">Absolutely love this piece! The quality is amazing and it fits perfectly. I wore it to an event and got so many compliments.</p>
+                    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.5;">Absolutely love this
+                        piece! The quality is amazing and it fits perfectly. I wore it to an event and got so many
+                        compliments.</p>
                 </div>
                 <div style="border-bottom:1px solid #eee; padding-bottom:1rem;">
                     <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
-                        <div style="font-weight:600;">Jessica T. <i class="fa-solid fa-circle-check" style="color:var(--success); font-size:0.8rem; margin-left:4px;"></i></div>
-                        <div style="color:#f5a623; font-size:0.8rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
+                        <div style="font-weight:600;">Jessica T. <i class="fa-solid fa-circle-check"
+                                style="color:var(--success); font-size:0.8rem; margin-left:4px;"></i></div>
+                        <div style="color:#f5a623; font-size:0.8rem;"><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
                     </div>
-                    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.5;">Great product. The material feels very premium. Taking one star off because shipping was slightly delayed.</p>
+                    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.5;">Great product. The
+                        material feels very premium. Taking one star off because shipping was slightly delayed.</p>
                 </div>
             </div>
         </div>
@@ -904,7 +1322,8 @@
     </section>
 
     <!-- Recently Viewed Products -->
-    <section class="related-section" id="recentlyViewedSection" style="display:none; margin-top:2rem; border-top:1px solid var(--border-light); padding-top:4rem;">
+    <section class="related-section" id="recentlyViewedSection"
+        style="display:none; margin-top:2rem; border-top:1px solid var(--border-light); padding-top:4rem;">
         <h2>Recently Viewed</h2>
         <div class="product-grid" id="recentGrid"></div>
     </section>
@@ -986,7 +1405,8 @@
         </div>
         <div class="cart-footer">
             <div class="totals" style="margin-bottom: 1rem;">
-                <div style="display:flex; justify-content:space-between; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); font-weight: bold; font-size: 1.1rem;">
+                <div
+                    style="display:flex; justify-content:space-between; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); font-weight: bold; font-size: 1.1rem;">
                     <span>Total</span>
                     <span id="totalAmount">$0.00</span>
                 </div>
@@ -999,30 +1419,30 @@
     <div class="pdp-toast" id="pdpToast"></div>
 
     <!-- Load core JS first to provide products, cart, wishlist globally -->
-        <!-- Mobile Bottom Nav -->
-        <nav class="mobile-bottom-nav">
-            <a href="index.html" class="bottom-nav-item">
-                <i class="fa-solid fa-house"></i>
-                <span>Home</span>
-            </a>
-            <a href="categories.html" class="bottom-nav-item">
-                <i class="fa-solid fa-list"></i>
-                <span>Category</span>
-            </a>
-            <a href="index.html#shop" class="bottom-nav-item">
-                <i class="fa-solid fa-shirt"></i>
-                <span>New</span>
-            </a>
-            <a href="#" class="bottom-nav-item" onclick="toggleCart(true); return false;">
-                <i class="fa-solid fa-bag-shopping"></i>
-                <span>Bag</span>
-                <span class="bottom-nav-badge hidden" id="mobileCartBadge">0</span>
-            </a>
-            <a href="account.html" class="bottom-nav-item">
-                <i class="fa-regular fa-user"></i>
-                <span>Me</span>
-            </a>
-        </nav>
+    <!-- Mobile Bottom Nav -->
+    <nav class="mobile-bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="categories.html" class="bottom-nav-item">
+            <i class="fa-solid fa-list"></i>
+            <span>Category</span>
+        </a>
+        <a href="index.html#shop" class="bottom-nav-item">
+            <i class="fa-solid fa-shirt"></i>
+            <span>New</span>
+        </a>
+        <a href="#" class="bottom-nav-item" onclick="toggleCart(true); return false;">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span>Bag</span>
+            <span class="bottom-nav-badge hidden" id="mobileCartBadge">0</span>
+        </a>
+        <a href="account.html" class="bottom-nav-item">
+            <i class="fa-regular fa-user"></i>
+            <span>Me</span>
+        </a>
+    </nav>
 
     <!-- Mobile Search Overlay -->
     <div class="mobile-search-overlay hidden" id="mobileSearchOverlay">
@@ -1039,66 +1459,80 @@
 
     <script src="app.js"></script>
     <script>
-    // ============================================
-    // State
-    // ============================================
-    let pdpQty = 1;
+        // ============================================
+        // State
+        // ============================================
+        let pdpQty = 1;
 
-    // ============================================
-    // Init
-    // ============================================
-    function initPDP() {
-        const params = new URLSearchParams(window.location.search);
-        const productId = parseInt(params.get('id'));
-        const product = products.find(p => p.id === productId);
+        // ============================================
+        // Init
+        // ============================================
+        function initPDP() {
+            const params = new URLSearchParams(window.location.search);
+            const productId = parseInt(params.get('id'));
+            const product = products.find(p => p.id === productId);
 
-        if (!product) {
-            document.getElementById('pdpGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:4rem;"><h2>Product not found</h2><p style="margin:1rem 0;color:var(--text-muted);">The product you\'re looking for doesn\'t exist.</p><a href="index.html" class="btn btn-primary">Back to Shop</a></div>';
-            return;
+            if (!product) {
+                document.getElementById('pdpGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:4rem;"><h2>Product not found</h2><p style="margin:1rem 0;color:var(--text-muted);">The product you\'re looking for doesn\'t exist.</p><a href="index.html" class="btn btn-primary">Back to Shop</a></div>';
+                return;
+            }
+
+            document.title = `${product.name} | Shining Store`;
+            renderProduct(product);
+            renderRelatedProducts(product);
+            setupTabs();
+            updateCartBadge();
+            updateWishlistBadge();
+            trackRecentlyViewed(product.id);
+            renderRecentProducts();
+
+            // Scroll effects
+            window.addEventListener('scroll', () => {
+                const navbar = document.getElementById('navbar');
+                window.scrollY > 50 ? navbar?.classList.add('scrolled') : navbar?.classList.remove('scrolled');
+            }, { passive: true });
         }
 
-        document.title = `${product.name} | Shining Store`;
-        renderProduct(product);
-        renderRelatedProducts(product);
-        setupTabs();
-        updateCartBadge();
-        updateWishlistBadge();
-        trackRecentlyViewed(product.id);
-        renderRecentProducts();
-
-        // Scroll effects
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            window.scrollY > 50 ? navbar?.classList.add('scrolled') : navbar?.classList.remove('scrolled');
-        }, { passive: true });
-    }
-
-    // ============================================
-    // Render Product Detail
-    // ============================================
-    async function loadHDImages(productId) {
-        try {
+        // ============================================
+        // Render Product Detail
+        // ============================================
+        // Cache full product data in memory — only fetched once per tab session
+        let _fullDataCache = null;
+        async function _getFullData() {
+            if (_fullDataCache) return _fullDataCache;
             const res = await fetch('shining-store-data/products-full.json');
-            const data = await res.json();
-            for (const cat of Object.values(data.categories)) {
-                const fullProd = cat.products.find(p => p.id == productId);
-                if (fullProd && fullProd.images && fullProd.images.length > 0) {
-                    const gallery = document.querySelector('.pdp-gallery');
-                    if (gallery) {
-                        const mainImg = fullProd.images[0].src;
-                        // Use up to 4 images for thumbnails
-                        const thumbs = fullProd.images.slice(0, 4).map((img, idx) => 
-                            `<div class="pdp-thumb ${idx === 0 ? 'active' : ''}" onclick="changeImage(this, '${img.src}')">
-                                <img src="${img.src}" alt="View ${idx+1}">
+            _fullDataCache = await res.json();
+            return _fullDataCache;
+        }
+
+        async function loadHDImages(productId) {
+            const product = products.find(p => p.id === productId);
+            const fallbackCat = product ? product.category : 'fashion';
+            try {
+                const data = await _getFullData();
+                for (const cat of Object.values(data.categories)) {
+                    const fullProd = cat.products.find(p => p.id == productId);
+                    if (fullProd && fullProd.images && fullProd.images.length > 0) {
+                        const gallery = document.querySelector('.pdp-gallery');
+                        if (gallery) {
+                            const mainImg = fullProd.images[0].src;
+                            // Use up to 4 images for thumbnails
+                            const thumbs = fullProd.images.slice(0, 4).map((img, idx) =>
+                                `<div class="pdp-thumb ${idx === 0 ? 'active' : ''}" onclick="changeImage(this, '${img.src}')">
+                                <img src="${img.src}" alt="View ${idx + 1}" onerror="handleImageError(this, '${fallbackCat}')">
                             </div>`
-                        ).join('');
-                        
-                        gallery.innerHTML = `
+                            ).join('');
+
+                            gallery.innerHTML = `
                             <div class="pdp-main-image">
-                                <img src="${mainImg}" id="mainImage" alt="Product">
+                                <img src="${mainImg}" id="mainImage" alt="Product" onerror="handleImageError(this, '${fallbackCat}')">
                                 <button class="pdp-share-btn" onclick="toggleSharePopup(event)" aria-label="Share">
                                     <i class="fa-solid fa-arrow-up-from-bracket"></i>
                                 </button>
+                                ${fallbackCat === 'fashion' ? `<div class="pdp-floating-actions">
+                                    <button class="pdp-float-btn" onclick="showToast('Similar products coming soon!')" title="Similar"><i class="fa-regular fa-clone"></i><span>SIMILAR</span></button>
+                                    <button class="pdp-float-btn" onclick="openSizeGuide()" title="Size Guide"><i class="fa-solid fa-ruler"></i><span>SIZE</span></button>
+                                </div>` : ''}
                                 <div class="pdp-share-popup" id="pdpSharePopup" style="display: none;">
                                     <div class="pdp-share-item">
                                         <a href="#" onclick="shareProduct('email', event)">
@@ -1132,49 +1566,54 @@
                                 ${thumbs}
                             </div>
                         `;
+
+                            // Render full options (Color, Size)
+                            window.currentProductVariants = fullProd.variants || [];
+                            window.currentProductOptions = fullProd.options || [];
+                            renderDynamicOptions();
+                        }
+                        return;
                     }
-                    return;
                 }
+            } catch (e) {
+                console.error('Error loading HD images', e);
             }
-        } catch(e) {
-            console.error('Error loading HD images', e);
         }
-    }
 
-    function renderProduct(product) {
-        // Breadcrumb
-        document.getElementById('breadcrumbCategory').textContent = product.category.charAt(0).toUpperCase() + product.category.slice(1);
-        document.getElementById('breadcrumbProduct').textContent = product.name;
 
-        // Stars
-        const fullStars = Math.floor(product.rating);
-        const hasHalf = product.rating % 1 >= 0.5;
-        let starsHTML = '';
-        for (let i = 0; i < fullStars; i++) starsHTML += '<i class="fa-solid fa-star"></i>';
-        if (hasHalf) starsHTML += '<i class="fa-solid fa-star-half-stroke"></i>';
-        for (let i = fullStars + (hasHalf ? 1 : 0); i < 5; i++) starsHTML += '<i class="fa-regular fa-star"></i>';
-        for (let i = fullStars + (hasHalf ? 1 : 0); i < 5; i++) starsHTML += '<i class="fa-regular fa-star"></i>';
-        
-        // Reviews Tab Stars
-        const reviewStars = document.getElementById('reviewStars');
-        if (reviewStars) reviewStars.innerHTML = starsHTML;
+        function renderProduct(product) {
+            // Breadcrumb
+            document.getElementById('breadcrumbCategory').textContent = product.category.charAt(0).toUpperCase() + product.category.slice(1);
+            document.getElementById('breadcrumbProduct').textContent = product.name;
 
-        // Price
-        let priceHTML = `<span class="pdp-price">${formatPrice(product.price)}</span>`;
-        if (product.comparePrice) {
-            const savePercent = Math.round((1 - product.price / product.comparePrice) * 100);
-            priceHTML = `
+            // Stars
+            const fullStars = Math.floor(product.rating);
+            const hasHalf = product.rating % 1 >= 0.5;
+            let starsHTML = '';
+            for (let i = 0; i < fullStars; i++) starsHTML += '<i class="fa-solid fa-star"></i>';
+            if (hasHalf) starsHTML += '<i class="fa-solid fa-star-half-stroke"></i>';
+            for (let i = fullStars + (hasHalf ? 1 : 0); i < 5; i++) starsHTML += '<i class="fa-regular fa-star"></i>';
+
+            // Reviews Tab Stars
+            const reviewStars = document.getElementById('reviewStars');
+            if (reviewStars) reviewStars.innerHTML = starsHTML;
+
+            // Price
+            let priceHTML = `<span class="pdp-price">${formatPrice(product.price)}</span>`;
+            if (product.comparePrice) {
+                const savePercent = Math.round((1 - product.price / product.comparePrice) * 100);
+                priceHTML = `
                 <span class="pdp-compare-price">${formatPrice(product.comparePrice)}</span>
                 <span class="pdp-price sale">${formatPrice(product.price)}</span>
                 <span class="pdp-save-badge">Save ${savePercent}%</span>
             `;
-        }
+            }
 
-        // Wishlist state
-        const isWished = wishlist.includes(product.id);
+            // Wishlist state
+            const isWished = wishlist.includes(product.id);
 
-        // Description tab
-        document.getElementById('tab-description').innerHTML = `
+            // Description tab
+            document.getElementById('tab-description').innerHTML = `
             <h4>About This Product</h4>
             <p>${product.desc}</p>
             <ul style="margin-top:1rem;">
@@ -1185,14 +1624,18 @@
             </ul>
         `;
 
-        document.getElementById('pdpGrid').innerHTML = `
+            document.getElementById('pdpGrid').innerHTML = `
             <!-- Image Gallery -->
             <div class="pdp-gallery">
                 <div class="pdp-main-image">
-                    <img src="${product.image}" alt="${product.name}" id="mainImage">
+                    <img src="${product.image}" alt="${product.name}" id="mainImage" onerror="handleImageError(this, '${product.category}')">
                     <button class="pdp-share-btn" onclick="toggleSharePopup(event)" aria-label="Share">
                         <i class="fa-solid fa-arrow-up-from-bracket"></i>
                     </button>
+                    ${product.category === 'fashion' ? `<div class="pdp-floating-actions">
+                        <button class="pdp-float-btn" onclick="showToast('Similar products coming soon!')" title="Similar"><i class="fa-regular fa-clone"></i><span>SIMILAR</span></button>
+                        <button class="pdp-float-btn" onclick="openSizeGuide()" title="Size Guide"><i class="fa-solid fa-ruler"></i><span>SIZE</span></button>
+                    </div>` : ''}
                     <div class="pdp-share-popup" id="pdpSharePopup" style="display: none;">
                         <div class="pdp-share-item">
                             <a href="#" onclick="shareProduct('email', event)">
@@ -1224,13 +1667,13 @@
                 </div>
                 <div class="pdp-thumbnails">
                     <div class="pdp-thumb active" onclick="changeImage(this, '${product.image}')">
-                        <img src="${product.image}" alt="View 1">
+                        <img src="${product.image}" alt="View 1" onerror="handleImageError(this, '${product.category}')">
                     </div>
                     <div class="pdp-thumb" onclick="changeImage(this, '${product.image.replace('w=600', 'w=601')}')">
-                        <img src="${product.image}" alt="View 2">
+                        <img src="${product.image}" alt="View 2" onerror="handleImageError(this, '${product.category}')">
                     </div>
                     <div class="pdp-thumb" onclick="changeImage(this, '${product.image.replace('w=600', 'w=602')}')">
-                        <img src="${product.image}" alt="View 3">
+                        <img src="${product.image}" alt="View 3" onerror="handleImageError(this, '${product.category}')">
                     </div>
                 </div>
             </div>
@@ -1238,7 +1681,14 @@
             <!-- Product Info -->
             <div class="pdp-info">
                 <div class="pdp-category">${product.category}</div>
-                <h1 class="pdp-title">${product.name}</h1>
+                <div class="pdp-title-row">
+                    <div class="pdp-title-col-left">
+                        <h1 class="pdp-title" style="margin:0;">${product.name}</h1>
+                    </div>
+                    <div class="pdp-title-col-right" id="dynamicColorContainer">
+                        <!-- Removed mini colors, using dynamic full colors below -->
+                    </div>
+                </div>
 
                 <div class="pdp-rating">
                     <div class="pdp-stars">${starsHTML}</div>
@@ -1251,13 +1701,8 @@
 
                 <p class="pdp-desc">${product.desc}</p>
 
-                <div class="pdp-option-label">Size</div>
-                <div class="pdp-sizes">
-                    <button class="size-btn" onclick="selectSize(this)">XS</button>
-                    <button class="size-btn active" onclick="selectSize(this)">S</button>
-                    <button class="size-btn" onclick="selectSize(this)">M</button>
-                    <button class="size-btn" onclick="selectSize(this)">L</button>
-                    <button class="size-btn" onclick="selectSize(this)">XL</button>
+                <div id="dynamicOptionsContainer">
+                    <div style="text-align:center; padding: 1rem;"><i class="fa-solid fa-spinner fa-spin"></i> Loading options...</div>
                 </div>
 
                 <div class="pdp-option-label">Quantity</div>
@@ -1300,91 +1745,166 @@
             </div>
         `;
 
-        // Attempt to load HD images asynchronously
-        loadHDImages(product.id);
-    }
-
-    // ============================================
-    // Helpers
-    // ============================================
-    function changeImage(thumb, src) {
-        document.getElementById('mainImage').src = src;
-        document.querySelectorAll('.pdp-thumb').forEach(t => t.classList.remove('active'));
-        thumb.classList.add('active');
-    }
-
-    function selectSize(btn) {
-        document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-    }
-
-    function changeQty(delta) {
-        pdpQty = Math.max(1, pdpQty + delta);
-        document.getElementById('qtyDisplay').textContent = pdpQty;
-    }
-
-    function showToast(msg) {
-        const toast = document.getElementById('pdpToast');
-        toast.textContent = msg;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2500);
-    }
-
-    // ============================================
-    // Cart
-    // ============================================
-    function buyNowPDP(id) {
-        addToCartPDP(id);
-        window.location.href = 'checkout.html';
-    }
-
-    function addToCartPDP(id) {
-        const product = products.find(p => p.id === id);
-        const existing = cart.find(item => item.id === id);
-        if (existing) {
-            existing.quantity += pdpQty;
-        } else {
-            cart.push({ ...product, quantity: pdpQty });
+            // Attempt to load HD images asynchronously
+            loadHDImages(product.id);
         }
-        localStorage.setItem('shiningstore_cart', JSON.stringify(cart));
-        updateCartBadge();
-        updateCartDrawer();
-        showToast(`✓ Added ${pdpQty}x ${product.name} to cart`);
-    }
 
-    function updateCartBadge() {
-        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        const badge = document.getElementById('cartBadge');
-        if (badge) {
-            badge.innerText = totalItems;
-            totalItems > 0 ? badge.classList.remove('hidden') : badge.classList.add('hidden');
+        // ============================================
+        // Helpers
+        // ============================================
+        function changeImage(thumb, src) {
+            document.getElementById('mainImage').src = src;
+            document.querySelectorAll('.pdp-thumb').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
         }
-        const mobileBadge = document.getElementById('mobileHeaderCartBadge');
-        if (mobileBadge) {
-            mobileBadge.innerText = totalItems;
-            totalItems > 0 ? mobileBadge.classList.remove('hidden') : mobileBadge.classList.add('hidden');
-        }
-        const mobileBottomBadge = document.getElementById('mobileCartBadge');
-        if (mobileBottomBadge) {
-            mobileBottomBadge.innerText = totalItems;
-            totalItems > 0 ? mobileBottomBadge.classList.remove('hidden') : mobileBottomBadge.classList.add('hidden');
-        }
-    }
 
-    function updateCartDrawer() {
-        const container = document.getElementById('cartItems');
-        const totalEl = document.getElementById('totalAmount');
-        const checkoutBtn = document.getElementById('checkoutBtn');
-        if (!container) return;
+        function selectSize(btn, sizeValue) {
+            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            window.selectedSize = sizeValue;
+        }
 
-        if (cart.length === 0) {
-            container.innerHTML = '<div style="text-align:center; padding:2rem; color:#767676;">Your bag is empty.</div>';
-            checkoutBtn.disabled = true;
-        } else {
-            checkoutBtn.disabled = false;
-            container.innerHTML = cart.map(item => `
+        function selectColor(btn, colorValue) {
+            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            window.selectedColor = colorValue;
+            // Filter sizes based on selected color
+            renderDynamicOptions(false);
+        }
+
+        function renderDynamicOptions(init = true) {
+            const container = document.getElementById('dynamicOptionsContainer');
+            if (!container) return;
+
+            const options = window.currentProductOptions || [];
+            const variants = window.currentProductVariants || [];
+
+            if (options.length === 0 || (options.length === 1 && options[0].name === 'Title')) {
+                container.innerHTML = '';
+                return;
+            }
+
+            let html = '';
+            const colorOpt = options.find(o => o.name.toLowerCase() === 'color' || o.name.toLowerCase() === 'colour');
+            const sizeOpt = options.find(o => o.name.toLowerCase() === 'size');
+
+            if (init && colorOpt && colorOpt.values.length > 0) {
+                window.selectedColor = colorOpt.values[0];
+            }
+
+            if (colorOpt) {
+                html += `<div class="pdp-option-label">Color: <span style="color:#000; font-weight:600;">${window.selectedColor || ''}</span></div>`;
+                html += `<div class="pdp-sizes" style="gap:10px; margin-bottom: 1rem; flex-wrap:wrap;">`;
+                colorOpt.values.forEach(col => {
+                    const isActive = window.selectedColor === col;
+                    const isAvailable = variants.some(v => (v.option1 === col || v.option2 === col || v.option3 === col) && v.available);
+                    if (isAvailable) {
+                        const safeColor = col.replace(/\s+/g, '').toLowerCase();
+                        const escapeCol = col.replace(/'/g, "\\'");
+                        html += `<button class="color-btn ${isActive ? 'active' : ''}" style="width:36px; height:36px; border-radius:50%; border:2px solid ${isActive ? '#000' : '#ddd'}; padding:2px; cursor:pointer; background:transparent;" onclick="selectColor(this, '${escapeCol}')" title="${col}">`;
+                        html += `<div style="width:100%; height:100%; border-radius:50%; background-color:${safeColor}; border:1px solid rgba(0,0,0,0.1);"></div>`;
+                        html += `</button>`;
+                    }
+                });
+                html += `</div>`;
+            }
+
+            if (sizeOpt) {
+                html += `<div class="pdp-option-label" style="margin-top:0.5rem;">Size</div>`;
+                html += `<div class="pdp-sizes" style="flex-wrap:wrap;">`;
+
+                let availableSizes = sizeOpt.values;
+                if (window.selectedColor) {
+                    availableSizes = sizeOpt.values.filter(size => {
+                        return variants.some(v =>
+                            (v.option1 === window.selectedColor || v.option2 === window.selectedColor || v.option3 === window.selectedColor) &&
+                            (v.option1 === size || v.option2 === size || v.option3 === size) &&
+                            v.available
+                        );
+                    });
+                }
+
+                if (init && availableSizes.length > 0) window.selectedSize = availableSizes[0];
+
+                sizeOpt.values.forEach(size => {
+                    const isAvailable = availableSizes.includes(size);
+                    const isActive = window.selectedSize === size && isAvailable;
+                    const escapeSize = size.replace(/'/g, "\\'");
+                    html += `<button class="size-btn ${isActive ? 'active' : ''}" ${!isAvailable ? 'disabled style="opacity:0.4; text-decoration:line-through;"' : ''} onclick="selectSize(this, '${escapeSize}')">${size}</button>`;
+                });
+                html += `</div>`;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function changeQty(delta) {
+            pdpQty = Math.max(1, pdpQty + delta);
+            document.getElementById('qtyDisplay').textContent = pdpQty;
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('pdpToast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        // ============================================
+        // Cart
+        // ============================================
+        function buyNowPDP(id) {
+            addToCartPDP(id);
+            window.location.href = 'checkout.html';
+        }
+
+        function addToCartPDP(id) {
+            const product = products.find(p => p.id === id);
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.quantity += pdpQty;
+            } else {
+                cart.push({ ...product, quantity: pdpQty });
+            }
+            localStorage.setItem('shiningstore_cart', JSON.stringify(cart));
+            updateCartBadge();
+            updateCartDrawer();
+            showToast(`✓ Added ${pdpQty}x ${product.name} to cart`);
+        }
+
+        function updateCartBadge() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const badge = document.getElementById('cartBadge');
+            if (badge) {
+                badge.innerText = totalItems;
+                totalItems > 0 ? badge.classList.remove('hidden') : badge.classList.add('hidden');
+            }
+            const mobileBadge = document.getElementById('mobileHeaderCartBadge');
+            if (mobileBadge) {
+                mobileBadge.innerText = totalItems;
+                totalItems > 0 ? mobileBadge.classList.remove('hidden') : mobileBadge.classList.add('hidden');
+            }
+            const mobileBottomBadge = document.getElementById('mobileCartBadge');
+            if (mobileBottomBadge) {
+                mobileBottomBadge.innerText = totalItems;
+                totalItems > 0 ? mobileBottomBadge.classList.remove('hidden') : mobileBottomBadge.classList.add('hidden');
+            }
+        }
+
+        function updateCartDrawer() {
+            const container = document.getElementById('cartItems');
+            const totalEl = document.getElementById('totalAmount');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            if (!container) return;
+
+            if (cart.length === 0) {
+                container.innerHTML = '<div style="text-align:center; padding:2rem; color:#767676;">Your bag is empty.</div>';
+                checkoutBtn.disabled = true;
+            } else {
+                checkoutBtn.disabled = false;
+                container.innerHTML = cart.map(item => `
                 <div style="display:flex; gap:1rem; padding:1rem 0; border-bottom:1px solid var(--border-light);">
-                    <img src="${item.image}" alt="${item.name}" style="width:70px; height:90px; object-fit:cover; border-radius:6px;">
+                    <img src="${item.image}" alt="${item.name}" style="width:70px; height:90px; object-fit:cover; border-radius:6px;" onerror="handleImageError(this, '${item.category}')">
                     <div style="flex:1;">
                         <div style="font-weight:600; font-size:0.88rem; margin-bottom:0.3rem;">${item.name}</div>
                         <div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;">Qty: ${item.quantity}</div>
@@ -1393,82 +1913,82 @@
                     <button onclick="removeFromCartPDP(${item.id})" style="background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:1rem;"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             `).join('');
-        }
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        if (totalEl) totalEl.innerText = `$${total.toFixed(2)}`;
-    }
-
-    function removeFromCartPDP(id) {
-        cart = cart.filter(i => i.id !== id);
-        localStorage.setItem('shiningstore_cart', JSON.stringify(cart));
-        updateCartBadge();
-        updateCartDrawer();
-    }
-
-    function toggleCartDrawer() {
-        const drawer = document.getElementById('cartDrawer');
-        const overlay = document.getElementById('cartOverlay');
-        updateCartDrawer();
-        drawer.classList.toggle('active');
-        overlay.classList.toggle('active');
-        document.body.style.overflow = drawer.classList.contains('active') ? 'hidden' : '';
-    }
-
-    // ============================================
-    // Wishlist
-    // ============================================
-    function toggleWishlistPDP(id) {
-        const idx = wishlist.indexOf(id);
-        if (idx > -1) {
-            wishlist.splice(idx, 1);
-        } else {
-            wishlist.push(id);
-        }
-        localStorage.setItem('shiningstore_wishlist', JSON.stringify(wishlist));
-        updateWishlistBadge();
-        updateWishlistDrawer();
-
-        // Update button
-        const btn = document.getElementById('pdpWishBtn');
-        const icon = btn.querySelector('i');
-        if (wishlist.includes(id)) {
-            btn.classList.add('active');
-            icon.classList.remove('fa-regular');
-            icon.classList.add('fa-solid');
-            showToast('♥ Added to Wishlist');
-        } else {
-            btn.classList.remove('active');
-            icon.classList.remove('fa-solid');
-            icon.classList.add('fa-regular');
-            showToast('Removed from Wishlist');
-        }
-    }
-
-    function updateWishlistBadge() {
-        const badge = document.getElementById('wishlistBadge');
-        if (badge) {
-            badge.innerText = wishlist.length;
-            wishlist.length > 0 ? badge.classList.remove('hidden') : badge.classList.add('hidden');
-        }
-    }
-
-    function updateWishlistDrawer() {
-        const container = document.getElementById('wishlistItems');
-        const count = document.getElementById('wishlistCount');
-        if (!container) return;
-        if (count) count.textContent = wishlist.length;
-
-        if (wishlist.length === 0) {
-            container.innerHTML = '<div style="text-align:center; padding:2rem; color:#767676;"><i class="fa-regular fa-heart" style="font-size:3rem; margin-bottom:1rem; display:block; color:#ddd;"></i><p>Your wishlist is empty.</p></div>';
-            return;
+            }
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            if (totalEl) totalEl.innerText = `$${total.toFixed(2)}`;
         }
 
-        container.innerHTML = wishlist.map(id => {
-            const p = products.find(pr => pr.id === id);
-            if (!p) return '';
-            return `
+        function removeFromCartPDP(id) {
+            cart = cart.filter(i => i.id !== id);
+            localStorage.setItem('shiningstore_cart', JSON.stringify(cart));
+            updateCartBadge();
+            updateCartDrawer();
+        }
+
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cartDrawer');
+            const overlay = document.getElementById('cartOverlay');
+            updateCartDrawer();
+            drawer.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = drawer.classList.contains('active') ? 'hidden' : '';
+        }
+
+        // ============================================
+        // Wishlist
+        // ============================================
+        function toggleWishlistPDP(id) {
+            const idx = wishlist.indexOf(id);
+            if (idx > -1) {
+                wishlist.splice(idx, 1);
+            } else {
+                wishlist.push(id);
+            }
+            localStorage.setItem('shiningstore_wishlist', JSON.stringify(wishlist));
+            updateWishlistBadge();
+            updateWishlistDrawer();
+
+            // Update button
+            const btn = document.getElementById('pdpWishBtn');
+            const icon = btn.querySelector('i');
+            if (wishlist.includes(id)) {
+                btn.classList.add('active');
+                icon.classList.remove('fa-regular');
+                icon.classList.add('fa-solid');
+                showToast('♥ Added to Wishlist');
+            } else {
+                btn.classList.remove('active');
+                icon.classList.remove('fa-solid');
+                icon.classList.add('fa-regular');
+                showToast('Removed from Wishlist');
+            }
+        }
+
+        function updateWishlistBadge() {
+            const badge = document.getElementById('wishlistBadge');
+            if (badge) {
+                badge.innerText = wishlist.length;
+                wishlist.length > 0 ? badge.classList.remove('hidden') : badge.classList.add('hidden');
+            }
+        }
+
+        function updateWishlistDrawer() {
+            const container = document.getElementById('wishlistItems');
+            const count = document.getElementById('wishlistCount');
+            if (!container) return;
+            if (count) count.textContent = wishlist.length;
+
+            if (wishlist.length === 0) {
+                container.innerHTML = '<div style="text-align:center; padding:2rem; color:#767676;"><i class="fa-regular fa-heart" style="font-size:3rem; margin-bottom:1rem; display:block; color:#ddd;"></i><p>Your wishlist is empty.</p></div>';
+                return;
+            }
+
+            container.innerHTML = wishlist.map(id => {
+                const p = products.find(pr => pr.id === id);
+                if (!p) return '';
+                return `
                 <div style="display:flex; gap:1rem; padding:1rem 0; border-bottom:1px solid var(--border-light);">
-                    <a href="product.html?id=${p.id}"><img src="${p.image}" alt="${p.name}" style="width:70px; height:90px; object-fit:cover; border-radius:6px; cursor:pointer;"></a>
+                    <a href="product.html?id=${p.id}"><img src="${p.image}" alt="${p.name}" style="width:70px; height:90px; object-fit:cover; border-radius:6px; cursor:pointer;" onerror="handleImageError(this, '${p.category}')"></a>
                     <div style="flex:1;">
                         <a href="product.html?id=${p.id}" style="font-weight:600; font-size:0.88rem; margin-bottom:0.3rem; display:block; color:var(--text-main);">${p.name}</a>
                         <div style="font-weight:700; margin-top:0.3rem;">${formatPrice(p.price)}</div>
@@ -1477,82 +1997,82 @@
                     <button onclick="removeFromWishlistDrawer(${p.id})" style="background:none;border:none;cursor:pointer;color:#d4736d;font-size:1.1rem;"><i class="fa-solid fa-heart"></i></button>
                 </div>
             `;
-        }).join('');
-    }
-
-    function removeFromWishlistDrawer(id) {
-        wishlist = wishlist.filter(w => w !== id);
-        localStorage.setItem('shiningstore_wishlist', JSON.stringify(wishlist));
-        updateWishlistBadge();
-        updateWishlistDrawer();
-        // Update PDP button if on same product
-        const btn = document.getElementById('pdpWishBtn');
-        if (btn) {
-            const icon = btn.querySelector('i');
-            btn.classList.remove('active');
-            icon.classList.remove('fa-solid');
-            icon.classList.add('fa-regular');
+            }).join('');
         }
-    }
 
-    function toggleWishlistDrawer() {
-        const drawer = document.getElementById('wishlistDrawer');
-        const overlay = document.getElementById('wishlistOverlay');
-        updateWishlistDrawer();
-        drawer.classList.toggle('active');
-        overlay.classList.toggle('active');
-        document.body.style.overflow = drawer.classList.contains('active') ? 'hidden' : '';
-    }
+        function removeFromWishlistDrawer(id) {
+            wishlist = wishlist.filter(w => w !== id);
+            localStorage.setItem('shiningstore_wishlist', JSON.stringify(wishlist));
+            updateWishlistBadge();
+            updateWishlistDrawer();
+            // Update PDP button if on same product
+            const btn = document.getElementById('pdpWishBtn');
+            if (btn) {
+                const icon = btn.querySelector('i');
+                btn.classList.remove('active');
+                icon.classList.remove('fa-solid');
+                icon.classList.add('fa-regular');
+            }
+        }
 
-    // ============================================
-    // Drawers Setup
-    // ============================================
-    function setupDrawers() {
-        document.getElementById('cartCloseBtn')?.addEventListener('click', toggleCartDrawer);
-        document.getElementById('cartOverlay')?.addEventListener('click', toggleCartDrawer);
-        document.getElementById('wishlistCloseBtn')?.addEventListener('click', toggleWishlistDrawer);
-        document.getElementById('wishlistOverlay')?.addEventListener('click', toggleWishlistDrawer);
-    }
+        function toggleWishlistDrawer() {
+            const drawer = document.getElementById('wishlistDrawer');
+            const overlay = document.getElementById('wishlistOverlay');
+            updateWishlistDrawer();
+            drawer.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = drawer.classList.contains('active') ? 'hidden' : '';
+        }
 
-    // ============================================
-    // Tabs
-    // ============================================
-    function setupTabs() {
-        document.querySelectorAll('.pdp-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                document.querySelectorAll('.pdp-tab').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.pdp-tab-content').forEach(c => c.classList.remove('active'));
-                tab.classList.add('active');
-                document.getElementById('tab-' + tab.dataset.tab)?.classList.add('active');
+        // ============================================
+        // Drawers Setup
+        // ============================================
+        function setupDrawers() {
+            document.getElementById('cartCloseBtn')?.addEventListener('click', toggleCartDrawer);
+            document.getElementById('cartOverlay')?.addEventListener('click', toggleCartDrawer);
+            document.getElementById('wishlistCloseBtn')?.addEventListener('click', toggleWishlistDrawer);
+            document.getElementById('wishlistOverlay')?.addEventListener('click', toggleWishlistDrawer);
+        }
+
+        // ============================================
+        // Tabs
+        // ============================================
+        function setupTabs() {
+            document.querySelectorAll('.pdp-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.pdp-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.pdp-tab-content').forEach(c => c.classList.remove('active'));
+                    tab.classList.add('active');
+                    document.getElementById('tab-' + tab.dataset.tab)?.classList.add('active');
+                });
             });
-        });
-    }
-
-    // ============================================
-    // Related Products
-    // ============================================
-    function renderRelatedProducts(currentProduct) {
-        let related = products
-            .filter(p => p.category === currentProduct.category && p.id !== currentProduct.id)
-            .slice(0, 4);
-
-        // If not enough from same category, fill from others
-        if (related.length < 4) {
-            const more = products.filter(p => p.id !== currentProduct.id && !related.find(r => r.id === p.id)).slice(0, 4 - related.length);
-            related.push(...more);
-        }
-        const grid = document.getElementById('relatedGrid');
-        if (!grid) return;
-        
-        if (related.length === 0) {
-            grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text-muted);">No related products found.</p>';
-            return;
         }
 
-        grid.innerHTML = related.map(p => `
+        // ============================================
+        // Related Products
+        // ============================================
+        function renderRelatedProducts(currentProduct) {
+            let related = products
+                .filter(p => p.category === currentProduct.category && p.id !== currentProduct.id)
+                .slice(0, 4);
+
+            // If not enough from same category, fill from others
+            if (related.length < 4) {
+                const more = products.filter(p => p.id !== currentProduct.id && !related.find(r => r.id === p.id)).slice(0, 4 - related.length);
+                related.push(...more);
+            }
+            const grid = document.getElementById('relatedGrid');
+            if (!grid) return;
+
+            if (related.length === 0) {
+                grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text-muted);">No related products found.</p>';
+                return;
+            }
+
+            grid.innerHTML = related.map(p => `
             <div class="product-card fade-in">
                 <div class="product-img-wrapper">
-                    <a href="product.html?id=${p.id}"><img src="${p.image}" alt="${p.name}" loading="lazy"></a>
+                    <a href="product.html?id=${p.id}"><img src="${p.image}" alt="${p.name}" loading="lazy" onerror="handleImageError(this, '${p.category}')"></a>
                 </div>
                 <div class="product-info">
                     <div class="product-category">${p.category}</div>
@@ -1563,42 +2083,42 @@
                 </div>
             </div>
         `).join('');
-    }
-
-    // ============================================
-    // Recently Viewed Products
-    // ============================================
-    function trackRecentlyViewed(id) {
-        let recent = JSON.parse(localStorage.getItem('shiningstore_recent') || '[]');
-        recent = recent.filter(pId => pId !== id); // Remove if exists
-        recent.unshift(id); // Add to beginning
-        if (recent.length > 4) recent.pop(); // Keep max 4
-        localStorage.setItem('shiningstore_recent', JSON.stringify(recent));
-    }
-
-    function renderRecentProducts() {
-        const section = document.getElementById('recentlyViewedSection');
-        const grid = document.getElementById('recentGrid');
-        if (!section || !grid) return;
-
-        const recentIds = JSON.parse(localStorage.getItem('shiningstore_recent') || '[]');
-        // Don't show the current product in recent list
-        const filteredIds = recentIds.filter(id => id !== productId);
-
-        if (filteredIds.length === 0) {
-            section.style.display = 'none';
-            return;
         }
 
-        section.style.display = 'block';
-        
-        grid.innerHTML = filteredIds.map(id => {
-            const p = products.find(prod => prod.id === id);
-            if(!p) return '';
-            return `
+        // ============================================
+        // Recently Viewed Products
+        // ============================================
+        function trackRecentlyViewed(id) {
+            let recent = JSON.parse(localStorage.getItem('shiningstore_recent') || '[]');
+            recent = recent.filter(pId => pId !== id); // Remove if exists
+            recent.unshift(id); // Add to beginning
+            if (recent.length > 4) recent.pop(); // Keep max 4
+            localStorage.setItem('shiningstore_recent', JSON.stringify(recent));
+        }
+
+        function renderRecentProducts() {
+            const section = document.getElementById('recentlyViewedSection');
+            const grid = document.getElementById('recentGrid');
+            if (!section || !grid) return;
+
+            const recentIds = JSON.parse(localStorage.getItem('shiningstore_recent') || '[]');
+            // Don't show the current product in recent list
+            const filteredIds = recentIds.filter(id => id !== productId);
+
+            if (filteredIds.length === 0) {
+                section.style.display = 'none';
+                return;
+            }
+
+            section.style.display = 'block';
+
+            grid.innerHTML = filteredIds.map(id => {
+                const p = products.find(prod => prod.id === id);
+                if (!p) return '';
+                return `
                 <div class="product-card fade-in">
                     <div class="product-img-wrapper">
-                        <a href="product.html?id=${p.id}"><img src="${p.image}" alt="${p.name}" loading="lazy"></a>
+                        <a href="product.html?id=${p.id}"><img src="${p.image}" alt="${p.name}" loading="lazy" onerror="handleImageError(this, '${p.category}')"></a>
                     </div>
                     <div class="product-info">
                         <div class="product-category">${p.category}</div>
@@ -1609,107 +2129,260 @@
                     </div>
                 </div>
             `;
-        }).join('');
-    }
-
-    // Currency event listener
-    window.addEventListener('currencyChanged', () => {
-        const params = new URLSearchParams(window.location.search);
-        const productId = parseInt(params.get('id'));
-        const product = products.find(p => p.id === productId);
-        if (product) {
-            renderProduct(product);
-            renderRelatedProducts(product);
+            }).join('');
         }
-    });
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const currentCurrencyStr = localStorage.getItem('shiningstore_currency') || 'USD';
-        const displays = document.querySelectorAll('.current-currency-display');
-        displays.forEach(el => el.textContent = currentCurrencyStr === 'USD' ? '$ USD' : '₹ INR');
+        // Currency event listener
+        window.addEventListener('currencyChanged', () => {
+            const params = new URLSearchParams(window.location.search);
+            const productId = parseInt(params.get('id'));
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                renderProduct(product);
+                renderRelatedProducts(product);
+            }
+        });
 
-        const currencyToggleBtn = document.getElementById('currencyToggleBtn');
-        const currencyDropdown = document.getElementById('currencyDropdown');
-        if(currencyToggleBtn && currencyDropdown) {
-            currencyToggleBtn.addEventListener('click', (e) => {
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentCurrencyStr = localStorage.getItem('shiningstore_currency') || 'USD';
+            const displays = document.querySelectorAll('.current-currency-display');
+            displays.forEach(el => el.textContent = currentCurrencyStr === 'USD' ? '$ USD' : '₹ INR');
+
+            const currencyToggleBtn = document.getElementById('currencyToggleBtn');
+            const currencyDropdown = document.getElementById('currencyDropdown');
+            if (currencyToggleBtn && currencyDropdown) {
+                currencyToggleBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    currencyDropdown.classList.toggle('hidden');
+                });
+                document.addEventListener('click', () => {
+                    currencyDropdown.classList.add('hidden');
+                });
+            }
+        });
+
+        // ============================================
+        // Share Menu Functionality
+        // ============================================
+        window.toggleSharePopup = function (e) {
+            if (e) e.stopPropagation();
+            const popup = document.getElementById('pdpSharePopup');
+            if (popup) {
+                popup.style.display = popup.style.display === 'none' ? 'block' : 'none';
+            }
+        };
+
+        window.closeSharePopup = function (e) {
+            if (e) e.stopPropagation();
+            const popup = document.getElementById('pdpSharePopup');
+            if (popup) popup.style.display = 'none';
+        };
+
+        // Close share popup on click outside
+        document.addEventListener('click', () => {
+            window.closeSharePopup();
+        });
+
+        window.shareProduct = function (type, e) {
+            if (e) {
+                e.preventDefault();
                 e.stopPropagation();
-                currencyDropdown.classList.toggle('hidden');
-            });
-            document.addEventListener('click', () => {
-                currencyDropdown.classList.add('hidden');
-            });
+            }
+
+            const params = new URLSearchParams(window.location.search);
+            const productId = parseInt(params.get('id'));
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            // Customize portable short link format (e.g. domain/?p=id)
+            const shortUrl = window.location.origin + '/?p=' + product.id;
+
+            const title = encodeURIComponent(product.name);
+            const desc = encodeURIComponent(product.desc || '');
+            const image = encodeURIComponent(product.image);
+
+            if (type === 'email') {
+                window.location.href = `mailto:?subject=Check out ${product.name}&body=Check out this amazing product: ${product.name}%0A%0AHere is the link: ${shortUrl}`;
+            } else if (type === 'pinterest') {
+                window.open(`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(shortUrl)}&media=${image}&description=${title}`, '_blank');
+            } else if (type === 'facebook') {
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shortUrl)}`, '_blank');
+            } else if (type === 'x') {
+                window.open(`https://twitter.com/intent/tweet?text=Check out ${title} at Shining Store!&url=${encodeURIComponent(shortUrl)}`, '_blank');
+            } else if (type === 'copy') {
+                navigator.clipboard.writeText(shortUrl).then(() => {
+                    showToast('✓ Short link copied to clipboard!');
+                }).catch(err => {
+                    // Fallback
+                    const input = document.createElement('input');
+                    input.value = shortUrl;
+                    document.body.appendChild(input);
+                    input.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(input);
+                    showToast('✓ Short link copied to clipboard!');
+                });
+            }
+            window.closeSharePopup();
+        };
+
+        // ============================================
+        // Size Guide & Color Functions
+        // ============================================
+        function openSizeGuide() {
+            document.getElementById('sizeGuideModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
-    });
 
-    // ============================================
-    // Share Menu Functionality
-    // ============================================
-    window.toggleSharePopup = function(e) {
-        if (e) e.stopPropagation();
-        const popup = document.getElementById('pdpSharePopup');
-        if (popup) {
-            popup.style.display = popup.style.display === 'none' ? 'block' : 'none';
+        function closeSizeGuide(e) {
+            document.getElementById('sizeGuideModal').classList.remove('active');
+            document.body.style.overflow = '';
         }
-    };
 
-    window.closeSharePopup = function(e) {
-        if (e) e.stopPropagation();
-        const popup = document.getElementById('pdpSharePopup');
-        if (popup) popup.style.display = 'none';
-    };
-
-    // Close share popup on click outside
-    document.addEventListener('click', () => {
-        window.closeSharePopup();
-    });
-
-    window.shareProduct = function(type, e) {
-        if (e) {
-            e.preventDefault();
-            e.stopPropagation();
+        function switchSizeTab(tabId, el) {
+            document.querySelectorAll('.size-modal-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.size-tab-content').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            document.getElementById('size-tab-' + tabId).classList.add('active');
         }
-        
-        const params = new URLSearchParams(window.location.search);
-        const productId = parseInt(params.get('id'));
-        const product = products.find(p => p.id === productId);
-        if (!product) return;
 
-        // Customize portable short link format (e.g. domain/?p=id)
-        const shortUrl = window.location.origin + '/?p=' + product.id;
-        
-        const title = encodeURIComponent(product.name);
-        const desc = encodeURIComponent(product.desc || '');
-        const image = encodeURIComponent(product.image);
-
-        if (type === 'email') {
-            window.location.href = `mailto:?subject=Check out ${product.name}&body=Check out this amazing product: ${product.name}%0A%0AHere is the link: ${shortUrl}`;
-        } else if (type === 'pinterest') {
-            window.open(`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(shortUrl)}&media=${image}&description=${title}`, '_blank');
-        } else if (type === 'facebook') {
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shortUrl)}`, '_blank');
-        } else if (type === 'x') {
-            window.open(`https://twitter.com/intent/tweet?text=Check out ${title} at Shining Store!&url=${encodeURIComponent(shortUrl)}`, '_blank');
-        } else if (type === 'copy') {
-            navigator.clipboard.writeText(shortUrl).then(() => {
-                showToast('✓ Short link copied to clipboard!');
-            }).catch(err => {
-                // Fallback
-                const input = document.createElement('input');
-                input.value = shortUrl;
-                document.body.appendChild(input);
-                input.select();
-                document.execCommand('copy');
-                document.body.removeChild(input);
-                showToast('✓ Short link copied to clipboard!');
-            });
+        function selectColor(btn, colorName) {
+            document.querySelectorAll('.color-swatch').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
         }
-        window.closeSharePopup();
-    };
 
-    document.addEventListener('productsLoaded', initPDP);
+        document.addEventListener('productsLoaded', initPDP);
 
     </script>
-    
+
+    <!-- Size Guide Modal -->
+    <div class="size-modal-overlay" id="sizeGuideModal" onclick="closeSizeGuide(event)">
+        <div class="size-modal" onclick="event.stopPropagation()">
+            <div class="size-modal-header">
+                <button class="size-modal-close" onclick="closeSizeGuide()"><i
+                        class="fa-solid fa-chevron-left"></i></button>
+                <h3>Size Guide</h3>
+            </div>
+            <div class="size-modal-tabs">
+                <div class="size-modal-tab active" onclick="switchSizeTab('guide', this)">Guide</div>
+                <div class="size-modal-tab" onclick="switchSizeTab('measure', this)">How to measure</div>
+            </div>
+            <div class="size-modal-body">
+                <!-- Tab 1: Guide -->
+                <div class="size-tab-content active" id="size-tab-guide">
+                    <div class="size-box">
+                        <div class="size-toggle-row">
+                            <span>Body Measurement</span>
+                            <div class="size-toggle">
+                                <div class="size-toggle-btn active">in</div>
+                                <div class="size-toggle-btn">cm</div>
+                            </div>
+                        </div>
+                        <table class="size-table">
+                            <thead>
+                                <tr>
+                                    <th>Size</th>
+                                    <th>Brand Size (IN)</th>
+                                    <th>Bust</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>XS</td>
+                                    <td>XS</td>
+                                    <td>30.5-32</td>
+                                </tr>
+                                <tr>
+                                    <td>S</td>
+                                    <td>S</td>
+                                    <td>32.5-34</td>
+                                </tr>
+                                <tr>
+                                    <td>M</td>
+                                    <td>M</td>
+                                    <td>34.5-36</td>
+                                </tr>
+                                <tr>
+                                    <td>L</td>
+                                    <td>L</td>
+                                    <td>36.5-38</td>
+                                </tr>
+                                <tr>
+                                    <td>XL</td>
+                                    <td>XL</td>
+                                    <td>38.5-40</td>
+                                </tr>
+                                <tr>
+                                    <td>XXL</td>
+                                    <td>XXL</td>
+                                    <td>40.5-42</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="size-feedback" id="size-feedback">
+                        Tip :
+                        <div class="size-feedback-box">
+                            <span>Was this information useful?</span>
+                            <div style="display:flex; gap: 15px; font-size: 1.2rem; cursor:pointer;">
+                                <i class="fa-regular fa-thumbs-up" onclick="showToast('Thanks for your feedback!')"></i>
+                                <i class="fa-regular fa-thumbs-down"
+                                    onclick="showToast('Thanks for your feedback!')"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: How to Measure -->
+                <div class="size-tab-content" id="size-tab-measure">
+                    <div class="size-box" style="padding-left: 0.5rem; padding-right: 0.5rem;">
+                        <div class="htm-image-container" style="max-width: 320px; margin: 0 auto; padding: 1rem 0;">
+                            <div
+                                style="background:#e0e5eb; width:130px; height:320px; margin:0 auto; border-radius: 80px; position:relative;">
+                                <!-- Simple CSS abstract representation to mimic the image without an actual image, since we don't have the model image -->
+                                <div
+                                    style="position:absolute; top:20%; width:100%; height:80%; background:#d6dce3; border-radius:40px;">
+                                </div>
+                            </div>
+
+                            <div class="htm-pointer" style="top: 40px; right: 0px;">
+                                <div class="htm-pointer-circle">BUST</div>
+                                <span>Place the measuring tape under your arms, around your bustline along the fullest
+                                    part</span>
+                            </div>
+
+                            <div class="htm-pointer" style="top: 140px; left: 0px;">
+                                <div class="htm-pointer-circle">WAIST</div>
+                                <span>Measure around the waist, above the belly button along the slimmest part</span>
+                            </div>
+
+                            <div class="htm-pointer" style="top: 250px; right: 0px;">
+                                <div class="htm-pointer-circle">HIPS</div>
+                                <span>Standing with your feet together, measure along the fullest part of your
+                                    hips</span>
+                            </div>
+                        </div>
+
+                        <div class="htm-title-line">HOW TO MEASURE</div>
+                        <div class="htm-tip">
+                            Here's a tip:<br>
+                            If you don't find an exact match, go for the next larger size.
+                        </div>
+
+                        <div class="htm-accurate-box">
+                            TO ARRIVE AT ACCURATE MEASUREMENTS
+                        </div>
+                        <div class="htm-desc">
+                            Always keep the measuring tape parallel to the floor and ensure that you are only wearing
+                            undergarments while measuring yourself. Outerwear could affect the accuracy of the readings.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Chatbot is injected dynamically via app.js -->
 </body>
 
