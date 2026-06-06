@@ -90,9 +90,11 @@ export default function MobileProductGrid() {
                   <span className="text-sm font-semibold" style={{ color: 'var(--color-charcoal)' }}>
                     {formatPrice(product.price)}
                   </span>
-                  <span className="text-[10px] line-through text-neutral-400">
-                    {formatPrice(product.originalPrice)}
-                  </span>
+                  {product.originalPrice && (
+                    <span className="text-[10px] line-through text-neutral-400">
+                      {formatPrice(product.originalPrice)}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>

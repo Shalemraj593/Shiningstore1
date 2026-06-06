@@ -15,7 +15,7 @@ export const products: Product[] = [
     name: "Floral Print Summer Dress",
     price: 1238,
     originalPrice: 1769,
-    image: "/images/prod-dress.jpg",
+    image: "images/prod-dress.jpg",
     category: "Fashion",
     badge: "New",
     isNew: true,
@@ -25,7 +25,7 @@ export const products: Product[] = [
     name: "Wireless Noise-Cancelling Headphones",
     price: 1560,
     originalPrice: 2229,
-    image: "/images/prod-headphones.jpg",
+    image: "images/prod-headphones.jpg",
     category: "Electronics",
     badge: "Sale",
   },
@@ -34,7 +34,7 @@ export const products: Product[] = [
     name: "Automatic Pet Feeder",
     price: 2799,
     originalPrice: 3999,
-    image: "/images/prod-petfeeder.jpg",
+    image: "images/prod-petfeeder.jpg",
     category: "Pets",
     isNew: true,
   },
@@ -43,7 +43,7 @@ export const products: Product[] = [
     name: "Knitted Cardigan Coat",
     price: 1213,
     originalPrice: 1733,
-    image: "/images/prod-cardigan.jpg",
+    image: "images/prod-cardigan.jpg",
     category: "Fashion",
   },
   {
@@ -51,7 +51,7 @@ export const products: Product[] = [
     name: "Stiletto Heel Sandals",
     price: 1560,
     originalPrice: 2229,
-    image: "/images/prod-sandals.jpg",
+    image: "images/prod-sandals.jpg",
     category: "Shoes",
     badge: "New",
     isNew: true,
@@ -61,7 +61,7 @@ export const products: Product[] = [
     name: "3-in-1 Wireless Charger",
     price: 1670,
     originalPrice: 2385,
-    image: "/images/prod-charger.jpg",
+    image: "images/prod-charger.jpg",
     category: "Electronics",
   },
   {
@@ -69,7 +69,7 @@ export const products: Product[] = [
     name: "Round Plush Pet Bed",
     price: 1567,
     originalPrice: 2238,
-    image: "/images/prod-petbed.jpg",
+    image: "images/prod-petbed.jpg",
     category: "Pets",
   },
   {
@@ -77,7 +77,7 @@ export const products: Product[] = [
     name: "Silicone Phone Case Set",
     price: 403,
     originalPrice: 575,
-    image: "/images/prod-phonecase.jpg",
+    image: "images/prod-phonecase.jpg",
     category: "Accessories",
     badge: "Sale",
   },
@@ -90,11 +90,11 @@ export interface Category {
 }
 
 export const categories: Category[] = [
-  { id: 1, name: "Fashion", image: "/images/cat-fashion.jpg" },
-  { id: 2, name: "Shoes", image: "/images/cat-shoes.jpg" },
-  { id: 3, name: "Electronics", image: "/images/cat-electronics.jpg" },
-  { id: 4, name: "Pet Essentials", image: "/images/cat-pets.jpg" },
-  { id: 5, name: "Accessories", image: "/images/cat-accessories.jpg" },
+  { id: 1, name: "Fashion", image: "images/cat-fashion.jpg" },
+  { id: 2, name: "Shoes", image: "images/cat-shoes.jpg" },
+  { id: 3, name: "Electronics", image: "images/cat-electronics.jpg" },
+  { id: 4, name: "Pet Essentials", image: "images/cat-pets.jpg" },
+  { id: 5, name: "Accessories", image: "images/cat-accessories.jpg" },
 ];
 
 export interface Testimonial {
@@ -130,13 +130,13 @@ export const testimonials: Testimonial[] = [
 ];
 
 export const ringImages = [
-  "/images/ring-fashion-1.jpg",
-  "/images/ring-fashion-2.jpg",
-  "/images/ring-shoes-1.jpg",
-  "/images/ring-pets-1.jpg",
-  "/images/ring-electronics-1.jpg",
-  "/images/ring-accessories-1.jpg",
-  "/images/ring-fashion-3.jpg",
+  "images/ring-fashion-1.jpg",
+  "images/ring-fashion-2.jpg",
+  "images/ring-shoes-1.jpg",
+  "images/ring-pets-1.jpg",
+  "images/ring-electronics-1.jpg",
+  "images/ring-accessories-1.jpg",
+  "images/ring-fashion-3.jpg",
 ];
 
 export const navCategories = [

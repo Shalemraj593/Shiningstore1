@@ -2,11 +2,11 @@ import { Instagram } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const images = [
-  '/images/insta-1.jpg',
-  '/images/insta-2.jpg',
-  '/images/insta-3.jpg',
-  '/images/insta-4.jpg',
-  '/images/insta-5.jpg',
+  'images/insta-1.jpg',
+  'images/insta-2.jpg',
+  'images/insta-3.jpg',
+  'images/insta-4.jpg',
+  'images/insta-5.jpg',
 ];
 
 export default function InstagramSection() {

@@ -6,14 +6,14 @@ const collections = [
     title: 'The Summer Edit',
     subtitle: 'Curated looks for every occasion',
     cta: 'Shop the Look',
-    image: '/images/feat-summer.jpg',
+    image: 'images/feat-summer.jpg',
   },
   {
     badge: 'New',
     title: 'Evening Elegance',
     subtitle: 'Sophisticated styles for special moments',
     cta: 'Explore',
-    image: '/images/feat-evening.jpg',
+    image: 'images/feat-evening.jpg',
   },
 ];
 
